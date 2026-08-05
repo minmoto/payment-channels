@@ -1,0 +1,51 @@
+{
+  "name": "@minmoto/payment-channels",
+  "version": "0.1.0",
+  "description": "Open registry and validation toolkit for fiat payment channel schemas.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minmoto/payment-channels.git"
+  },
+  "homepage": "https://github.com/minmoto/payment-channels#readme",
+  "bugs": {
+    "url": "https://github.com/minmoto/payment-channels/issues"
+  },
+  "keywords": [
+    "payment-channels",
+    "fiat",
+    "mobile-money",
+    "registry",
+    "validation",
+    "minmoto"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "check": "npm run typecheck && npm test",
+    "prepack": "npm run check"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}
