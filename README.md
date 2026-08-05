@@ -31,7 +31,7 @@ const channels = listPaymentChannelSchemas(registry, {
   flow: PaymentFlow.Offramp,
 });
 
-const mpesa = registry.get("mpesa_phone");
+const mpesa = registry.get("mpesa_phone_ke_kes");
 if (!mpesa) throw new Error("M-Pesa schema missing");
 
 const result = validatePaymentChannelData(mpesa, {
@@ -67,7 +67,7 @@ addPaymentChannelSchema(registry, definePaymentChannelSchema(myChannel));
 - `id` and `version`: stable identity and schema revision
 - `display`: human-facing labels, description, icon token, and payment method group
 - `network`: stable money network identity plus ISO-style country and currency codes
-- `support`: onramp/offramp flows, visible actors, and an explicit automation capability flag
+- `support`: onramp/offramp flows, visible actors, and an explicit automation mode
 - `fields`: typed inputs with required state, placeholders, normalization, masking, and serializable validation rules
 - `detailRows`: ordered display and copy rows for collected payment details
 - `instructions`: payer and payee guidance
@@ -81,6 +81,7 @@ Validation rules are data, not callbacks. This keeps schemas serializable and sa
 import {
   NormalizationKind,
   PaymentActor,
+  PaymentChannelAutomation,
   PaymentChannelGroup,
   PaymentFieldType,
   PaymentFlow,
@@ -88,8 +89,8 @@ import {
   definePaymentChannelSchema,
 } from "@minmoto/payment-channels";
 
-export const exampleWallet = definePaymentChannelSchema({
-  id: "example_wallet",
+export const exampleWalletKeKes = definePaymentChannelSchema({
+  id: "example_wallet_ke_kes",
   version: 1,
   display: {
     label: "Example Wallet",
@@ -107,7 +108,7 @@ export const exampleWallet = definePaymentChannelSchema({
   support: {
     flows: [PaymentFlow.Onramp, PaymentFlow.Offramp],
     actors: [PaymentActor.Agent, PaymentActor.Customer],
-    automatedPayout: false,
+    automation: PaymentChannelAutomation.Manual,
   },
   fields: [
     {
@@ -137,7 +138,9 @@ export const exampleWallet = definePaymentChannelSchema({
 });
 ```
 
-Use `definePaymentChannelSchema` at definition time. It rejects duplicate field keys, invalid regular expressions, invalid length rules, empty allow-lists, and detail rows that reference unknown fields.
+Use `definePaymentChannelSchema` at definition time. It rejects invalid IDs and code casing, invalid enum values, duplicate field or detail-row keys, malformed select fields, invalid regular expressions, invalid length rules, empty allow-lists, and detail rows that reference unknown fields.
+
+Built-in IDs and source filenames use `<network>_<variant?>_<country>_<currency>`, with lowercase country and currency suffixes. For example, `mpesa_phone_ke_kes` is defined in `src/channels/mpesa_phone_ke_kes.ts`.
 
 ## Built-in registry
 
@@ -146,13 +149,13 @@ The seed registry currently includes:
 - Kenya (`KES`): M-Pesa phone, M-Pesa till, M-Pesa paybill, Airtel Money, and cash
 - Malawi (`MWK`): Airtel Money and TNM Mpamba
 
-Cash is intentionally represented as a channel for workflow selection, but it has no structured payment fields and `automatedPayout: false`. A schema never implies that an external provider integration exists.
+Cash is intentionally represented as a channel for workflow selection, but it has no structured payment fields and `automation: PaymentChannelAutomation.None`. A schema never implies that an external provider integration exists.
 
 ## Security and trust boundary
 
 Payment details can contain personal or financial information. Consumers should mask sensitive fields in UI and keep raw values out of logs, analytics, URLs, and error reports. Validate again at the integration boundary and apply provider limits, authorization, rate limiting, compliance, and settlement verification there.
 
-The registry is open for contribution, but a contributor-provided schema is not an authorization to send funds. Applications should allow-list the schemas and automation capabilities they have independently reviewed.
+The registry is open for contribution, but a contributor-provided schema is not an authorization to send funds. Applications should allow-list the schemas and automation modes they have independently reviewed.
 
 ## Contributing and releasing
 

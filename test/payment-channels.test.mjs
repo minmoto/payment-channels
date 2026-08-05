@@ -1,8 +1,12 @@
 import assert from "node:assert/strict";
+import { readFile, readdir } from "node:fs/promises";
+import path from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 
 import {
   PaymentActor,
+  PaymentChannelAutomation,
   PaymentFlow,
   PaymentChannelGroup,
   builtinPaymentChannels,
@@ -25,12 +29,12 @@ test("registry exposes built-in KES mobile money channels", () => {
 
   assert.deepEqual(
     channels.map((channel) => channel.id),
-    ["mpesa_phone", "mpesa_till", "mpesa_paybill", "airtel_money"],
+    ["mpesa_phone_ke_kes", "mpesa_till_ke_kes", "mpesa_paybill_ke_kes", "airtel_money_ke_kes"],
   );
 });
 
 test("phone fields normalize and validate against currency network rules", () => {
-  const schema = builtinPaymentChannels.find((channel) => channel.id === "mpesa_phone");
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "mpesa_phone_ke_kes");
   assert.ok(schema);
 
   const result = validatePaymentChannelData(schema, {
@@ -44,7 +48,7 @@ test("phone fields normalize and validate against currency network rules", () =>
 });
 
 test("invalid channel data returns field issues", () => {
-  const schema = builtinPaymentChannels.find((channel) => channel.id === "tnm_mpamba");
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "tnm_mpamba_mw_mwk");
   assert.ok(schema);
 
   const result = validatePaymentChannelData(schema, {
@@ -61,7 +65,7 @@ test("invalid channel data returns field issues", () => {
 });
 
 test("detail rows render copyable values from validated data", () => {
-  const schema = builtinPaymentChannels.find((channel) => channel.id === "mpesa_paybill");
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "mpesa_paybill_ke_kes");
   assert.ok(schema);
 
   const validation = validatePaymentChannelData(schema, {
@@ -89,11 +93,30 @@ test("detail rows render copyable values from validated data", () => {
 });
 
 test("cash is present but explicitly not automated", () => {
-  const cash = builtinPaymentChannels.find((channel) => channel.id === "cash");
+  const cash = builtinPaymentChannels.find((channel) => channel.id === "cash_ke_kes");
   assert.ok(cash);
   assert.equal(cash.display.group, PaymentChannelGroup.Cash);
-  assert.equal(cash.support.automatedPayout, false);
+  assert.equal(cash.support.automation, PaymentChannelAutomation.None);
   assert.deepEqual(cash.fields, []);
+});
+
+test("channel source files contain one channel matching the filename", async () => {
+  const channelsDirectory = fileURLToPath(new URL("../src/channels", import.meta.url));
+  const filenames = (await readdir(channelsDirectory)).filter(
+    (filename) => filename.endsWith(".ts") && filename !== "index.ts" && filename !== "shared.ts",
+  );
+
+  assert.ok(filenames.length > 0);
+
+  for (const filename of filenames) {
+    const source = await readFile(path.join(channelsDirectory, filename), "utf8");
+    const definitions = source.match(/definePaymentChannelSchema\(\{/g) ?? [];
+    const exports = [...source.matchAll(/^export\s+const\s+(\w+)\s*=\s*definePaymentChannelSchema\(\{\s*id:\s*"([^"]+)"/gm)];
+
+    assert.equal(definitions.length, 1, `${filename} must define exactly one payment channel`);
+    assert.equal(exports.length, 1, `${filename} must export its payment channel definition`);
+    assert.equal(filename, `${exports[0][2]}.ts`, `${filename} must match channel id ${exports[0][2]}`);
+  }
 });
 
 test("schema definitions reject unsafe registry entries early", () => {
@@ -110,7 +133,11 @@ test("schema definitions reject unsafe registry entries early", () => {
           group: PaymentChannelGroup.MobileMoney,
         },
         network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
-        support: { flows: [PaymentFlow.Offramp], actors: [PaymentActor.Agent], automatedPayout: false },
+        support: {
+          flows: [PaymentFlow.Offramp],
+          actors: [PaymentActor.Agent],
+          automation: PaymentChannelAutomation.Manual,
+        },
         fields: [
           {
             key: "account",
@@ -123,5 +150,67 @@ test("schema definitions reject unsafe registry entries early", () => {
         detailRows: [],
       }),
     /Invalid validation pattern/,
+  );
+});
+
+test("schema definitions reject invalid automation values early", () => {
+  assert.throws(
+    () =>
+      definePaymentChannelSchema({
+        id: "broken_automation",
+        version: 1,
+        display: {
+          label: "Broken",
+          shortLabel: "Broken",
+          description: "Invalid schema",
+          icon: "broken",
+          group: PaymentChannelGroup.MobileMoney,
+        },
+        network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
+        support: {
+          flows: [PaymentFlow.Offramp],
+          actors: [PaymentActor.Agent],
+          automation: /** @type {any} */ ("script"),
+        },
+        fields: [],
+        detailRows: [],
+      }),
+    /Payment channel automation is invalid/,
+  );
+});
+
+test("schema definitions reject duplicate detail row keys", () => {
+  assert.throws(
+    () =>
+      definePaymentChannelSchema({
+        id: "duplicate_detail_rows",
+        version: 1,
+        display: {
+          label: "Broken",
+          shortLabel: "Broken",
+          description: "Invalid schema",
+          icon: "broken",
+          group: PaymentChannelGroup.MobileMoney,
+        },
+        network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
+        support: {
+          flows: [PaymentFlow.Offramp],
+          actors: [PaymentActor.Agent],
+          automation: PaymentChannelAutomation.Manual,
+        },
+        fields: [
+          {
+            key: "account",
+            label: "Account",
+            type: "text",
+            required: true,
+          },
+        ],
+        detailRows: [
+          { key: "account", label: "Account", fields: ["account"] },
+          { key: "account", label: "Account copy", fields: ["account"] },
+        ],
+      }),
+    /Duplicate detail row key/,
   );
 });
