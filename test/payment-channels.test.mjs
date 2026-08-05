@@ -47,6 +47,18 @@ test("phone fields normalize and validate against currency network rules", () =>
   assert.equal(result.data.description, "settlement");
 });
 
+test("phone fields normalize international dialing prefixes", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "mpesa_phone_ke_kes");
+  assert.ok(schema);
+
+  const result = validatePaymentChannelData(schema, {
+    phoneNumber: "00254 712 345 678",
+  });
+
+  assert.equal(result.valid, true);
+  assert.equal(result.data.phoneNumber, "+254712345678");
+});
+
 test("invalid channel data returns field issues", () => {
   const schema = builtinPaymentChannels.find((channel) => channel.id === "tnm_mpamba_mw_mwk");
   assert.ok(schema);
@@ -60,6 +72,26 @@ test("invalid channel data returns field issues", () => {
     {
       field: "phoneNumber",
       message: "Use a TNM Malawi number, e.g. +265881234567",
+    },
+  ]);
+});
+
+test("detail rows mask display values while preserving copy values", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "mpesa_phone_ke_kes");
+  assert.ok(schema);
+
+  const validation = validatePaymentChannelData(schema, {
+    phoneNumber: "0712 345 678",
+  });
+
+  assert.equal(validation.valid, true);
+  assert.deepEqual(renderDetailRows(schema, validation.data), [
+    {
+      key: "phoneNumber",
+      label: "Phone number",
+      value: "+254***678",
+      copyable: true,
+      copyValue: "+254712345678",
     },
   ]);
 });
@@ -176,6 +208,59 @@ test("schema definitions reject invalid automation values early", () => {
         detailRows: [],
       }),
     /Payment channel automation is invalid/,
+  );
+});
+
+test("schema definitions reject missing detail rows early", () => {
+  assert.throws(
+    () =>
+      definePaymentChannelSchema(
+        /** @type {any} */ ({
+          id: "missing_detail_rows",
+          version: 1,
+          display: {
+            label: "Broken",
+            shortLabel: "Broken",
+            description: "Invalid schema",
+            icon: "broken",
+            group: PaymentChannelGroup.MobileMoney,
+          },
+          network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
+          support: {
+            flows: [PaymentFlow.Offramp],
+            actors: [PaymentActor.Agent],
+            automation: PaymentChannelAutomation.Manual,
+          },
+          fields: [],
+        }),
+      ),
+    /Payment channel schema missing detailRows/,
+  );
+});
+
+test("schema definitions reject non-canonical channel identifiers", () => {
+  assert.throws(
+    () =>
+      definePaymentChannelSchema({
+        id: /** @type {any} */ ("Mpesa"),
+        version: 1,
+        display: {
+          label: "Broken",
+          shortLabel: "Broken",
+          description: "Invalid schema",
+          icon: "broken",
+          group: PaymentChannelGroup.MobileMoney,
+        },
+        network: { id: "broken", label: "Broken", country: /** @type {any} */ ("ke"), currency: "KES" },
+        support: {
+          flows: [PaymentFlow.Offramp],
+          actors: [PaymentActor.Agent],
+          automation: PaymentChannelAutomation.Manual,
+        },
+        fields: [],
+        detailRows: [],
+      }),
+    /Payment channel schema id must be lowercase snake case/,
   );
 });
 

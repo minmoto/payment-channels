@@ -165,7 +165,7 @@ export interface RenderedDetailRow {
   copyValue?: string;
 }
 
-const REQUIRED_SCHEMA_KEYS = ["id", "version", "display", "network", "support", "fields"] as const;
+const REQUIRED_SCHEMA_KEYS = ["id", "version", "display", "network", "support", "fields", "detailRows"] as const;
 
 export function definePaymentChannelSchema<T extends PaymentChannelSchema>(schema: T): T {
   assertValidSchema(schema);
@@ -272,8 +272,12 @@ export function renderDetailRows(
   schema: PaymentChannelSchema,
   data: Record<string, string>,
 ): RenderedDetailRow[] {
+  const fieldsByKey = new Map(schema.fields.map((field) => [field.key, field]));
   return schema.detailRows.map((row) => {
-    const value = renderTemplate(row.template, row.fields, data);
+    const value = renderTemplate(row.template, row.fields, data, (fieldKey, fieldValue) => {
+      const field = fieldsByKey.get(fieldKey);
+      return field ? maskFieldValue(field, fieldValue) : fieldValue;
+    });
     const copyValue = row.copyable
       ? renderTemplate(row.copyTemplate ?? row.template, row.fields, data)
       : undefined;
@@ -470,15 +474,19 @@ function renderTemplate(
   template: string | undefined,
   fields: readonly string[],
   data: Record<string, string>,
+  formatValue: (field: string, value: string) => string = (_field, value) => value,
 ): string {
   if (!template) {
-    return fields.map((field) => data[field] ?? "").filter(Boolean).join(" ");
+    return fields.map((field) => formatValue(field, data[field] ?? "")).filter(Boolean).join(" ");
   }
-  return template.replace(/\{\{([a-zA-Z0-9_]+)\}\}/g, (_, key: string) => data[key] ?? "");
+  return template.replace(/\{\{([a-zA-Z0-9_]+)\}\}/g, (_, key: string) =>
+    formatValue(key, data[key] ?? ""),
+  );
 }
 
 function toE164(value: string, countryCode: string): string {
   const digits = value.replace(/\D/g, "");
+  if (digits.startsWith("00")) return digits.length > 2 ? `+${digits.slice(2)}` : "";
   if (digits.startsWith(countryCode)) return `+${digits}`;
   if (digits.startsWith("0")) return `+${countryCode}${digits.slice(1)}`;
   return digits ? `+${countryCode}${digits}` : "";
