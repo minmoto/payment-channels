@@ -167,4 +167,10 @@ npm run check
 npm pack --dry-run
 ```
 
-The project uses semantic versioning. Keep published channel IDs and serialized enum values stable. Add tests whenever a channel or validation rule changes. The package is MIT-licensed; see [`LICENSE`](./LICENSE).
+The project uses semantic versioning. Keep published channel IDs and serialized enum values stable. Add tests whenever a channel or validation rule changes.
+
+`npm install` automatically configures the repository's `commit-msg` hook to reject non-Conventional Commit subjects. CI checks pull request commits as the authoritative enforcement, including when a local hook is bypassed.
+
+Release Please derives versions and [`CHANGELOG.md`](./CHANGELOG.md) entries from Conventional Commit messages. The release pull request is the review point for each version's changelog; merging it creates the GitHub release and publishes the package to npm. See [`RELEASING.md`](./RELEASING.md) for setup and release instructions.
+
+The package is MIT-licensed; see [`LICENSE`](./LICENSE).
