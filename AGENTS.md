@@ -13,6 +13,8 @@ The package describes how a channel is identified, displayed, collected, normali
 - `src/index.ts` is the public source module.
 - `test/payment-channels.test.mjs` is the runtime contract test suite. Tests import compiled output from `dist`.
 - `README.md` is the consumer-facing API and release documentation.
+- `CHANGELOG.md` is generated per release from Conventional Commit messages.
+- `RELEASING.md` documents release preparation, npm trusted publishing, and recovery.
 - `package.json` and `package-lock.json` define the npm package and reproducible development dependencies.
 - `dist/` is generated output and must not be committed.
 
@@ -45,13 +47,9 @@ Do not put provider secrets, API calls, environment-specific URLs, executable ca
 
 The package follows semantic versioning. Additive schema fields and new built-in channel IDs are normally minor releases. Removing or renaming exported symbols, changing existing channel IDs, or changing validation/normalization behavior in a way that rejects previously accepted input requires a major release unless explicitly documented otherwise.
 
-Review the generated declaration file and `npm pack --dry-run` output before publishing. Publish from a clean, reviewed tag with:
+Use Conventional Commit subjects so Release Please can determine the next version and generate `CHANGELOG.md`. Review and merge its release pull request to create the tag, GitHub release, and npm publication. Do not manually edit released changelog entries or package versions; see `RELEASING.md` for the complete process.
 
-```sh
-npm publish --access public
-```
-
-Do not publish a package containing `dist` from a different source revision. The `prepack` hook runs the full check suite before npm creates the tarball.
+Do not publish a package containing `dist` from a different source revision. The automated publish checks out the release SHA, and the `prepack` hook runs the full check suite before npm creates the tarball.
 
 ## Guidance for LLM contributors
 
