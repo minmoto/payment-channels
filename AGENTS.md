@@ -8,7 +8,9 @@ The package describes how a channel is identified, displayed, collected, normali
 
 ## Repository map
 
-- `src/index.ts` is the public source module and contains the schema types, registry helpers, validators, render helpers, and built-in seed entries.
+- `src/core.ts` contains schema types, registry helpers, validators, and render helpers.
+- `src/channels/` contains one built-in channel per market-qualified source file.
+- `src/index.ts` is the public source module.
 - `test/payment-channels.test.mjs` is the runtime contract test suite. Tests import compiled output from `dist`.
 - `README.md` is the consumer-facing API and release documentation.
 - `package.json` and `package-lock.json` define the npm package and reproducible development dependencies.
@@ -28,12 +30,12 @@ npm pack --dry-run
 
 ## Adding or changing a channel
 
-1. Use a stable, lowercase, descriptive channel ID. Once published, changing an ID is a breaking change.
+1. Use `<network>_<variant?>_<country>_<currency>` for the stable lowercase channel ID and matching source filename, for example `mpesa_phone_ke_kes` in `mpesa_phone_ke_kes.ts`. Once published, changing an ID is a breaking change.
 2. Keep the network, country, and currency relationship explicit. Use ISO-style uppercase country and currency codes and a lowercase stable network ID.
 3. Define every user-entered value as a field with a label, type, required flag, normalization rules, and serializable validation rules.
 4. Add ordered detail rows for values that a consumer must display or copy after collection.
 5. Add payer/payee instructions and evidence fields when the channel needs operational or reconciliation guidance.
-6. Set `automatedPayout` to `true` only when a separate integration can actually perform the payout. A schema is not proof of provider capability.
+6. Set `support.automation` to `api` only when a separate integration can actually perform the payout. A schema is not proof of provider capability.
 7. Add or update tests for filtering, normalization, validation failures, and rendered details.
 8. Update the README when the public API, built-in registry, supported runtime, or release process changes.
 
