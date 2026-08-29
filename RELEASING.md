@@ -18,8 +18,10 @@ Merge changes to `main` using Conventional Commit subjects:
 
 - `fix: ...` requests a patch release.
 - `feat: ...` requests a minor release.
-- `feat!: ...`, `fix!: ...`, or a `BREAKING CHANGE:` footer requests a major release.
+- `feat!: ...`, `fix!: ...`, or a `BREAKING CHANGE:` footer requests a breaking release. While the package is below `1.0.0`, Release Please advances the minor version instead of creating `1.0.0`, for example from `0.2.0` to `0.3.0`.
 - `docs:`, `test:`, `build:`, `ci:`, and `chore:` changes do not request a release by themselves.
+
+Creating the first major version requires a deliberate, reviewed change to the pre-major versioning policy in `release-please-config.json`. Do not merge a release pull request proposing `1.0.0` while that policy is active.
 
 `npm install` and `npm ci` automatically enable the local `commit-msg` hook. Pull request CI validates every commit subject even when dependencies have not been installed or a local hook is bypassed.
 
