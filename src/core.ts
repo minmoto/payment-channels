@@ -5,11 +5,6 @@ export enum PaymentChannelGroup {
   Card = "card",
 }
 
-export enum PaymentActor {
-  Agent = "agent",
-  Customer = "customer",
-}
-
 export enum PaymentChannelAutomation {
   None = "none",
   Manual = "manual",
@@ -131,7 +126,6 @@ export interface PaymentChannelSchema {
   };
   network: PaymentNetwork;
   support: {
-    actors: readonly PaymentActor[];
     automation: PaymentChannelAutomation;
   };
   fields: readonly PaymentChannelField[];
@@ -193,14 +187,12 @@ export function listPaymentChannelSchemas(
     currency?: CurrencyCode;
     country?: CountryCode;
     group?: PaymentChannelGroup;
-    actor?: PaymentActor;
   } = {},
 ): PaymentChannelSchema[] {
   return [...registry.values()].filter((schema) => {
     if (filter.currency && schema.network.currency !== filter.currency) return false;
     if (filter.country && schema.network.country !== filter.country) return false;
     if (filter.group && schema.display.group !== filter.group) return false;
-    if (filter.actor && !schema.support.actors.includes(filter.actor)) return false;
     return true;
   });
 }
@@ -330,17 +322,6 @@ function assertValidSchema(schema: PaymentChannelSchema): void {
   }
   if (!Object.values(PaymentChannelAutomation).includes(schema.support.automation)) {
     throw new Error(`Payment channel automation is invalid in ${schema.id}`);
-  }
-
-  const actors = new Set<PaymentActor>();
-  for (const actor of schema.support.actors) {
-    if (!Object.values(PaymentActor).includes(actor)) {
-      throw new Error(`Payment channel actor is invalid in ${schema.id}`);
-    }
-    actors.add(actor);
-  }
-  if (actors.size === 0) {
-    throw new Error(`Payment channel support.actors must not be empty in ${schema.id}`);
   }
 
   const keys = new Set<string>();

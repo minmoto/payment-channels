@@ -61,6 +61,6 @@ Before handing work back, report the files changed and the exact verification co
 
 ## Guidance for consumers
 
-Treat registry entries as declarative product metadata. Filter by currency, country, actor, and group before showing a channel. Map product workflows to approved channel IDs in the consuming application or provider integration. Validate and use `ValidationResult.data` as the normalized value; do not reimplement the same normalization in each UI.
+Treat registry entries as declarative product metadata. Filter by currency, country, and group before showing a channel. Map product workflows and application roles to approved channel IDs in the consuming application or provider integration. Validate and use `ValidationResult.data` as the normalized value; do not reimplement the same normalization in each UI.
 
 Use `renderDetailRows` only for presentation and copy actions. Provider-side transaction status, recipient ownership, limits, fees, exchange rates, fraud controls, and settlement confirmation remain application or integration responsibilities. Keep sensitive field values out of logs and analytics.

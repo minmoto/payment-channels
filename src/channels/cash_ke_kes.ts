@@ -1,5 +1,4 @@
 import {
-  PaymentActor,
   PaymentChannelAutomation,
   PaymentChannelGroup,
   PaymentFieldType,
@@ -18,7 +17,6 @@ export const cashKeKesPaymentChannel = definePaymentChannelSchema({
   },
   network: { id: "cash", label: "Cash", country: "KE", currency: "KES" },
   support: {
-    actors: [PaymentActor.Agent, PaymentActor.Customer],
     automation: PaymentChannelAutomation.None,
   },
   fields: [],
