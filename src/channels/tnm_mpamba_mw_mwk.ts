@@ -3,7 +3,6 @@ import {
   PaymentActor,
   PaymentChannelAutomation,
   PaymentChannelGroup,
-  PaymentFlow,
   ValidationRuleKind,
   definePaymentChannelSchema,
 } from "../core.js";
@@ -11,7 +10,7 @@ import { descriptionField, mobileReferenceEvidence, phoneNumberField } from "./s
 
 export const tnmMpambaMwMwkPaymentChannel = definePaymentChannelSchema({
   id: "tnm_mpamba_mw_mwk",
-  version: 1,
+  version: 2,
   display: {
     label: "TNM Mpamba",
     shortLabel: "Mpamba",
@@ -21,7 +20,6 @@ export const tnmMpambaMwMwkPaymentChannel = definePaymentChannelSchema({
   },
   network: { id: "tnm_mpamba", label: "TNM Mpamba", country: "MW", currency: "MWK" },
   support: {
-    flows: [PaymentFlow.Onramp, PaymentFlow.Offramp],
     actors: [PaymentActor.Agent, PaymentActor.Customer],
     automation: PaymentChannelAutomation.Api,
   },

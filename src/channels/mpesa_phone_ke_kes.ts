@@ -3,7 +3,6 @@ import {
   PaymentActor,
   PaymentChannelAutomation,
   PaymentChannelGroup,
-  PaymentFlow,
   ValidationRuleKind,
   definePaymentChannelSchema,
 } from "../core.js";
@@ -11,7 +10,7 @@ import { descriptionField, mobileReferenceEvidence, phoneNumberField } from "./s
 
 export const mpesaPhoneKeKesPaymentChannel = definePaymentChannelSchema({
   id: "mpesa_phone_ke_kes",
-  version: 1,
+  version: 2,
   display: {
     label: "M-Pesa phone",
     shortLabel: "M-Pesa",
@@ -21,7 +20,6 @@ export const mpesaPhoneKeKesPaymentChannel = definePaymentChannelSchema({
   },
   network: { id: "mpesa", label: "M-Pesa", country: "KE", currency: "KES" },
   support: {
-    flows: [PaymentFlow.Onramp, PaymentFlow.Offramp],
     actors: [PaymentActor.Agent, PaymentActor.Customer],
     automation: PaymentChannelAutomation.Api,
   },

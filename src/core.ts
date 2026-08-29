@@ -5,11 +5,6 @@ export enum PaymentChannelGroup {
   Card = "card",
 }
 
-export enum PaymentFlow {
-  Onramp = "onramp",
-  Offramp = "offramp",
-}
-
 export enum PaymentActor {
   Agent = "agent",
   Customer = "customer",
@@ -136,7 +131,6 @@ export interface PaymentChannelSchema {
   };
   network: PaymentNetwork;
   support: {
-    flows: readonly PaymentFlow[];
     actors: readonly PaymentActor[];
     automation: PaymentChannelAutomation;
   };
@@ -199,7 +193,6 @@ export function listPaymentChannelSchemas(
     currency?: CurrencyCode;
     country?: CountryCode;
     group?: PaymentChannelGroup;
-    flow?: PaymentFlow;
     actor?: PaymentActor;
   } = {},
 ): PaymentChannelSchema[] {
@@ -207,7 +200,6 @@ export function listPaymentChannelSchemas(
     if (filter.currency && schema.network.currency !== filter.currency) return false;
     if (filter.country && schema.network.country !== filter.country) return false;
     if (filter.group && schema.display.group !== filter.group) return false;
-    if (filter.flow && !schema.support.flows.includes(filter.flow)) return false;
     if (filter.actor && !schema.support.actors.includes(filter.actor)) return false;
     return true;
   });
@@ -338,17 +330,6 @@ function assertValidSchema(schema: PaymentChannelSchema): void {
   }
   if (!Object.values(PaymentChannelAutomation).includes(schema.support.automation)) {
     throw new Error(`Payment channel automation is invalid in ${schema.id}`);
-  }
-
-  const flows = new Set<PaymentFlow>();
-  for (const flow of schema.support.flows) {
-    if (!Object.values(PaymentFlow).includes(flow)) {
-      throw new Error(`Payment channel flow is invalid in ${schema.id}`);
-    }
-    flows.add(flow);
-  }
-  if (flows.size === 0) {
-    throw new Error(`Payment channel support.flows must not be empty in ${schema.id}`);
   }
 
   const actors = new Set<PaymentActor>();

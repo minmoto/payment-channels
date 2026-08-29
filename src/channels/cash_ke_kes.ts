@@ -3,13 +3,12 @@ import {
   PaymentChannelAutomation,
   PaymentChannelGroup,
   PaymentFieldType,
-  PaymentFlow,
   definePaymentChannelSchema,
 } from "../core.js";
 
 export const cashKeKesPaymentChannel = definePaymentChannelSchema({
   id: "cash_ke_kes",
-  version: 1,
+  version: 2,
   display: {
     label: "Cash",
     shortLabel: "Cash",
@@ -19,7 +18,6 @@ export const cashKeKesPaymentChannel = definePaymentChannelSchema({
   },
   network: { id: "cash", label: "Cash", country: "KE", currency: "KES" },
   support: {
-    flows: [PaymentFlow.Onramp, PaymentFlow.Offramp],
     actors: [PaymentActor.Agent, PaymentActor.Customer],
     automation: PaymentChannelAutomation.None,
   },

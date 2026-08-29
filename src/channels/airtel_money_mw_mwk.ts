@@ -3,7 +3,6 @@ import {
   PaymentActor,
   PaymentChannelAutomation,
   PaymentChannelGroup,
-  PaymentFlow,
   ValidationRuleKind,
   definePaymentChannelSchema,
 } from "../core.js";
@@ -11,7 +10,7 @@ import { descriptionField, mobileReferenceEvidence, phoneNumberField } from "./s
 
 export const airtelMoneyMwMwkPaymentChannel = definePaymentChannelSchema({
   id: "airtel_money_mw_mwk",
-  version: 1,
+  version: 2,
   display: {
     label: "Airtel Money Malawi",
     shortLabel: "Airtel MW",
@@ -21,7 +20,6 @@ export const airtelMoneyMwMwkPaymentChannel = definePaymentChannelSchema({
   },
   network: { id: "airtel_money", label: "Airtel Money", country: "MW", currency: "MWK" },
   support: {
-    flows: [PaymentFlow.Onramp, PaymentFlow.Offramp],
     actors: [PaymentActor.Agent, PaymentActor.Customer],
     automation: PaymentChannelAutomation.Api,
   },
