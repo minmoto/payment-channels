@@ -45,7 +45,7 @@ Do not put provider secrets, API calls, environment-specific URLs, executable ca
 
 ## Compatibility and releases
 
-The package follows semantic versioning. Additive schema fields and new built-in channel IDs are normally minor releases. Removing or renaming exported symbols, changing existing channel IDs, or changing validation/normalization behavior in a way that rejects previously accepted input requires a major release unless explicitly documented otherwise.
+The package follows semantic versioning. Additive schema fields and new built-in channel IDs are normally minor releases. Removing or renaming exported symbols, changing existing channel IDs, or changing validation/normalization behavior in a way that rejects previously accepted input is a breaking change. While the package is below `1.0.0`, Release Please advances the minor version for breaking changes; creating `1.0.0` requires a deliberate, reviewed release-policy change.
 
 Use Conventional Commit subjects so Release Please can determine the next version and generate `CHANGELOG.md`. Review and merge its release pull request to create the tag, GitHub release, and npm publication. Do not manually edit released changelog entries or package versions; see `RELEASING.md` for the complete process.
 

@@ -4,6 +4,7 @@
     ".": {
       "release-type": "node",
       "package-name": "@minmoto/payment-channels",
+      "bump-minor-pre-major": true,
       "include-v-in-tag": true,
       "changelog-sections": [
         { "type": "feat", "section": "Features" },
