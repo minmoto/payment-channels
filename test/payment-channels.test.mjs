@@ -4,10 +4,10 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
+import * as paymentChannels from "../dist/index.js";
 import {
   PaymentActor,
   PaymentChannelAutomation,
-  PaymentFlow,
   PaymentChannelGroup,
   builtinPaymentChannels,
   createPaymentChannelRegistry,
@@ -17,13 +17,19 @@ import {
   validatePaymentChannelData,
 } from "../dist/index.js";
 
+test("public contract excludes product workflow metadata", () => {
+  assert.equal("PaymentFlow" in paymentChannels, false);
+  for (const channel of builtinPaymentChannels) {
+    assert.equal("flows" in channel.support, false);
+  }
+});
+
 test("registry exposes built-in KES mobile money channels", () => {
   const registry = createPaymentChannelRegistry();
   const channels = listPaymentChannelSchemas(registry, {
     currency: "KES",
     country: "KE",
     group: PaymentChannelGroup.MobileMoney,
-    flow: PaymentFlow.Offramp,
     actor: PaymentActor.Agent,
   });
 
@@ -166,7 +172,6 @@ test("schema definitions reject unsafe registry entries early", () => {
         },
         network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
         support: {
-          flows: [PaymentFlow.Offramp],
           actors: [PaymentActor.Agent],
           automation: PaymentChannelAutomation.Manual,
         },
@@ -200,7 +205,6 @@ test("schema definitions reject invalid automation values early", () => {
         },
         network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
         support: {
-          flows: [PaymentFlow.Offramp],
           actors: [PaymentActor.Agent],
           automation: /** @type {any} */ ("script"),
         },
@@ -227,7 +231,6 @@ test("schema definitions reject missing detail rows early", () => {
           },
           network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
           support: {
-            flows: [PaymentFlow.Offramp],
             actors: [PaymentActor.Agent],
             automation: PaymentChannelAutomation.Manual,
           },
@@ -253,7 +256,6 @@ test("schema definitions reject non-canonical channel identifiers", () => {
         },
         network: { id: "broken", label: "Broken", country: /** @type {any} */ ("ke"), currency: "KES" },
         support: {
-          flows: [PaymentFlow.Offramp],
           actors: [PaymentActor.Agent],
           automation: PaymentChannelAutomation.Manual,
         },
@@ -279,7 +281,6 @@ test("schema definitions reject duplicate detail row keys", () => {
         },
         network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
         support: {
-          flows: [PaymentFlow.Offramp],
           actors: [PaymentActor.Agent],
           automation: PaymentChannelAutomation.Manual,
         },

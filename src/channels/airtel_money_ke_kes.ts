@@ -3,7 +3,6 @@ import {
   PaymentActor,
   PaymentChannelAutomation,
   PaymentChannelGroup,
-  PaymentFlow,
   ValidationRuleKind,
   definePaymentChannelSchema,
 } from "../core.js";
@@ -11,7 +10,7 @@ import { descriptionField, mobileReferenceEvidence, phoneNumberField } from "./s
 
 export const airtelMoneyKeKesPaymentChannel = definePaymentChannelSchema({
   id: "airtel_money_ke_kes",
-  version: 1,
+  version: 2,
   display: {
     label: "Airtel Money",
     shortLabel: "Airtel",
@@ -21,7 +20,6 @@ export const airtelMoneyKeKesPaymentChannel = definePaymentChannelSchema({
   },
   network: { id: "airtel_money", label: "Airtel Money", country: "KE", currency: "KES" },
   support: {
-    flows: [PaymentFlow.Onramp, PaymentFlow.Offramp],
     actors: [PaymentActor.Agent, PaymentActor.Customer],
     automation: PaymentChannelAutomation.Api,
   },

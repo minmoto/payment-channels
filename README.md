@@ -18,7 +18,6 @@ Node.js 18 or newer is supported. The package ships as tree-shakeable ESM with g
 
 ```ts
 import {
-  PaymentFlow,
   createPaymentChannelRegistry,
   listPaymentChannelSchemas,
   validatePaymentChannelData,
@@ -28,7 +27,6 @@ const registry = createPaymentChannelRegistry();
 const channels = listPaymentChannelSchemas(registry, {
   currency: "KES",
   country: "KE",
-  flow: PaymentFlow.Offramp,
 });
 
 const mpesa = registry.get("mpesa_phone_ke_kes");
@@ -67,7 +65,7 @@ addPaymentChannelSchema(registry, definePaymentChannelSchema(myChannel));
 - `id` and `version`: stable identity and schema revision
 - `display`: human-facing labels, description, icon token, and payment method group
 - `network`: stable money network identity plus ISO-style country and currency codes
-- `support`: onramp/offramp flows, visible actors, and an explicit automation mode
+- `support`: visible actors and an explicit automation mode
 - `fields`: typed inputs with required state, placeholders, normalization, masking, and serializable validation rules
 - `detailRows`: ordered display and copy rows for collected payment details
 - `instructions`: payer and payee guidance
@@ -84,7 +82,6 @@ import {
   PaymentChannelAutomation,
   PaymentChannelGroup,
   PaymentFieldType,
-  PaymentFlow,
   ValidationRuleKind,
   definePaymentChannelSchema,
 } from "@minmoto/payment-channels";
@@ -106,7 +103,6 @@ export const exampleWalletKeKes = definePaymentChannelSchema({
     currency: "KES",
   },
   support: {
-    flows: [PaymentFlow.Onramp, PaymentFlow.Offramp],
     actors: [PaymentActor.Agent, PaymentActor.Customer],
     automation: PaymentChannelAutomation.Manual,
   },
@@ -149,7 +145,28 @@ The seed registry currently includes:
 - Kenya (`KES`): M-Pesa phone, M-Pesa till, M-Pesa paybill, Airtel Money, and cash
 - Malawi (`MWK`): Airtel Money and TNM Mpamba
 
-Cash is intentionally represented as a channel for workflow selection, but it has no structured payment fields and `automation: PaymentChannelAutomation.None`. A schema never implies that an external provider integration exists.
+Cash is intentionally represented as a channel, but it has no structured payment fields and `automation: PaymentChannelAutomation.None`. A schema never implies that an external provider integration exists.
+
+## Migration: product-owned workflow mapping
+
+This breaking change removes the `PaymentFlow` export, `support.flows` schema field, and `flow` registry filter, and advances the built-in schema revisions to `2`. Collection, disbursement, exchange, settlement, and other product workflows now map to channel IDs outside this package, in application or provider configuration.
+
+For example:
+
+```ts
+const channelsByWorkflow = {
+  collection: ["mpesa_paybill_ke_kes", "mpesa_till_ke_kes"],
+  disbursement: ["mpesa_phone_ke_kes", "airtel_money_ke_kes"],
+} as const;
+
+const configuredIds = new Set<string>(channelsByWorkflow.disbursement);
+const configuredChannels = listPaymentChannelSchemas(registry, {
+  country: "KE",
+  currency: "KES",
+}).filter((channel) => configuredIds.has(channel.id));
+```
+
+This mapping is product policy, not portable schema metadata. It can account for provider capabilities, commercial agreements, limits, and risk controls without changing a channel's fields or validation contract.
 
 ## Security and trust boundary
 

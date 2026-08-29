@@ -5,7 +5,6 @@ export {
   PaymentChannelAutomation,
   PaymentChannelGroup,
   PaymentFieldType,
-  PaymentFlow,
   ValidationRuleKind,
   addPaymentChannelSchema,
   definePaymentChannelSchema,

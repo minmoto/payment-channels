@@ -4,7 +4,6 @@ import {
   PaymentChannelAutomation,
   PaymentChannelGroup,
   PaymentFieldType,
-  PaymentFlow,
   ValidationRuleKind,
   definePaymentChannelSchema,
 } from "../core.js";
@@ -12,7 +11,7 @@ import { descriptionField, mobileReferenceEvidence } from "./shared.js";
 
 export const mpesaPaybillKeKesPaymentChannel = definePaymentChannelSchema({
   id: "mpesa_paybill_ke_kes",
-  version: 1,
+  version: 2,
   display: {
     label: "M-Pesa paybill",
     shortLabel: "Paybill",
@@ -22,7 +21,6 @@ export const mpesaPaybillKeKesPaymentChannel = definePaymentChannelSchema({
   },
   network: { id: "mpesa", label: "M-Pesa", country: "KE", currency: "KES" },
   support: {
-    flows: [PaymentFlow.Onramp, PaymentFlow.Offramp],
     actors: [PaymentActor.Agent, PaymentActor.Customer],
     automation: PaymentChannelAutomation.Api,
   },
