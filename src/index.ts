@@ -1,7 +1,6 @@
 export {
   MaskingKind,
   NormalizationKind,
-  PaymentActor,
   PaymentChannelAutomation,
   PaymentChannelGroup,
   PaymentFieldType,

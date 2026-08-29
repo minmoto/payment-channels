@@ -65,7 +65,7 @@ addPaymentChannelSchema(registry, definePaymentChannelSchema(myChannel));
 - `id` and `version`: stable identity and schema revision
 - `display`: human-facing labels, description, icon token, and payment method group
 - `network`: stable money network identity plus ISO-style country and currency codes
-- `support`: visible actors and an explicit automation mode
+- `support`: an explicit automation mode
 - `fields`: typed inputs with required state, placeholders, normalization, masking, and serializable validation rules
 - `detailRows`: ordered display and copy rows for collected payment details
 - `instructions`: payer and payee guidance
@@ -78,7 +78,6 @@ Validation rules are data, not callbacks. This keeps schemas serializable and sa
 ```ts
 import {
   NormalizationKind,
-  PaymentActor,
   PaymentChannelAutomation,
   PaymentChannelGroup,
   PaymentFieldType,
@@ -103,7 +102,6 @@ export const exampleWalletKeKes = definePaymentChannelSchema({
     currency: "KES",
   },
   support: {
-    actors: [PaymentActor.Agent, PaymentActor.Customer],
     automation: PaymentChannelAutomation.Manual,
   },
   fields: [
@@ -147,9 +145,9 @@ The seed registry currently includes:
 
 Cash is intentionally represented as a channel, but it has no structured payment fields and `automation: PaymentChannelAutomation.None`. A schema never implies that an external provider integration exists.
 
-## Migration: product-owned workflow mapping
+## Migration: product-owned workflow and role mapping
 
-This breaking change removes the `PaymentFlow` export, `support.flows` schema field, and `flow` registry filter, and advances the built-in schema revisions to `2`. Collection, disbursement, exchange, settlement, and other product workflows now map to channel IDs outside this package, in application or provider configuration.
+This breaking change removes the `PaymentFlow` and `PaymentActor` exports, the `support.flows` and `support.actors` schema fields, and the `flow` and `actor` registry filters. The built-in schema revisions remain at `2`. Collection, disbursement, exchange, settlement, product roles, and permissions now map to channel IDs outside this package, in application or provider configuration.
 
 For example:
 
@@ -159,14 +157,20 @@ const channelsByWorkflow = {
   disbursement: ["mpesa_phone_ke_kes", "airtel_money_ke_kes"],
 } as const;
 
-const configuredIds = new Set<string>(channelsByWorkflow.disbursement);
+const channelsByRole = {
+  customer: ["mpesa_paybill_ke_kes", "mpesa_till_ke_kes"],
+  agent: ["mpesa_phone_ke_kes", "airtel_money_ke_kes"],
+} as const;
+
+const workflowIds = new Set<string>(channelsByWorkflow.disbursement);
+const roleIds = new Set<string>(channelsByRole.agent);
 const configuredChannels = listPaymentChannelSchemas(registry, {
   country: "KE",
   currency: "KES",
-}).filter((channel) => configuredIds.has(channel.id));
+}).filter((channel) => workflowIds.has(channel.id) && roleIds.has(channel.id));
 ```
 
-This mapping is product policy, not portable schema metadata. It can account for provider capabilities, commercial agreements, limits, and risk controls without changing a channel's fields or validation contract.
+These mappings are product policy, not portable schema metadata. They can account for provider capabilities, commercial agreements, authorization, limits, and risk controls without changing a channel's fields or validation contract. Transaction-relative payer and payee instructions remain in the schema because they describe how to use the payment method rather than who may access it.
 
 ## Security and trust boundary
 

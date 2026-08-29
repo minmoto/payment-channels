@@ -1,6 +1,5 @@
 import {
   NormalizationKind,
-  PaymentActor,
   PaymentChannelAutomation,
   PaymentChannelGroup,
   PaymentFieldType,
@@ -21,7 +20,6 @@ export const mpesaPaybillKeKesPaymentChannel = definePaymentChannelSchema({
   },
   network: { id: "mpesa", label: "M-Pesa", country: "KE", currency: "KES" },
   support: {
-    actors: [PaymentActor.Agent, PaymentActor.Customer],
     automation: PaymentChannelAutomation.Api,
   },
   fields: [

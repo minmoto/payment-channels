@@ -1,6 +1,5 @@
 import {
   NormalizationKind,
-  PaymentActor,
   PaymentChannelAutomation,
   PaymentChannelGroup,
   ValidationRuleKind,
@@ -20,7 +19,6 @@ export const airtelMoneyMwMwkPaymentChannel = definePaymentChannelSchema({
   },
   network: { id: "airtel_money", label: "Airtel Money", country: "MW", currency: "MWK" },
   support: {
-    actors: [PaymentActor.Agent, PaymentActor.Customer],
     automation: PaymentChannelAutomation.Api,
   },
   fields: [
