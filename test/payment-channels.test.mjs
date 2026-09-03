@@ -61,6 +61,40 @@ test("registry exposes built-in KES mobile money channels", () => {
   );
 });
 
+test("registry exposes the built-in ZAR PayShap bank channel", () => {
+  const registry = createPaymentChannelRegistry();
+  const channels = listPaymentChannelSchemas(registry, { currency: "ZAR", country: "ZA", group: PaymentChannelGroup.Bank });
+  assert.deepEqual(channels.map((channel) => channel.id), ["payshap_shapid_za_zar", "payshap_account_za_zar"]);
+});
+
+test("PayShap account details are normalized and required", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "payshap_account_za_zar");
+  assert.ok(schema);
+  const valid = validatePaymentChannelData(schema, { recipientName: " Jane Example ", bankName: " Example Bank ", accountNumber: " 1234567890 ", description: " settlement " });
+  assert.equal(valid.valid, true);
+  assert.deepEqual(valid.data, { recipientName: "Jane Example", bankName: "Example Bank", accountNumber: "1234567890", description: "settlement" });
+  const invalid = validatePaymentChannelData(schema, { recipientName: "Jane Example", bankName: " ", accountNumber: "1234567890" });
+  assert.equal(invalid.valid, false);
+  assert.deepEqual(invalid.issues, [{ field: "bankName", message: "Bank is required" }]);
+});
+
+test("PayShap trims and validates bank-qualified ShapIDs", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "payshap_shapid_za_zar");
+  assert.ok(schema);
+  const result = validatePaymentChannelData(schema, { shapId: " 0812345678@standardbank ", description: " settlement " });
+  assert.equal(result.valid, true);
+  assert.equal(result.data.shapId, "0812345678@standardbank");
+  assert.equal(result.data.description, "settlement");
+});
+
+test("PayShap rejects invalid ShapIDs", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "payshap_shapid_za_zar");
+  assert.ok(schema);
+  const result = validatePaymentChannelData(schema, { shapId: "not-a-shapid" });
+  assert.equal(result.valid, false);
+  assert.deepEqual(result.issues, [{ field: "shapId", message: "Use a South African cellphone ShapID, e.g. 0812345678 or 0812345678@bank" }]);
+});
+
 test("Pochi la Biashara normalizes and renders its business phone number", () => {
   const schema = builtinPaymentChannels.find((channel) => channel.id === "mpesa_pochi_ke_kes");
   assert.ok(schema);

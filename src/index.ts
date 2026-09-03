@@ -42,6 +42,8 @@ export {
   mpesaPhoneKeKesPaymentChannel,
   mpesaPochiKeKesPaymentChannel,
   mpesaTillKeKesPaymentChannel,
+  payshapAccountZaZarPaymentChannel,
+  payshapShapidZaZarPaymentChannel,
   tnmMpambaMwMwkPaymentChannel,
 } from "./channels/index.js";
 
