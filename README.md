@@ -142,6 +142,7 @@ The seed registry currently includes:
 
 - Kenya (`KES`): M-Pesa phone, M-Pesa till, M-Pesa paybill, Airtel Money, and cash
 - Malawi (`MWK`): Airtel Money and TNM Mpamba
+- South Africa (`ZAR`): PayShap ShapID and PayShap bank account
 
 Cash is intentionally represented as a channel, but it has no structured payment fields and `automation: PaymentChannelAutomation.None`. A schema never implies that an external provider integration exists.
 
