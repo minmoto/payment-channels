@@ -3,7 +3,7 @@ import {
   PaymentChannelGroup,
   PaymentFieldType,
   definePaymentChannelSchema,
-} from "../core.js";
+} from "../../core.js";
 
 export const cashKeKesPaymentChannel = definePaymentChannelSchema({
   id: "cash_ke_kes",

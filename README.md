@@ -134,7 +134,7 @@ export const exampleWalletKeKes = definePaymentChannelSchema({
 
 Use `definePaymentChannelSchema` at definition time. It rejects invalid IDs and code casing, invalid enum values, duplicate field or detail-row keys, malformed select fields, invalid regular expressions, invalid length rules, empty allow-lists, and detail rows that reference unknown fields.
 
-Built-in IDs and source filenames use `<network>_<variant?>_<country>_<currency>`, with lowercase country and currency suffixes. For example, `mpesa_phone_ke_kes` is defined in `src/channels/mpesa_phone_ke_kes.ts`.
+Built-in IDs use `<network>_<variant?>_<country>_<currency>`, with lowercase country and currency suffixes. Source files are grouped by country and omit the redundant market suffix: `src/channels/<country>/<network>_<variant?>.ts`. For example, `mpesa_phone_ke_kes` is defined in `src/channels/ke/mpesa_phone.ts`. Country and currency remain explicit schema attributes even though currency is not repeated in the source path.
 
 ## Built-in registry
 
@@ -142,6 +142,7 @@ The seed registry currently includes:
 
 - Kenya (`KES`): M-Pesa phone, M-Pesa till, M-Pesa paybill, Airtel Money, and cash
 - Malawi (`MWK`): Airtel Money and TNM Mpamba
+- South Africa (`ZAR`): PayShap ShapID and PayShap bank account
 
 Cash is intentionally represented as a channel, but it has no structured payment fields and `automation: PaymentChannelAutomation.None`. A schema never implies that an external provider integration exists.
 

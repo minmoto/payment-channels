@@ -16,6 +16,22 @@ import {
   validatePaymentChannelData,
 } from "../dist/index.js";
 
+async function listChannelSourceFiles(directory) {
+  const files = [];
+
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const entryPath = path.join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...(await listChannelSourceFiles(entryPath)));
+    } else if (entry.name.endsWith(".ts") && entry.name !== "index.ts" && entry.name !== "shared.ts") {
+      files.push(entryPath);
+    }
+  }
+
+  return files;
+}
+
 test("public contract excludes product workflow and actor metadata", () => {
   assert.equal("PaymentFlow" in paymentChannels, false);
   assert.equal("PaymentActor" in paymentChannels, false);
@@ -37,6 +53,134 @@ test("registry exposes built-in KES mobile money channels", () => {
     channels.map((channel) => channel.id),
     ["mpesa_phone_ke_kes", "mpesa_till_ke_kes", "mpesa_paybill_ke_kes", "airtel_money_ke_kes"],
   );
+});
+
+test("registry exposes the built-in ZAR PayShap bank channel", () => {
+  const registry = createPaymentChannelRegistry();
+  const channels = listPaymentChannelSchemas(registry, {
+    currency: "ZAR",
+    country: "ZA",
+    group: PaymentChannelGroup.Bank,
+  });
+
+  assert.deepEqual(
+    channels.map((channel) => channel.id),
+    ["payshap_shapid_za_zar", "payshap_account_za_zar"],
+  );
+});
+
+test("PayShap account details are normalized and required", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "payshap_account_za_zar");
+  assert.ok(schema);
+
+  const valid = validatePaymentChannelData(schema, {
+    recipientName: " Jane Example ",
+    bankName: " Example Bank ",
+    accountNumber: " 1234567890 ",
+    description: " settlement ",
+  });
+
+  assert.equal(valid.valid, true);
+  assert.deepEqual(valid.data, {
+    recipientName: "Jane Example",
+    bankName: "Example Bank",
+    accountNumber: "1234567890",
+    description: "settlement",
+  });
+
+  const invalid = validatePaymentChannelData(schema, {
+    recipientName: "Jane Example",
+    bankName: " ",
+    accountNumber: "1234567890",
+  });
+
+  assert.equal(invalid.valid, false);
+  assert.deepEqual(invalid.issues, [{ field: "bankName", message: "Bank is required" }]);
+});
+
+test("PayShap account details render with a masked copyable account number", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "payshap_account_za_zar");
+  assert.ok(schema);
+
+  const validation = validatePaymentChannelData(schema, {
+    recipientName: "Jane Example",
+    bankName: "Example Bank",
+    accountNumber: "1234567890",
+  });
+
+  assert.equal(validation.valid, true);
+  assert.deepEqual(renderDetailRows(schema, validation.data), [
+    {
+      key: "recipientName",
+      label: "Recipient name",
+      value: "Jane Example",
+      copyable: false,
+    },
+    {
+      key: "bankName",
+      label: "Bank",
+      value: "Example Bank",
+      copyable: false,
+    },
+    {
+      key: "accountNumber",
+      label: "Account number",
+      value: "******7890",
+      copyable: true,
+      copyValue: "1234567890",
+    },
+  ]);
+});
+
+test("PayShap trims and validates bank-qualified ShapIDs", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "payshap_shapid_za_zar");
+  assert.ok(schema);
+
+  const result = validatePaymentChannelData(schema, {
+    shapId: " 0812345678@standardbank ",
+    description: " settlement ",
+  });
+
+  assert.equal(result.valid, true);
+  assert.equal(result.data.shapId, "0812345678@standardbank");
+  assert.equal(result.data.description, "settlement");
+});
+
+test("PayShap rejects invalid ShapIDs", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "payshap_shapid_za_zar");
+  assert.ok(schema);
+
+  const result = validatePaymentChannelData(schema, {
+    shapId: "not-a-shapid",
+  });
+
+  assert.equal(result.valid, false);
+  assert.deepEqual(result.issues, [
+    {
+      field: "shapId",
+      message: "Use a South African cellphone ShapID, e.g. 0812345678 or 0812345678@bank",
+    },
+  ]);
+});
+
+test("PayShap detail rows mask display values while preserving the full copy value", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "payshap_shapid_za_zar");
+  assert.ok(schema);
+
+  const validation = validatePaymentChannelData(schema, {
+    shapId: "0812345678@standardbank",
+  });
+
+  assert.equal(validation.valid, true);
+  assert.deepEqual(renderDetailRows(schema, validation.data), [
+    {
+      key: "shapId",
+      label: "ShapID",
+      value: "0812***678@standardbank",
+      copyable: true,
+      copyValue: "0812345678@standardbank",
+    },
+  ]);
 });
 
 test("phone fields normalize and validate against currency network rules", () => {
@@ -138,22 +282,31 @@ test("cash is present but explicitly not automated", () => {
   assert.deepEqual(cash.fields, []);
 });
 
-test("channel source files contain one channel matching the filename", async () => {
+test("channel source files are grouped by country and match stable channel IDs", async () => {
   const channelsDirectory = fileURLToPath(new URL("../src/channels", import.meta.url));
-  const filenames = (await readdir(channelsDirectory)).filter(
-    (filename) => filename.endsWith(".ts") && filename !== "index.ts" && filename !== "shared.ts",
-  );
+  const filenames = await listChannelSourceFiles(channelsDirectory);
 
-  assert.ok(filenames.length > 0);
+  assert.equal(filenames.length, builtinPaymentChannels.length);
 
   for (const filename of filenames) {
-    const source = await readFile(path.join(channelsDirectory, filename), "utf8");
+    const source = await readFile(filename, "utf8");
     const definitions = source.match(/definePaymentChannelSchema\(\{/g) ?? [];
     const exports = [...source.matchAll(/^export\s+const\s+(\w+)\s*=\s*definePaymentChannelSchema\(\{\s*id:\s*"([^"]+)"/gm)];
 
     assert.equal(definitions.length, 1, `${filename} must define exactly one payment channel`);
     assert.equal(exports.length, 1, `${filename} must export its payment channel definition`);
-    assert.equal(filename, `${exports[0][2]}.ts`, `${filename} must match channel id ${exports[0][2]}`);
+
+    const channel = builtinPaymentChannels.find((candidate) => candidate.id === exports[0][2]);
+    assert.ok(channel, `${filename} must define a built-in payment channel`);
+
+    const country = channel.network.country.toLowerCase();
+    const currency = channel.network.currency.toLowerCase();
+    const marketSuffix = `_${country}_${currency}`;
+    assert.ok(channel.id.endsWith(marketSuffix), `${channel.id} must end with ${marketSuffix}`);
+
+    const shortId = channel.id.slice(0, -marketSuffix.length);
+    const expectedPath = path.join(country, `${shortId}.ts`);
+    assert.equal(path.relative(channelsDirectory, filename), expectedPath);
   }
 });
 

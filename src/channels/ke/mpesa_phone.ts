@@ -4,8 +4,8 @@ import {
   PaymentChannelGroup,
   ValidationRuleKind,
   definePaymentChannelSchema,
-} from "../core.js";
-import { descriptionField, mobileReferenceEvidence, phoneNumberField } from "./shared.js";
+} from "../../core.js";
+import { descriptionField, mobileReferenceEvidence, phoneNumberField } from "../shared.js";
 
 export const mpesaPhoneKeKesPaymentChannel = definePaymentChannelSchema({
   id: "mpesa_phone_ke_kes",
