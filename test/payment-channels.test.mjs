@@ -16,6 +16,22 @@ import {
   validatePaymentChannelData,
 } from "../dist/index.js";
 
+async function listChannelSourceFiles(directory) {
+  const files = [];
+
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const entryPath = path.join(directory, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...(await listChannelSourceFiles(entryPath)));
+    } else if (entry.name.endsWith(".ts") && entry.name !== "index.ts" && entry.name !== "shared.ts") {
+      files.push(entryPath);
+    }
+  }
+
+  return files;
+}
+
 test("public contract excludes product workflow and actor metadata", () => {
   assert.equal("PaymentFlow" in paymentChannels, false);
   assert.equal("PaymentActor" in paymentChannels, false);
@@ -138,22 +154,31 @@ test("cash is present but explicitly not automated", () => {
   assert.deepEqual(cash.fields, []);
 });
 
-test("channel source files contain one channel matching the filename", async () => {
+test("channel source files are grouped by country and match stable channel IDs", async () => {
   const channelsDirectory = fileURLToPath(new URL("../src/channels", import.meta.url));
-  const filenames = (await readdir(channelsDirectory)).filter(
-    (filename) => filename.endsWith(".ts") && filename !== "index.ts" && filename !== "shared.ts",
-  );
+  const filenames = await listChannelSourceFiles(channelsDirectory);
 
-  assert.ok(filenames.length > 0);
+  assert.equal(filenames.length, builtinPaymentChannels.length);
 
   for (const filename of filenames) {
-    const source = await readFile(path.join(channelsDirectory, filename), "utf8");
+    const source = await readFile(filename, "utf8");
     const definitions = source.match(/definePaymentChannelSchema\(\{/g) ?? [];
     const exports = [...source.matchAll(/^export\s+const\s+(\w+)\s*=\s*definePaymentChannelSchema\(\{\s*id:\s*"([^"]+)"/gm)];
 
     assert.equal(definitions.length, 1, `${filename} must define exactly one payment channel`);
     assert.equal(exports.length, 1, `${filename} must export its payment channel definition`);
-    assert.equal(filename, `${exports[0][2]}.ts`, `${filename} must match channel id ${exports[0][2]}`);
+
+    const channel = builtinPaymentChannels.find((candidate) => candidate.id === exports[0][2]);
+    assert.ok(channel, `${filename} must define a built-in payment channel`);
+
+    const country = channel.network.country.toLowerCase();
+    const currency = channel.network.currency.toLowerCase();
+    const marketSuffix = `_${country}_${currency}`;
+    assert.ok(channel.id.endsWith(marketSuffix), `${channel.id} must end with ${marketSuffix}`);
+
+    const shortId = channel.id.slice(0, -marketSuffix.length);
+    const expectedPath = path.join(country, `${shortId}.ts`);
+    assert.equal(path.relative(channelsDirectory, filename), expectedPath);
   }
 });
 
