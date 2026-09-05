@@ -39,6 +39,7 @@ export enum MaskingKind {
   None = "none",
   Phone = "phone",
   Last4 = "last4",
+  ShapId = "shap_id",
 }
 
 export type CurrencyCode = Uppercase<string>;
@@ -249,6 +250,7 @@ export function maskFieldValue(field: PaymentChannelField, value: string): strin
   if (field.mask === MaskingKind.None || !field.mask) return value;
   if (field.mask === MaskingKind.Last4) return maskLast4(value);
   if (field.mask === MaskingKind.Phone) return maskPhone(value);
+  if (field.mask === MaskingKind.ShapId) return maskShapId(value);
   return value;
 }
 
@@ -462,4 +464,10 @@ function maskLast4(value: string): string {
 function maskPhone(value: string): string {
   if (value.length <= 7) return maskLast4(value);
   return `${value.slice(0, 4)}***${value.slice(-3)}`;
+}
+
+function maskShapId(value: string): string {
+  const separatorIndex = value.indexOf("@");
+  if (separatorIndex === -1) return maskPhone(value);
+  return `${maskPhone(value.slice(0, separatorIndex))}${value.slice(separatorIndex)}`;
 }
