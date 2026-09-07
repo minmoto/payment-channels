@@ -140,7 +140,7 @@ Built-in IDs use `<network>_<variant?>_<country>_<currency>`, with lowercase cou
 
 The seed registry currently includes:
 
-- Kenya (`KES`): M-Pesa phone, M-Pesa till, M-Pesa paybill, Airtel Money, and cash
+- Kenya (`KES`): M-Pesa phone, M-Pesa Pochi la Biashara, M-Pesa till, M-Pesa paybill, Airtel Money, and cash
 - Malawi (`MWK`): Airtel Money and TNM Mpamba
 
 Cash is intentionally represented as a channel, but it has no structured payment fields and `automation: PaymentChannelAutomation.None`. A schema never implies that an external provider integration exists.
