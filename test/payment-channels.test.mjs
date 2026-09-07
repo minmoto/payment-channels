@@ -51,8 +51,57 @@ test("registry exposes built-in KES mobile money channels", () => {
 
   assert.deepEqual(
     channels.map((channel) => channel.id),
-    ["mpesa_phone_ke_kes", "mpesa_till_ke_kes", "mpesa_paybill_ke_kes", "airtel_money_ke_kes"],
+    [
+      "mpesa_phone_ke_kes",
+      "mpesa_pochi_ke_kes",
+      "mpesa_till_ke_kes",
+      "mpesa_paybill_ke_kes",
+      "airtel_money_ke_kes",
+    ],
   );
+});
+
+test("Pochi la Biashara normalizes and renders its business phone number", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "mpesa_pochi_ke_kes");
+  assert.ok(schema);
+  assert.equal(schema.support.automation, PaymentChannelAutomation.Manual);
+
+  const validation = validatePaymentChannelData(schema, {
+    phoneNumber: "0712 345 678",
+    description: " market stall ",
+  });
+
+  assert.equal(validation.valid, true);
+  assert.deepEqual(validation.data, {
+    phoneNumber: "+254712345678",
+    description: "market stall",
+  });
+  assert.deepEqual(renderDetailRows(schema, validation.data), [
+    {
+      key: "phoneNumber",
+      label: "Business phone number",
+      value: "+254***678",
+      copyable: true,
+      copyValue: "+254712345678",
+    },
+  ]);
+});
+
+test("Pochi la Biashara rejects invalid business phone numbers", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "mpesa_pochi_ke_kes");
+  assert.ok(schema);
+
+  const validation = validatePaymentChannelData(schema, {
+    phoneNumber: "12345",
+  });
+
+  assert.equal(validation.valid, false);
+  assert.deepEqual(validation.issues, [
+    {
+      field: "phoneNumber",
+      message: "Use a Kenyan phone number in international format, e.g. +254712345678",
+    },
+  ]);
 });
 
 test("phone fields normalize and validate against currency network rules", () => {
