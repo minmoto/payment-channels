@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.0](https://github.com/minmoto/payment-channels/compare/payment-channels-v0.3.0...payment-channels-v0.4.0) (2026-09-08)
+
+
+### Features
+
+* add M-Pesa Pochi la Biashara channel ([4fb4c2a](https://github.com/minmoto/payment-channels/commit/4fb4c2a02027020cb5dc9b1824e7572085eb1c5d))
+
+
+### Code Refactoring
+
+* group channel sources by country ([c210a07](https://github.com/minmoto/payment-channels/commit/c210a07e73861fda603ef2b51f523dccb737c2da))
+
 ## [0.3.0](https://github.com/minmoto/payment-channels/compare/payment-channels-v0.2.0...payment-channels-v0.3.0) (2026-08-29)
 
 
