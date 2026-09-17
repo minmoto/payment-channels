@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.4.0](https://github.com/minmoto/payment-channels/compare/payment-channels-v0.3.0...payment-channels-v0.4.0) (2026-09-17)
+
+
+### Features
+
+* add cash channels for Malawi and South Africa ([74805bc](https://github.com/minmoto/payment-channels/commit/74805bc0d7eea249b2dcc7686c5872ba03f6a4f2))
+* add Kenyan PesaLink account channel ([eaca68b](https://github.com/minmoto/payment-channels/commit/eaca68bd8897de189e22b0cddca293e9a57b6a39))
+* add M-Pesa Pochi la Biashara channel ([4fb4c2a](https://github.com/minmoto/payment-channels/commit/4fb4c2a02027020cb5dc9b1824e7572085eb1c5d))
+* add reusable cash channel composition ([8713f4d](https://github.com/minmoto/payment-channels/commit/8713f4d22f2aaab5934158bac258f174aea53f29))
+* add South African PayShap channels ([2e5bd37](https://github.com/minmoto/payment-channels/commit/2e5bd377c6eade1da5f9e167d9116ac87a441ee8))
+* support dual ESM and CommonJS exports ([f40a612](https://github.com/minmoto/payment-channels/commit/f40a61288f3c94fe15124e57296bc3e1c050fbb6))
+
+
+### Code Refactoring
+
+* group channel sources by country ([c210a07](https://github.com/minmoto/payment-channels/commit/c210a07e73861fda603ef2b51f523dccb737c2da))
+
 ## [0.3.0](https://github.com/minmoto/payment-channels/compare/payment-channels-v0.2.0...payment-channels-v0.3.0) (2026-08-29)
 
 
