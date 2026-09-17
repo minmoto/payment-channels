@@ -158,7 +158,7 @@ Built-in IDs use `<network>_<variant?>_<country>_<currency>`, with lowercase cou
 
 The seed registry currently includes:
 
-- Kenya (`KES`): M-Pesa phone, M-Pesa Pochi la Biashara, M-Pesa till, M-Pesa paybill, Airtel Money, and cash
+- Kenya (`KES`): M-Pesa phone, M-Pesa Pochi la Biashara, M-Pesa till, M-Pesa paybill, Airtel Money, PesaLink bank account, and cash
 - Malawi (`MWK`): Airtel Money, TNM Mpamba, and cash
 - South Africa (`ZAR`): PayShap ShapID, PayShap bank account, and cash
 

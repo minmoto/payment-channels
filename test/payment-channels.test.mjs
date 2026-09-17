@@ -68,6 +68,26 @@ test("registry exposes the built-in ZAR PayShap bank channel", () => {
   assert.deepEqual(channels.map((channel) => channel.id), ["payshap_shapid_za_zar", "payshap_account_za_zar"]);
 });
 
+test("registry exposes the built-in Kenyan PesaLink bank channel", () => {
+  const registry = createPaymentChannelRegistry();
+  const channels = listPaymentChannelSchemas(registry, { currency: "KES", country: "KE", group: PaymentChannelGroup.Bank });
+  assert.deepEqual(channels.map((channel) => channel.id), ["pesalink_account_ke_kes"]);
+});
+
+test("PesaLink account details are normalized and rendered", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "pesalink_account_ke_kes");
+  assert.ok(schema);
+  const validation = validatePaymentChannelData(schema, {
+    recipientName: " Jane Example ", bankName: " Example Bank ", accountNumber: " 1234567890 ",
+  });
+  assert.equal(validation.valid, true);
+  assert.deepEqual(renderDetailRows(schema, validation.data), [
+    { key: "recipientName", label: "Recipient name", value: "Jane Example", copyable: false },
+    { key: "bankName", label: "Bank", value: "Example Bank", copyable: false },
+    { key: "accountNumber", label: "Account number", value: "******7890", copyable: true, copyValue: "1234567890" },
+  ]);
+});
+
 test("PayShap account details are normalized and required", () => {
   const schema = builtinPaymentChannels.find((channel) => channel.id === "payshap_account_za_zar");
   assert.ok(schema);

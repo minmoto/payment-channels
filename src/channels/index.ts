@@ -8,6 +8,7 @@ export { mpesaPaybillKeKesPaymentChannel } from "./ke/mpesa_paybill.js";
 export { mpesaPhoneKeKesPaymentChannel } from "./ke/mpesa_phone.js";
 export { mpesaPochiKeKesPaymentChannel } from "./ke/mpesa_pochi.js";
 export { mpesaTillKeKesPaymentChannel } from "./ke/mpesa_till.js";
+export { pesalinkAccountKeKesPaymentChannel } from "./ke/pesalink_account.js";
 export { airtelMoneyMwMwkPaymentChannel } from "./mw/airtel_money.js";
 export { cashMwMwkPaymentChannel } from "./mw/cash.js";
 export { tnmMpambaMwMwkPaymentChannel } from "./mw/tnm_mpamba.js";
@@ -21,6 +22,7 @@ import { mpesaPaybillKeKesPaymentChannel } from "./ke/mpesa_paybill.js";
 import { mpesaPhoneKeKesPaymentChannel } from "./ke/mpesa_phone.js";
 import { mpesaPochiKeKesPaymentChannel } from "./ke/mpesa_pochi.js";
 import { mpesaTillKeKesPaymentChannel } from "./ke/mpesa_till.js";
+import { pesalinkAccountKeKesPaymentChannel } from "./ke/pesalink_account.js";
 import { airtelMoneyMwMwkPaymentChannel } from "./mw/airtel_money.js";
 import { cashMwMwkPaymentChannel } from "./mw/cash.js";
 import { tnmMpambaMwMwkPaymentChannel } from "./mw/tnm_mpamba.js";
@@ -33,6 +35,7 @@ export const builtinPaymentChannels: readonly PaymentChannelSchema[] = [
   mpesaPochiKeKesPaymentChannel,
   mpesaTillKeKesPaymentChannel,
   mpesaPaybillKeKesPaymentChannel,
+  pesalinkAccountKeKesPaymentChannel,
   airtelMoneyKeKesPaymentChannel,
   airtelMoneyMwMwkPaymentChannel,
   cashMwMwkPaymentChannel,
