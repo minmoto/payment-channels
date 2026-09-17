@@ -14,6 +14,7 @@ import {
   listPaymentChannelSchemas,
   renderDetailRows,
   validatePaymentChannelData,
+  createCashPaymentChannel,
 } from "../dist/esm/index.js";
 
 async function listChannelSourceFiles(directory) {
@@ -237,6 +238,21 @@ test("cash is present but explicitly not automated", () => {
   assert.deepEqual(cash.fields, []);
 });
 
+test("cash definition composes into another country and currency", () => {
+  const cash = createCashPaymentChannel({ id: "cash_mw_mwk", country: "MW", currency: "MWK" });
+  assert.equal(cash.id, "cash_mw_mwk");
+  assert.deepEqual(cash.network, { id: "cash", label: "Cash", country: "MW", currency: "MWK" });
+  assert.equal(cash.support.automation, PaymentChannelAutomation.None);
+  assert.deepEqual(cash.fields, []);
+});
+
+test("every represented country has a built-in cash channel", () => {
+  assert.deepEqual(
+    builtinPaymentChannels.filter((channel) => channel.display.group === PaymentChannelGroup.Cash).map((channel) => channel.id),
+    ["cash_mw_mwk", "cash_za_zar", "cash_ke_kes"],
+  );
+});
+
 test("channel source files are grouped by country and match stable channel IDs", async () => {
   const channelsDirectory = fileURLToPath(new URL("../src/channels", import.meta.url));
   const filenames = await listChannelSourceFiles(channelsDirectory);
@@ -245,13 +261,14 @@ test("channel source files are grouped by country and match stable channel IDs",
 
   for (const filename of filenames) {
     const source = await readFile(filename, "utf8");
-    const definitions = source.match(/definePaymentChannelSchema\(\{/g) ?? [];
-    const exports = [...source.matchAll(/^export\s+const\s+(\w+)\s*=\s*definePaymentChannelSchema\(\{\s*id:\s*"([^"]+)"/gm)];
+    const definitions = source.match(/(?:definePaymentChannelSchema\(\{|createCashPaymentChannel\(\{)/g) ?? [];
+    const exports = [...source.matchAll(/^export\s+const\s+(\w+)\s*=\s*(?:definePaymentChannelSchema\(\{\s*id:\s*"([^"]+)"|createCashPaymentChannel\(\{\s*id:\s*"([^"]+)")/gm)];
 
     assert.equal(definitions.length, 1, `${filename} must define exactly one payment channel`);
     assert.equal(exports.length, 1, `${filename} must export its payment channel definition`);
 
-    const channel = builtinPaymentChannels.find((candidate) => candidate.id === exports[0][2]);
+    const channelId = exports[0][2] ?? exports[0][3];
+    const channel = builtinPaymentChannels.find((candidate) => candidate.id === channelId);
     assert.ok(channel, `${filename} must define a built-in payment channel`);
 
     const country = channel.network.country.toLowerCase();
