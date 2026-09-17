@@ -1,11 +1,57 @@
 import {
+  PaymentChannelAutomation,
+  PaymentChannelGroup,
   MaskingKind,
   NormalizationKind,
   PaymentChannelField,
   PaymentFieldType,
+  definePaymentChannelSchema,
   ValidationRuleKind,
   type EvidenceField,
+  type CountryCode,
+  type CurrencyCode,
+  type PaymentChannelId,
+  type PaymentChannelSchema,
 } from "../core.js";
+
+export const cashChannelDefinition = {
+  display: {
+    label: "Cash",
+    shortLabel: "Cash",
+    description: "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+    icon: "cash",
+    group: PaymentChannelGroup.Cash,
+  },
+  support: {
+    automation: PaymentChannelAutomation.None,
+  },
+  fields: [],
+  detailRows: [],
+  instructions: {
+    payer: ["Exchange cash in person and keep local receipt evidence when required."],
+  },
+  evidence: [
+    {
+      key: "receiptNote",
+      label: "Receipt note",
+      type: PaymentFieldType.Text,
+      required: false,
+    },
+  ],
+} satisfies Pick<PaymentChannelSchema, "display" | "support" | "fields" | "detailRows" | "instructions" | "evidence">;
+
+export function createCashPaymentChannel(input: {
+  id: PaymentChannelId;
+  country: CountryCode;
+  currency: CurrencyCode;
+}): PaymentChannelSchema {
+  return definePaymentChannelSchema({
+    id: input.id,
+    version: 2,
+    ...cashChannelDefinition,
+    network: { id: "cash", label: "Cash", country: input.country, currency: input.currency },
+  });
+}
 
 export const phoneNumberField: PaymentChannelField = {
   key: "phoneNumber",

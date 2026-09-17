@@ -36,8 +36,11 @@ import { builtinPaymentChannels } from "./channels/index.js";
 export {
   airtelMoneyKeKesPaymentChannel,
   airtelMoneyMwMwkPaymentChannel,
+  cashMwMwkPaymentChannel,
   builtinPaymentChannels,
   cashKeKesPaymentChannel,
+  cashZaZarPaymentChannel,
+  createCashPaymentChannel,
   mpesaPaybillKeKesPaymentChannel,
   mpesaPhoneKeKesPaymentChannel,
   mpesaPochiKeKesPaymentChannel,
