@@ -32,35 +32,39 @@ const { createPaymentChannelRegistry, validatePaymentChannelData } = require("@m
 
 Both entry points expose the same public symbols, schema data, and validation behavior. `require()` resolves and runs synchronously, so a CommonJS or Node16-targeted application (for example a Next.js or NestJS project) can depend on this package without switching module systems or falling back to `import()`.
 
-## Consumer example
+## Quick start
 
 ```ts
 import {
   createPaymentChannelRegistry,
+  getPaymentChannelSchema,
   listPaymentChannelSchemas,
+  renderDetailRows,
   validatePaymentChannelData,
 } from "@minmoto/payment-channels";
 
 const registry = createPaymentChannelRegistry();
-const channels = listPaymentChannelSchemas(registry, {
-  currency: "KES",
-  country: "KE",
+const available = listPaymentChannelSchemas(registry, {
+  country: configuredCountry,
+  currency: configuredCurrency,
 });
 
-const mpesa = registry.get("mpesa_phone_ke_kes");
-if (!mpesa) throw new Error("M-Pesa schema missing");
-
-const result = validatePaymentChannelData(mpesa, {
-  phoneNumber: "0712 345 678",
-});
-
-if (!result.valid) {
-  // Render result.issues next to the corresponding fields.
-  throw new Error("Invalid payment details");
+// Product policy chooses from independently reviewed channel IDs.
+const schema = getPaymentChannelSchema(registry, approvedChannelId);
+if (!schema || !available.some(({ id }) => id === schema.id)) {
+  throw new Error("Payment channel is not available for this market");
 }
 
-// Use normalized values for the integration boundary.
-result.data.phoneNumber; // "+254712345678"
+// Render inputs from schema.fields, then validate the submitted values.
+const result = validatePaymentChannelData(schema, submittedValues);
+
+if (!result.valid) {
+  showFieldErrors(result.issues);
+} else {
+  // Pass normalized values to the integration boundary.
+  submitPaymentDetails(result.data);
+  showPaymentDetails(renderDetailRows(schema, result.data));
+}
 ```
 
 `createPaymentChannelRegistry()` returns a fresh `Map`, so an application can add approved local schemas without mutating the built-in seed registry:
@@ -78,6 +82,8 @@ addPaymentChannelSchema(registry, definePaymentChannelSchema(myChannel));
 
 ## Schema contract
 
+For deterministic consumer guidance, see the [documentation map](./docs/README.md), [agent contract](./docs/agent-contract.md), and [schema reference](./docs/schema-reference.md). A complete executable example is in [examples/generic-consumer.mjs](./examples/generic-consumer.mjs).
+
 `PaymentChannelSchema` contains:
 
 - `id` and `version`: stable identity and schema revision
@@ -89,12 +95,13 @@ addPaymentChannelSchema(registry, definePaymentChannelSchema(myChannel));
 - `instructions`: payer and payee guidance
 - `evidence`: receipt or reconciliation fields
 
-Validation rules are data, not callbacks. This keeps schemas serializable and safe to consume across different runtimes. The built-in helpers support pattern, minimum/maximum/exact length, and allow-list validation, plus trimming, digits-only, uppercase, and Kenya/Malawi E.164 phone normalization.
+Validation rules are data, not callbacks. This keeps schemas serializable and safe to consume across different runtimes. The built-in helpers support pattern, minimum/maximum/exact length, and allow-list validation, plus the normalization and masking strategies described in the schema reference.
 
 ## Defining a channel
 
 ```ts
 import {
+  MaskingKind,
   NormalizationKind,
   PaymentChannelAutomation,
   PaymentChannelGroup,
@@ -103,47 +110,50 @@ import {
   definePaymentChannelSchema,
 } from "@minmoto/payment-channels";
 
-export const exampleWalletKeKes = definePaymentChannelSchema({
-  id: "example_wallet_ke_kes",
+// XZ is user-assigned and XTS is reserved for testing.
+export const exampleWalletXzXts = definePaymentChannelSchema({
+  id: "example_wallet_xz_xts",
   version: 1,
   display: {
     label: "Example Wallet",
     shortLabel: "Example",
-    description: "Example mobile wallet transfer.",
+    description: "Fictional wallet for an integration example.",
     icon: "example-wallet",
     group: PaymentChannelGroup.MobileMoney,
   },
   network: {
     id: "example_wallet",
     label: "Example Wallet",
-    country: "KE",
-    currency: "KES",
+    country: "XZ",
+    currency: "XTS",
   },
   support: {
     automation: PaymentChannelAutomation.Manual,
   },
   fields: [
     {
-      key: "phoneNumber",
-      label: "Phone number",
-      type: PaymentFieldType.Phone,
+      key: "accountCode",
+      label: "Account code",
+      type: PaymentFieldType.Text,
       required: true,
-      placeholder: "+254700000000",
-      normalize: [NormalizationKind.Trim],
+      placeholder: "AB-1234",
+      sensitive: true,
+      mask: MaskingKind.Last4,
+      normalize: [NormalizationKind.Trim, NormalizationKind.Uppercase],
       validation: [
         {
           kind: ValidationRuleKind.Pattern,
-          pattern: "^\\+254[0-9]{9}$",
-          message: "Use a Kenyan phone number in international format",
+          pattern: "^[A-Z]{2}-[0-9]{4}$",
+          message: "Use two letters, a hyphen, and four digits",
         },
       ],
     },
   ],
   detailRows: [
     {
-      key: "phoneNumber",
-      label: "Phone number",
-      fields: ["phoneNumber"],
+      key: "accountCode",
+      label: "Account code",
+      fields: ["accountCode"],
       copyable: true,
     },
   ],
@@ -152,53 +162,26 @@ export const exampleWalletKeKes = definePaymentChannelSchema({
 
 Use `definePaymentChannelSchema` at definition time. It rejects invalid IDs and code casing, invalid enum values, duplicate field or detail-row keys, malformed select fields, invalid regular expressions, invalid length rules, empty allow-lists, and detail rows that reference unknown fields.
 
-Built-in IDs use `<network>_<variant?>_<country>_<currency>`, with lowercase country and currency suffixes. Source files are grouped by country and omit the redundant market suffix: `src/channels/<country>/<network>_<variant?>.ts`. For example, `mpesa_phone_ke_kes` is defined in `src/channels/ke/mpesa_phone.ts`. Country and currency remain explicit schema attributes even though currency is not repeated in the source path.
+Built-in IDs use `<network>_<variant?>_<country>_<currency>`, with lowercase country and currency suffixes. Source files are grouped by country and omit the redundant market suffix: `src/channels/<country>/<network>_<variant?>.ts`. Country and currency remain explicit schema attributes even though currency is not repeated in the source path.
 
 ## Built-in registry
 
-The seed registry currently includes:
-
-- Angola (`AOA`): cash
-- Botswana (`BWP`): cash
-- Burundi (`BIF`): cash
-- Eswatini (`SZL`): cash
-- Ethiopia (`ETB`): cash
-- Kenya (`KES`): M-Pesa phone, M-Pesa Pochi la Biashara, M-Pesa till, M-Pesa paybill, Airtel Money, PesaLink bank account, and cash
-- Lesotho (`LSL`): cash
-- Malawi (`MWK`): Airtel Money, TNM Mpamba, and cash
-- Mozambique (`MZN`): cash
-- Namibia (`NAD`): cash
-- Rwanda (`RWF`): cash
-- South Africa (`ZAR`): PayShap ShapID, PayShap bank account, and cash
-- South Sudan (`SSP`): cash
-- Tanzania (`TZS`): cash
-- Uganda (`UGX`): cash
-- Zambia (`ZMW`): cash
+Discover current built-ins at runtime with `createPaymentChannelRegistry()` and `listPaymentChannelSchemas()`. Do not copy a channel catalog into application code or documentation. The repository publishes [machine-readable JSON](./docs/generated/registry.json) and a [generated human-readable inventory](./docs/generated/built-in-channels.md) for inspection; both are derived from `builtinPaymentChannels` and checked for drift by `npm run check`.
 
 Cash is intentionally represented as a channel, but it has no structured payment fields and `automation: PaymentChannelAutomation.None`. A schema never implies that an external provider integration exists.
 
-## Migration: product-owned workflow and role mapping
+## Product-owned workflow and role mapping
 
 This breaking change removes the `PaymentFlow` and `PaymentActor` exports, the `support.flows` and `support.actors` schema fields, and the `flow` and `actor` registry filters. The built-in schema revisions remain at `2`. Collection, disbursement, exchange, settlement, product roles, and permissions now map to channel IDs outside this package, in application or provider configuration.
 
 For example:
 
 ```ts
-const channelsByWorkflow = {
-  collection: ["mpesa_paybill_ke_kes", "mpesa_till_ke_kes"],
-  disbursement: ["mpesa_phone_ke_kes", "airtel_money_ke_kes"],
-} as const;
-
-const channelsByRole = {
-  customer: ["mpesa_paybill_ke_kes", "mpesa_till_ke_kes"],
-  agent: ["mpesa_phone_ke_kes", "airtel_money_ke_kes"],
-} as const;
-
-const workflowIds = new Set<string>(channelsByWorkflow.disbursement);
-const roleIds = new Set<string>(channelsByRole.agent);
+const workflowIds = new Set<string>(applicationConfig.channelsByWorkflow.disbursement);
+const roleIds = new Set<string>(applicationConfig.channelsByRole.operator);
 const configuredChannels = listPaymentChannelSchemas(registry, {
-  country: "KE",
-  currency: "KES",
+  country: applicationConfig.country,
+  currency: applicationConfig.currency,
 }).filter((channel) => workflowIds.has(channel.id) && roleIds.has(channel.id));
 ```
 

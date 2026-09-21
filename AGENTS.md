@@ -6,6 +6,8 @@ This repository publishes `@minmoto/payment-channels`, a small, dependency-free 
 
 The package describes how a channel is identified, displayed, collected, normalized, validated, and rendered. It does not move money, call a provider API, verify a transaction, or prove that a phone number belongs to a person.
 
+This file governs contributors modifying the repository. The public consumer contract starts at `docs/README.md`; do not treat contributor workflow or release instructions as runtime API guidance.
+
 ## Repository map
 
 - `src/core.ts` contains schema types, registry helpers, validators, and render helpers.

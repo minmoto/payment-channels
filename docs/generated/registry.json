@@ -1,0 +1,1504 @@
+[
+  {
+    "id": "cash_ao_aoa",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "AO",
+      "currency": "AOA"
+    }
+  },
+  {
+    "id": "cash_bi_bif",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "BI",
+      "currency": "BIF"
+    }
+  },
+  {
+    "id": "cash_bw_bwp",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "BW",
+      "currency": "BWP"
+    }
+  },
+  {
+    "id": "cash_et_etb",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "ET",
+      "currency": "ETB"
+    }
+  },
+  {
+    "id": "mpesa_phone_ke_kes",
+    "version": 2,
+    "display": {
+      "label": "M-Pesa phone",
+      "shortLabel": "M-Pesa",
+      "description": "Safaricom M-Pesa wallet transfer to a Kenyan phone number.",
+      "icon": "mpesa",
+      "group": "mobile_money"
+    },
+    "network": {
+      "id": "mpesa",
+      "label": "M-Pesa",
+      "country": "KE",
+      "currency": "KES"
+    },
+    "support": {
+      "automation": "api"
+    },
+    "fields": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "type": "phone",
+        "required": true,
+        "sensitive": true,
+        "mask": "phone",
+        "normalize": [
+          "trim",
+          "e164_ke_phone"
+        ],
+        "placeholder": "+254712345678",
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^\\+254[0-9]{9}$",
+            "message": "Use a Kenyan phone number in international format, e.g. +254712345678"
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "max_length",
+            "length": 100
+          }
+        ]
+      }
+    ],
+    "detailRows": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "fields": [
+          "phoneNumber"
+        ],
+        "copyable": true
+      }
+    ],
+    "instructions": {
+      "payer": [
+        "Send the exact amount to the displayed M-Pesa phone number."
+      ],
+      "payee": [
+        "Confirm the M-Pesa reference is available if the payment is disputed."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mpesa_pochi_ke_kes",
+    "version": 2,
+    "display": {
+      "label": "M-Pesa Pochi la Biashara",
+      "shortLabel": "Pochi",
+      "description": "Safaricom M-Pesa payment to a Pochi la Biashara business phone number.",
+      "icon": "mpesa",
+      "group": "mobile_money"
+    },
+    "network": {
+      "id": "mpesa",
+      "label": "M-Pesa",
+      "country": "KE",
+      "currency": "KES"
+    },
+    "support": {
+      "automation": "manual"
+    },
+    "fields": [
+      {
+        "key": "phoneNumber",
+        "label": "Business phone number",
+        "type": "phone",
+        "required": true,
+        "sensitive": true,
+        "mask": "phone",
+        "normalize": [
+          "trim",
+          "e164_ke_phone"
+        ],
+        "placeholder": "+254712345678",
+        "helpText": "Use the phone number registered for Pochi la Biashara.",
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^\\+254[0-9]{9}$",
+            "message": "Use a Kenyan phone number in international format, e.g. +254712345678"
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "max_length",
+            "length": 100
+          }
+        ]
+      }
+    ],
+    "detailRows": [
+      {
+        "key": "phoneNumber",
+        "label": "Business phone number",
+        "fields": [
+          "phoneNumber"
+        ],
+        "copyable": true
+      }
+    ],
+    "instructions": {
+      "payer": [
+        "Send the exact amount using M-Pesa Pochi la Biashara to the displayed business phone number."
+      ],
+      "payee": [
+        "Confirm the M-Pesa reference is available if the payment is disputed."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mpesa_till_ke_kes",
+    "version": 2,
+    "display": {
+      "label": "M-Pesa till",
+      "shortLabel": "Till",
+      "description": "Safaricom M-Pesa Buy Goods till payment.",
+      "icon": "mpesa",
+      "group": "mobile_money"
+    },
+    "network": {
+      "id": "mpesa",
+      "label": "M-Pesa",
+      "country": "KE",
+      "currency": "KES"
+    },
+    "support": {
+      "automation": "api"
+    },
+    "fields": [
+      {
+        "key": "tillNumber",
+        "label": "Till number",
+        "type": "text",
+        "required": true,
+        "placeholder": "123456",
+        "normalize": [
+          "trim",
+          "digits_only"
+        ],
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^\\d{5,7}$",
+            "message": "Use a 5-7 digit till number"
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "max_length",
+            "length": 100
+          }
+        ]
+      }
+    ],
+    "detailRows": [
+      {
+        "key": "tillNumber",
+        "label": "Till number",
+        "fields": [
+          "tillNumber"
+        ],
+        "copyable": true
+      }
+    ],
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mpesa_paybill_ke_kes",
+    "version": 2,
+    "display": {
+      "label": "M-Pesa paybill",
+      "shortLabel": "Paybill",
+      "description": "Safaricom M-Pesa Pay Bill payment with an account reference.",
+      "icon": "mpesa",
+      "group": "mobile_money"
+    },
+    "network": {
+      "id": "mpesa",
+      "label": "M-Pesa",
+      "country": "KE",
+      "currency": "KES"
+    },
+    "support": {
+      "automation": "api"
+    },
+    "fields": [
+      {
+        "key": "paybillNumber",
+        "label": "Paybill number",
+        "type": "text",
+        "required": true,
+        "placeholder": "123456",
+        "normalize": [
+          "trim",
+          "digits_only"
+        ],
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^\\d{5,7}$",
+            "message": "Use a 5-7 digit paybill number"
+          }
+        ]
+      },
+      {
+        "key": "accountNumber",
+        "label": "Account number",
+        "type": "text",
+        "required": true,
+        "placeholder": "Account reference",
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 1
+          },
+          {
+            "kind": "max_length",
+            "length": 20
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "max_length",
+            "length": 100
+          }
+        ]
+      }
+    ],
+    "detailRows": [
+      {
+        "key": "paybillNumber",
+        "label": "Paybill number",
+        "fields": [
+          "paybillNumber"
+        ],
+        "copyable": true
+      },
+      {
+        "key": "accountNumber",
+        "label": "Account number",
+        "fields": [
+          "accountNumber"
+        ],
+        "copyable": true
+      }
+    ],
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pesalink_account_ke_kes",
+    "version": 1,
+    "display": {
+      "label": "PesaLink bank account",
+      "shortLabel": "PesaLink",
+      "description": "Kenyan PesaLink transfer to a bank account.",
+      "icon": "pesalink",
+      "group": "bank"
+    },
+    "network": {
+      "id": "pesalink",
+      "label": "PesaLink",
+      "country": "KE",
+      "currency": "KES"
+    },
+    "support": {
+      "automation": "manual"
+    },
+    "fields": [
+      {
+        "key": "recipientName",
+        "label": "Recipient name",
+        "type": "text",
+        "required": true,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 1
+          }
+        ]
+      },
+      {
+        "key": "bankName",
+        "label": "Bank",
+        "type": "text",
+        "required": true,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 1
+          }
+        ]
+      },
+      {
+        "key": "accountNumber",
+        "label": "Account number",
+        "type": "bank_account",
+        "required": true,
+        "sensitive": true,
+        "mask": "last4",
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 1
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "max_length",
+            "length": 100
+          }
+        ]
+      }
+    ],
+    "detailRows": [
+      {
+        "key": "recipientName",
+        "label": "Recipient name",
+        "fields": [
+          "recipientName"
+        ]
+      },
+      {
+        "key": "bankName",
+        "label": "Bank",
+        "fields": [
+          "bankName"
+        ]
+      },
+      {
+        "key": "accountNumber",
+        "label": "Account number",
+        "fields": [
+          "accountNumber"
+        ],
+        "copyable": true
+      }
+    ],
+    "instructions": {
+      "payer": [
+        "Confirm the recipient name, bank, and account number directly before sending the payment."
+      ],
+      "payee": [
+        "Keep the bank confirmation and transaction reference for reconciliation."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "airtel_money_ke_kes",
+    "version": 2,
+    "display": {
+      "label": "Airtel Money",
+      "shortLabel": "Airtel",
+      "description": "Airtel Money wallet transfer to a phone number.",
+      "icon": "airtel-money",
+      "group": "mobile_money"
+    },
+    "network": {
+      "id": "airtel_money",
+      "label": "Airtel Money",
+      "country": "KE",
+      "currency": "KES"
+    },
+    "support": {
+      "automation": "api"
+    },
+    "fields": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "type": "phone",
+        "required": true,
+        "sensitive": true,
+        "mask": "phone",
+        "normalize": [
+          "trim",
+          "e164_ke_phone"
+        ],
+        "placeholder": "+254712345678",
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^\\+254[0-9]{9}$",
+            "message": "Use a Kenyan phone number in international format, e.g. +254712345678"
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "max_length",
+            "length": 100
+          }
+        ]
+      }
+    ],
+    "detailRows": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "fields": [
+          "phoneNumber"
+        ],
+        "copyable": true
+      }
+    ],
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cash_ke_kes",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "KE",
+      "currency": "KES"
+    }
+  },
+  {
+    "id": "cash_ls_lsl",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "LS",
+      "currency": "LSL"
+    }
+  },
+  {
+    "id": "airtel_money_mw_mwk",
+    "version": 2,
+    "display": {
+      "label": "Airtel Money Malawi",
+      "shortLabel": "Airtel MW",
+      "description": "Airtel Money Malawi wallet transfer to an Airtel phone number.",
+      "icon": "airtel-money",
+      "group": "mobile_money"
+    },
+    "network": {
+      "id": "airtel_money",
+      "label": "Airtel Money",
+      "country": "MW",
+      "currency": "MWK"
+    },
+    "support": {
+      "automation": "api"
+    },
+    "fields": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "type": "phone",
+        "required": true,
+        "sensitive": true,
+        "mask": "phone",
+        "normalize": [
+          "trim",
+          "e164_mw_phone"
+        ],
+        "placeholder": "+265991234567",
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^\\+2659[89][0-9]{7}$",
+            "message": "Use an Airtel Malawi number, e.g. +265991234567"
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "max_length",
+            "length": 100
+          }
+        ]
+      }
+    ],
+    "detailRows": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "fields": [
+          "phoneNumber"
+        ],
+        "copyable": true
+      }
+    ],
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cash_mw_mwk",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "MW",
+      "currency": "MWK"
+    }
+  },
+  {
+    "id": "tnm_mpamba_mw_mwk",
+    "version": 2,
+    "display": {
+      "label": "TNM Mpamba",
+      "shortLabel": "Mpamba",
+      "description": "TNM Mpamba wallet transfer to a TNM phone number.",
+      "icon": "tnm-mpamba",
+      "group": "mobile_money"
+    },
+    "network": {
+      "id": "tnm_mpamba",
+      "label": "TNM Mpamba",
+      "country": "MW",
+      "currency": "MWK"
+    },
+    "support": {
+      "automation": "api"
+    },
+    "fields": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "type": "phone",
+        "required": true,
+        "sensitive": true,
+        "mask": "phone",
+        "normalize": [
+          "trim",
+          "e164_mw_phone"
+        ],
+        "placeholder": "+265881234567",
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^\\+2658[48][0-9]{7}$",
+            "message": "Use a TNM Malawi number, e.g. +265881234567"
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "max_length",
+            "length": 100
+          }
+        ]
+      }
+    ],
+    "detailRows": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "fields": [
+          "phoneNumber"
+        ],
+        "copyable": true
+      }
+    ],
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cash_mz_mzn",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "MZ",
+      "currency": "MZN"
+    }
+  },
+  {
+    "id": "cash_na_nad",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "NA",
+      "currency": "NAD"
+    }
+  },
+  {
+    "id": "cash_rw_rwf",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "RW",
+      "currency": "RWF"
+    }
+  },
+  {
+    "id": "cash_ss_ssp",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "SS",
+      "currency": "SSP"
+    }
+  },
+  {
+    "id": "cash_sz_szl",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "SZ",
+      "currency": "SZL"
+    }
+  },
+  {
+    "id": "cash_tz_tzs",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "TZ",
+      "currency": "TZS"
+    }
+  },
+  {
+    "id": "cash_ug_ugx",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "UG",
+      "currency": "UGX"
+    }
+  },
+  {
+    "id": "payshap_shapid_za_zar",
+    "version": 1,
+    "display": {
+      "label": "PayShap ShapID",
+      "shortLabel": "PayShap",
+      "description": "South African real-time bank transfer to a registered PayShap ShapID.",
+      "icon": "payshap",
+      "group": "bank"
+    },
+    "network": {
+      "id": "payshap",
+      "label": "PayShap",
+      "country": "ZA",
+      "currency": "ZAR"
+    },
+    "support": {
+      "automation": "manual"
+    },
+    "fields": [
+      {
+        "key": "shapId",
+        "label": "ShapID",
+        "type": "text",
+        "required": true,
+        "placeholder": "0812345678@standardbank",
+        "helpText": "Use the recipient's registered cellphone number, optionally followed by @bank.",
+        "sensitive": true,
+        "mask": "shap_id",
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^(?:0[0-9]{9}|\\+27[0-9]{9})(?:@[A-Za-z0-9]+)?$",
+            "message": "Use a South African cellphone ShapID, e.g. 0812345678 or 0812345678@bank"
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "max_length",
+            "length": 100
+          }
+        ]
+      }
+    ],
+    "detailRows": [
+      {
+        "key": "shapId",
+        "label": "ShapID",
+        "fields": [
+          "shapId"
+        ],
+        "copyable": true
+      }
+    ],
+    "instructions": {
+      "payer": [
+        "Confirm the recipient name returned by the bank before sending the payment."
+      ],
+      "payee": [
+        "Keep the bank confirmation and transaction reference for reconciliation."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "payshap_account_za_zar",
+    "version": 1,
+    "display": {
+      "label": "PayShap bank account",
+      "shortLabel": "PayShap account",
+      "description": "South African real-time PayShap transfer to a bank account.",
+      "icon": "payshap",
+      "group": "bank"
+    },
+    "network": {
+      "id": "payshap",
+      "label": "PayShap",
+      "country": "ZA",
+      "currency": "ZAR"
+    },
+    "support": {
+      "automation": "manual"
+    },
+    "fields": [
+      {
+        "key": "recipientName",
+        "label": "Recipient name",
+        "type": "text",
+        "required": true,
+        "placeholder": "Recipient name",
+        "normalize": [
+          "trim"
+        ]
+      },
+      {
+        "key": "bankName",
+        "label": "Bank",
+        "type": "text",
+        "required": true,
+        "placeholder": "Recipient bank",
+        "normalize": [
+          "trim"
+        ]
+      },
+      {
+        "key": "accountNumber",
+        "label": "Account number",
+        "type": "bank_account",
+        "required": true,
+        "placeholder": "Recipient account number",
+        "sensitive": true,
+        "mask": "last4",
+        "normalize": [
+          "trim"
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": [
+          "trim"
+        ],
+        "validation": [
+          {
+            "kind": "max_length",
+            "length": 100
+          }
+        ]
+      }
+    ],
+    "detailRows": [
+      {
+        "key": "recipientName",
+        "label": "Recipient name",
+        "fields": [
+          "recipientName"
+        ]
+      },
+      {
+        "key": "bankName",
+        "label": "Bank",
+        "fields": [
+          "bankName"
+        ]
+      },
+      {
+        "key": "accountNumber",
+        "label": "Account number",
+        "fields": [
+          "accountNumber"
+        ],
+        "copyable": true
+      }
+    ],
+    "instructions": {
+      "payer": [
+        "Confirm the recipient name, bank, and account number directly before sending the payment."
+      ],
+      "payee": [
+        "Keep the bank confirmation and transaction reference for reconciliation."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [
+          {
+            "kind": "min_length",
+            "length": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cash_za_zar",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "ZA",
+      "currency": "ZAR"
+    }
+  },
+  {
+    "id": "cash_zm_zmw",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": {
+      "automation": "none"
+    },
+    "fields": [],
+    "detailRows": [],
+    "instructions": {
+      "payer": [
+        "Exchange cash in person and keep local receipt evidence when required."
+      ]
+    },
+    "evidence": [
+      {
+        "key": "receiptNote",
+        "label": "Receipt note",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "network": {
+      "id": "cash",
+      "label": "Cash",
+      "country": "ZM",
+      "currency": "ZMW"
+    }
+  }
+]

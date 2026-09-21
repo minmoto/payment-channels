@@ -29,6 +29,8 @@
   },
   "files": [
     "dist",
+    "docs",
+    "examples",
     "CHANGELOG.md",
     "README.md",
     "LICENSE"
@@ -53,9 +55,12 @@
     "build": "npm run clean && npm run build:esm && npm run build:cjs && node scripts/finalize-build.mjs",
     "build:esm": "tsc -p tsconfig.json",
     "build:cjs": "tsc -p tsconfig.cjs.json",
+    "docs:generate": "npm run build && node scripts/generate-registry-docs.mjs",
+    "docs:check": "node scripts/generate-registry-docs.mjs --check",
+    "examples:check": "node examples/generic-consumer.mjs",
     "prepare": "node scripts/install-hooks.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "npm run build && node --test",
+    "test": "npm run build && npm run docs:check && npm run examples:check && node --test",
     "verify:pack": "node scripts/verify-pack.mjs",
     "check": "npm run typecheck && npm test",
     "prepack": "npm run check"
