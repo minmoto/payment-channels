@@ -58,14 +58,21 @@
     "docs:generate": "npm run build && node scripts/generate-registry-docs.mjs",
     "docs:check": "node scripts/generate-registry-docs.mjs --check",
     "examples:check": "node examples/generic-consumer.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "prepare": "node scripts/install-hooks.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "npm run build && npm run docs:check && npm run examples:check && node --test",
     "verify:pack": "node scripts/verify-pack.mjs",
-    "check": "npm run typecheck && npm test",
+    "check": "npm run format:check && npm run typecheck && npm test",
     "prepack": "npm run check"
   },
   "devDependencies": {
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.6.2",
     "typescript": "^5.9.2"
+  },
+  "lint-staged": {
+    "*.{cjs,js,json,md,mjs,ts,yaml,yml}": "prettier --write"
   }
 }

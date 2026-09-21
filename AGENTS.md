@@ -29,12 +29,13 @@ Use Node.js 18 or newer.
 
 ```sh
 npm install
+npm run format
 npm run check
 npm pack --dry-run
 npm run verify:pack
 ```
 
-`npm run check` performs TypeScript type checking, dual ESM/CJS compilation, and runtime tests. Run `npm test` when you only need the normal test path. A release candidate must also pass `npm pack --dry-run`, with package contents containing only the intended runtime artifacts, and `npm run verify:pack`, which installs the packed tarball into throwaway ESM and CommonJS consumer projects and checks both resolve the package and produce equivalent results. `verify:pack` is not part of `check`/`prepack` — it invokes `npm pack` itself, and `npm pack` always runs `prepack`, so nesting it inside `check` would recurse.
+`npm run format` applies Prettier to supported repository files. The installed pre-commit hook applies it to staged files and re-stages them; `npm run check` verifies formatting before TypeScript type checking, dual ESM/CJS compilation, and runtime tests. Run `npm test` when you only need the normal test path. A release candidate must also pass `npm pack --dry-run`, with package contents containing only the intended runtime artifacts, and `npm run verify:pack`, which installs the packed tarball into throwaway ESM and CommonJS consumer projects and checks both resolve the package and produce equivalent results. `verify:pack` is not part of `check`/`prepack` — it invokes `npm pack` itself, and `npm pack` always runs `prepack`, so nesting it inside `check` would recurse.
 
 ## Adding or changing a channel
 

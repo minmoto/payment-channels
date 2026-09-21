@@ -31,7 +31,11 @@ export const mpesaPaybillKeKesPaymentChannel = definePaymentChannelSchema({
       placeholder: "123456",
       normalize: [NormalizationKind.Trim, NormalizationKind.DigitsOnly],
       validation: [
-        { kind: ValidationRuleKind.Pattern, pattern: "^\\d{5,7}$", message: "Use a 5-7 digit paybill number" },
+        {
+          kind: ValidationRuleKind.Pattern,
+          pattern: "^\\d{5,7}$",
+          message: "Use a 5-7 digit paybill number",
+        },
       ],
     },
     {
@@ -49,8 +53,18 @@ export const mpesaPaybillKeKesPaymentChannel = definePaymentChannelSchema({
     descriptionField,
   ],
   detailRows: [
-    { key: "paybillNumber", label: "Paybill number", fields: ["paybillNumber"], copyable: true },
-    { key: "accountNumber", label: "Account number", fields: ["accountNumber"], copyable: true },
+    {
+      key: "paybillNumber",
+      label: "Paybill number",
+      fields: ["paybillNumber"],
+      copyable: true,
+    },
+    {
+      key: "accountNumber",
+      label: "Account number",
+      fields: ["accountNumber"],
+      copyable: true,
+    },
   ],
   evidence: mobileReferenceEvidence,
 });

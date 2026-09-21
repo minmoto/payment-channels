@@ -23,7 +23,7 @@ Merge changes to `main` using Conventional Commit subjects:
 
 Creating the first major version requires a deliberate, reviewed change to the pre-major versioning policy in `release-please-config.json`. Do not merge a release pull request proposing `1.0.0` while that policy is active.
 
-`npm install` and `npm ci` automatically enable the local `commit-msg` hook. Pull request CI validates every commit subject even when dependencies have not been installed or a local hook is bypassed.
+`npm install` and `npm ci` automatically enable the local `commit-msg` and `pre-commit` hooks. The pre-commit hook formats supported staged files with Prettier and stages the result. Pull request CI validates every commit subject and runs `npm run format:check` even when dependencies have not been installed or a local hook is bypassed.
 
 Release Please opens or updates a release pull request. That pull request contains the next version in `package.json` and `package-lock.json`, plus a generated entry in `CHANGELOG.md`. Review the proposed version and changelog as the declaration of what the release contains.
 

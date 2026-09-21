@@ -17,7 +17,12 @@ export const airtelMoneyKeKesPaymentChannel = definePaymentChannelSchema({
     icon: "airtel-money",
     group: PaymentChannelGroup.MobileMoney,
   },
-  network: { id: "airtel_money", label: "Airtel Money", country: "KE", currency: "KES" },
+  network: {
+    id: "airtel_money",
+    label: "Airtel Money",
+    country: "KE",
+    currency: "KES",
+  },
   support: {
     automation: PaymentChannelAutomation.Api,
   },
@@ -36,6 +41,13 @@ export const airtelMoneyKeKesPaymentChannel = definePaymentChannelSchema({
     },
     descriptionField,
   ],
-  detailRows: [{ key: "phoneNumber", label: "Phone number", fields: ["phoneNumber"], copyable: true }],
+  detailRows: [
+    {
+      key: "phoneNumber",
+      label: "Phone number",
+      fields: ["phoneNumber"],
+      copyable: true,
+    },
+  ],
   evidence: mobileReferenceEvidence,
 });

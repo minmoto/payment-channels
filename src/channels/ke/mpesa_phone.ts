@@ -36,7 +36,14 @@ export const mpesaPhoneKeKesPaymentChannel = definePaymentChannelSchema({
     },
     descriptionField,
   ],
-  detailRows: [{ key: "phoneNumber", label: "Phone number", fields: ["phoneNumber"], copyable: true }],
+  detailRows: [
+    {
+      key: "phoneNumber",
+      label: "Phone number",
+      fields: ["phoneNumber"],
+      copyable: true,
+    },
+  ],
   instructions: {
     payer: ["Send the exact amount to the displayed M-Pesa phone number."],
     payee: ["Confirm the M-Pesa reference is available if the payment is disputed."],

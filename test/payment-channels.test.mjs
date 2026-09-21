@@ -52,49 +52,84 @@ test("registry exposes built-in KES mobile money channels", () => {
 
   assert.deepEqual(
     channels.map((channel) => channel.id),
-    [
-      "mpesa_phone_ke_kes",
-      "mpesa_pochi_ke_kes",
-      "mpesa_till_ke_kes",
-      "mpesa_paybill_ke_kes",
-      "airtel_money_ke_kes",
-    ],
+    ["mpesa_phone_ke_kes", "mpesa_pochi_ke_kes", "mpesa_till_ke_kes", "mpesa_paybill_ke_kes", "airtel_money_ke_kes"],
   );
 });
 
 test("registry exposes the built-in ZAR PayShap bank channel", () => {
   const registry = createPaymentChannelRegistry();
-  const channels = listPaymentChannelSchemas(registry, { currency: "ZAR", country: "ZA", group: PaymentChannelGroup.Bank });
-  assert.deepEqual(channels.map((channel) => channel.id), ["payshap_shapid_za_zar", "payshap_account_za_zar"]);
+  const channels = listPaymentChannelSchemas(registry, {
+    currency: "ZAR",
+    country: "ZA",
+    group: PaymentChannelGroup.Bank,
+  });
+  assert.deepEqual(
+    channels.map((channel) => channel.id),
+    ["payshap_shapid_za_zar", "payshap_account_za_zar"],
+  );
 });
 
 test("registry exposes the built-in Kenyan PesaLink bank channel", () => {
   const registry = createPaymentChannelRegistry();
-  const channels = listPaymentChannelSchemas(registry, { currency: "KES", country: "KE", group: PaymentChannelGroup.Bank });
-  assert.deepEqual(channels.map((channel) => channel.id), ["pesalink_account_ke_kes"]);
+  const channels = listPaymentChannelSchemas(registry, {
+    currency: "KES",
+    country: "KE",
+    group: PaymentChannelGroup.Bank,
+  });
+  assert.deepEqual(
+    channels.map((channel) => channel.id),
+    ["pesalink_account_ke_kes"],
+  );
 });
 
 test("PesaLink account details are normalized and rendered", () => {
   const schema = builtinPaymentChannels.find((channel) => channel.id === "pesalink_account_ke_kes");
   assert.ok(schema);
   const validation = validatePaymentChannelData(schema, {
-    recipientName: " Jane Example ", bankName: " Example Bank ", accountNumber: " 1234567890 ",
+    recipientName: " Jane Example ",
+    bankName: " Example Bank ",
+    accountNumber: " 1234567890 ",
   });
   assert.equal(validation.valid, true);
   assert.deepEqual(renderDetailRows(schema, validation.data), [
-    { key: "recipientName", label: "Recipient name", value: "Jane Example", copyable: false },
+    {
+      key: "recipientName",
+      label: "Recipient name",
+      value: "Jane Example",
+      copyable: false,
+    },
     { key: "bankName", label: "Bank", value: "Example Bank", copyable: false },
-    { key: "accountNumber", label: "Account number", value: "******7890", copyable: true, copyValue: "1234567890" },
+    {
+      key: "accountNumber",
+      label: "Account number",
+      value: "******7890",
+      copyable: true,
+      copyValue: "1234567890",
+    },
   ]);
 });
 
 test("PayShap account details are normalized and required", () => {
   const schema = builtinPaymentChannels.find((channel) => channel.id === "payshap_account_za_zar");
   assert.ok(schema);
-  const valid = validatePaymentChannelData(schema, { recipientName: " Jane Example ", bankName: " Example Bank ", accountNumber: " 1234567890 ", description: " settlement " });
+  const valid = validatePaymentChannelData(schema, {
+    recipientName: " Jane Example ",
+    bankName: " Example Bank ",
+    accountNumber: " 1234567890 ",
+    description: " settlement ",
+  });
   assert.equal(valid.valid, true);
-  assert.deepEqual(valid.data, { recipientName: "Jane Example", bankName: "Example Bank", accountNumber: "1234567890", description: "settlement" });
-  const invalid = validatePaymentChannelData(schema, { recipientName: "Jane Example", bankName: " ", accountNumber: "1234567890" });
+  assert.deepEqual(valid.data, {
+    recipientName: "Jane Example",
+    bankName: "Example Bank",
+    accountNumber: "1234567890",
+    description: "settlement",
+  });
+  const invalid = validatePaymentChannelData(schema, {
+    recipientName: "Jane Example",
+    bankName: " ",
+    accountNumber: "1234567890",
+  });
   assert.equal(invalid.valid, false);
   assert.deepEqual(invalid.issues, [{ field: "bankName", message: "Bank is required" }]);
 });
@@ -102,7 +137,10 @@ test("PayShap account details are normalized and required", () => {
 test("PayShap trims and validates bank-qualified ShapIDs", () => {
   const schema = builtinPaymentChannels.find((channel) => channel.id === "payshap_shapid_za_zar");
   assert.ok(schema);
-  const result = validatePaymentChannelData(schema, { shapId: " 0812345678@standardbank ", description: " settlement " });
+  const result = validatePaymentChannelData(schema, {
+    shapId: " 0812345678@standardbank ",
+    description: " settlement ",
+  });
   assert.equal(result.valid, true);
   assert.equal(result.data.shapId, "0812345678@standardbank");
   assert.equal(result.data.description, "settlement");
@@ -113,7 +151,12 @@ test("PayShap rejects invalid ShapIDs", () => {
   assert.ok(schema);
   const result = validatePaymentChannelData(schema, { shapId: "not-a-shapid" });
   assert.equal(result.valid, false);
-  assert.deepEqual(result.issues, [{ field: "shapId", message: "Use a South African cellphone ShapID, e.g. 0812345678 or 0812345678@bank" }]);
+  assert.deepEqual(result.issues, [
+    {
+      field: "shapId",
+      message: "Use a South African cellphone ShapID, e.g. 0812345678 or 0812345678@bank",
+    },
+  ]);
 });
 
 test("Pochi la Biashara normalizes and renders its business phone number", () => {
@@ -259,16 +302,27 @@ test("cash is present but explicitly not automated", () => {
 });
 
 test("cash definition composes into another country and currency", () => {
-  const cash = createCashPaymentChannel({ id: "cash_mw_mwk", country: "MW", currency: "MWK" });
+  const cash = createCashPaymentChannel({
+    id: "cash_mw_mwk",
+    country: "MW",
+    currency: "MWK",
+  });
   assert.equal(cash.id, "cash_mw_mwk");
-  assert.deepEqual(cash.network, { id: "cash", label: "Cash", country: "MW", currency: "MWK" });
+  assert.deepEqual(cash.network, {
+    id: "cash",
+    label: "Cash",
+    country: "MW",
+    currency: "MWK",
+  });
   assert.equal(cash.support.automation, PaymentChannelAutomation.None);
   assert.deepEqual(cash.fields, []);
 });
 
 test("every represented country has a built-in cash channel", () => {
   assert.deepEqual(
-    builtinPaymentChannels.filter((channel) => channel.display.group === PaymentChannelGroup.Cash).map((channel) => channel.id),
+    builtinPaymentChannels
+      .filter((channel) => channel.display.group === PaymentChannelGroup.Cash)
+      .map((channel) => channel.id),
     [
       "cash_ao_aoa",
       "cash_bi_bif",
@@ -308,7 +362,10 @@ test("registry exposes built-in cash channels for East African markets", () => {
       currency,
       group: PaymentChannelGroup.Cash,
     });
-    assert.deepEqual(channels.map((channel) => channel.id), [id]);
+    assert.deepEqual(
+      channels.map((channel) => channel.id),
+      [id],
+    );
   }
 });
 
@@ -330,7 +387,10 @@ test("registry exposes built-in cash channels for South African markets", () => 
       currency,
       group: PaymentChannelGroup.Cash,
     });
-    assert.deepEqual(channels.map((channel) => channel.id), [id]);
+    assert.deepEqual(
+      channels.map((channel) => channel.id),
+      [id],
+    );
   }
 });
 
@@ -343,7 +403,11 @@ test("channel source files are grouped by country and match stable channel IDs",
   for (const filename of filenames) {
     const source = await readFile(filename, "utf8");
     const definitions = source.match(/(?:definePaymentChannelSchema\(\{|createCashPaymentChannel\(\{)/g) ?? [];
-    const exports = [...source.matchAll(/^export\s+const\s+(\w+)\s*=\s*(?:definePaymentChannelSchema\(\{\s*id:\s*"([^"]+)"|createCashPaymentChannel\(\{\s*id:\s*"([^"]+)")/gm)];
+    const exports = [
+      ...source.matchAll(
+        /^export\s+const\s+(\w+)\s*=\s*(?:definePaymentChannelSchema\(\{\s*id:\s*"([^"]+)"|createCashPaymentChannel\(\{\s*id:\s*"([^"]+)")/gm,
+      ),
+    ];
 
     assert.equal(definitions.length, 1, `${filename} must define exactly one payment channel`);
     assert.equal(exports.length, 1, `${filename} must export its payment channel definition`);
@@ -376,7 +440,12 @@ test("schema definitions reject unsafe registry entries early", () => {
           icon: "broken",
           group: PaymentChannelGroup.MobileMoney,
         },
-        network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
+        network: {
+          id: "broken",
+          label: "Broken",
+          country: "KE",
+          currency: "KES",
+        },
         support: {
           automation: PaymentChannelAutomation.Manual,
         },
@@ -408,7 +477,12 @@ test("schema definitions reject invalid automation values early", () => {
           icon: "broken",
           group: PaymentChannelGroup.MobileMoney,
         },
-        network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
+        network: {
+          id: "broken",
+          label: "Broken",
+          country: "KE",
+          currency: "KES",
+        },
         support: {
           automation: /** @type {any} */ ("script"),
         },
@@ -433,7 +507,12 @@ test("schema definitions reject missing detail rows early", () => {
             icon: "broken",
             group: PaymentChannelGroup.MobileMoney,
           },
-          network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
+          network: {
+            id: "broken",
+            label: "Broken",
+            country: "KE",
+            currency: "KES",
+          },
           support: {
             automation: PaymentChannelAutomation.Manual,
           },
@@ -457,7 +536,12 @@ test("schema definitions reject non-canonical channel identifiers", () => {
           icon: "broken",
           group: PaymentChannelGroup.MobileMoney,
         },
-        network: { id: "broken", label: "Broken", country: /** @type {any} */ ("ke"), currency: "KES" },
+        network: {
+          id: "broken",
+          label: "Broken",
+          country: /** @type {any} */ ("ke"),
+          currency: "KES",
+        },
         support: {
           automation: PaymentChannelAutomation.Manual,
         },
@@ -481,7 +565,12 @@ test("schema definitions reject duplicate detail row keys", () => {
           icon: "broken",
           group: PaymentChannelGroup.MobileMoney,
         },
-        network: { id: "broken", label: "Broken", country: "KE", currency: "KES" },
+        network: {
+          id: "broken",
+          label: "Broken",
+          country: "KE",
+          currency: "KES",
+        },
         support: {
           automation: PaymentChannelAutomation.Manual,
         },

@@ -1,10 +1,7 @@
 const assert = require("node:assert/strict");
 const test = require("node:test");
 
-const {
-  createPaymentChannelRegistry,
-  validatePaymentChannelData,
-} = require("../dist/cjs/index.js");
+const { createPaymentChannelRegistry, validatePaymentChannelData } = require("../dist/cjs/index.js");
 
 test("require() loads the package synchronously and resolves built-in channels", () => {
   const registry = createPaymentChannelRegistry();

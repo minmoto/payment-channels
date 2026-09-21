@@ -17,7 +17,12 @@ export const airtelMoneyMwMwkPaymentChannel = definePaymentChannelSchema({
     icon: "airtel-money",
     group: PaymentChannelGroup.MobileMoney,
   },
-  network: { id: "airtel_money", label: "Airtel Money", country: "MW", currency: "MWK" },
+  network: {
+    id: "airtel_money",
+    label: "Airtel Money",
+    country: "MW",
+    currency: "MWK",
+  },
   support: {
     automation: PaymentChannelAutomation.Api,
   },
@@ -36,6 +41,13 @@ export const airtelMoneyMwMwkPaymentChannel = definePaymentChannelSchema({
     },
     descriptionField,
   ],
-  detailRows: [{ key: "phoneNumber", label: "Phone number", fields: ["phoneNumber"], copyable: true }],
+  detailRows: [
+    {
+      key: "phoneNumber",
+      label: "Phone number",
+      fields: ["phoneNumber"],
+      copyable: true,
+    },
+  ],
   evidence: mobileReferenceEvidence,
 });

@@ -208,6 +208,8 @@ The project uses semantic versioning. Keep published channel IDs and serialized 
 
 `npm install` automatically configures the repository's `commit-msg` hook to reject non-Conventional Commit subjects. CI checks pull request commits as the authoritative enforcement, including when a local hook is bypassed.
 
+The installed `pre-commit` hook runs Prettier on staged source, test, documentation, and configuration files through `lint-staged`, then stages the formatted results. Run `npm run format` to format the full repository or `npm run format:check` to check it without writing changes. CI runs the formatting check even when local hooks are bypassed.
+
 Release Please derives versions and [`CHANGELOG.md`](./CHANGELOG.md) entries from Conventional Commit messages. The release pull request is the review point for each version's changelog; merging it creates the GitHub release and publishes the package to npm. See [`RELEASING.md`](./RELEASING.md) for setup and release instructions.
 
 The package is MIT-licensed; see [`LICENSE`](./LICENSE).

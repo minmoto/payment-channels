@@ -8,7 +8,8 @@ if (!source) {
 
 const message = source === "--message" ? process.argv.slice(3).join(" ") : readFileSync(source, "utf8");
 const subject = message.split("\n", 1)[0].trim();
-const conventionalCommit = /^(feat|fix|perf|refactor|docs|test|build|ci|chore|revert)(\([a-z0-9][a-z0-9._/-]*\))?!?: .+$/;
+const conventionalCommit =
+  /^(feat|fix|perf|refactor|docs|test|build|ci|chore|revert)(\([a-z0-9][a-z0-9._/-]*\))?!?: .+$/;
 const generatedCommit = /^(Merge |Revert ")/;
 
 if (!conventionalCommit.test(subject) && !generatedCommit.test(subject)) {

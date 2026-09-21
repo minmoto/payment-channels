@@ -39,7 +39,12 @@ export const mpesaPochiKeKesPaymentChannel = definePaymentChannelSchema({
     descriptionField,
   ],
   detailRows: [
-    { key: "phoneNumber", label: "Business phone number", fields: ["phoneNumber"], copyable: true },
+    {
+      key: "phoneNumber",
+      label: "Business phone number",
+      fields: ["phoneNumber"],
+      copyable: true,
+    },
   ],
   instructions: {
     payer: ["Send the exact amount using M-Pesa Pochi la Biashara to the displayed business phone number."],

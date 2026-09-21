@@ -66,10 +66,7 @@ export type ValidationRule =
       message?: string;
     }
   | {
-      kind:
-        | ValidationRuleKind.MinLength
-        | ValidationRuleKind.MaxLength
-        | ValidationRuleKind.ExactLength;
+      kind: ValidationRuleKind.MinLength | ValidationRuleKind.MaxLength | ValidationRuleKind.ExactLength;
       length: number;
       message?: string;
     }
@@ -254,19 +251,14 @@ export function maskFieldValue(field: PaymentChannelField, value: string): strin
   return value;
 }
 
-export function renderDetailRows(
-  schema: PaymentChannelSchema,
-  data: Record<string, string>,
-): RenderedDetailRow[] {
+export function renderDetailRows(schema: PaymentChannelSchema, data: Record<string, string>): RenderedDetailRow[] {
   const fieldsByKey = new Map(schema.fields.map((field) => [field.key, field]));
   return schema.detailRows.map((row) => {
     const value = renderTemplate(row.template, row.fields, data, (fieldKey, fieldValue) => {
       const field = fieldsByKey.get(fieldKey);
       return field ? maskFieldValue(field, fieldValue) : fieldValue;
     });
-    const copyValue = row.copyable
-      ? renderTemplate(row.copyTemplate ?? row.template, row.fields, data)
-      : undefined;
+    const copyValue = row.copyable ? renderTemplate(row.copyTemplate ?? row.template, row.fields, data) : undefined;
     return {
       key: row.key,
       label: row.label,
@@ -281,19 +273,34 @@ function validateFieldValue(field: PaymentChannelField, value: string): Validati
   const issues: ValidationIssue[] = [];
   for (const rule of field.validation ?? []) {
     if (rule.kind === ValidationRuleKind.Pattern && !new RegExp(rule.pattern).test(value)) {
-      issues.push({ field: field.key, message: rule.message ?? `${field.label} has an invalid format` });
+      issues.push({
+        field: field.key,
+        message: rule.message ?? `${field.label} has an invalid format`,
+      });
     }
     if (rule.kind === ValidationRuleKind.MinLength && value.length < rule.length) {
-      issues.push({ field: field.key, message: rule.message ?? `${field.label} is too short` });
+      issues.push({
+        field: field.key,
+        message: rule.message ?? `${field.label} is too short`,
+      });
     }
     if (rule.kind === ValidationRuleKind.MaxLength && value.length > rule.length) {
-      issues.push({ field: field.key, message: rule.message ?? `${field.label} is too long` });
+      issues.push({
+        field: field.key,
+        message: rule.message ?? `${field.label} is too long`,
+      });
     }
     if (rule.kind === ValidationRuleKind.ExactLength && value.length !== rule.length) {
-      issues.push({ field: field.key, message: rule.message ?? `${field.label} must be ${rule.length} characters` });
+      issues.push({
+        field: field.key,
+        message: rule.message ?? `${field.label} must be ${rule.length} characters`,
+      });
     }
     if (rule.kind === ValidationRuleKind.OneOf && !rule.values.includes(value)) {
-      issues.push({ field: field.key, message: rule.message ?? `${field.label} is not supported` });
+      issues.push({
+        field: field.key,
+        message: rule.message ?? `${field.label} is not supported`,
+      });
     }
   }
   return issues;
@@ -394,7 +401,8 @@ function assertValidSchema(schema: PaymentChannelSchema): void {
     if (!row.key || !row.label) throw new Error(`Detail row must have a key and label in ${schema.id}`);
     if (detailRowKeys.has(row.key)) throw new Error(`Duplicate detail row key ${row.key} in ${schema.id}`);
     detailRowKeys.add(row.key);
-    if (row.fields.length === 0) throw new Error(`Detail row ${row.key} must reference at least one field in ${schema.id}`);
+    if (row.fields.length === 0)
+      throw new Error(`Detail row ${row.key} must reference at least one field in ${schema.id}`);
     for (const field of row.fields) {
       if (!keys.has(field)) throw new Error(`Detail row ${row.key} references unknown field ${field}`);
     }
@@ -441,11 +449,12 @@ function renderTemplate(
   formatValue: (field: string, value: string) => string = (_field, value) => value,
 ): string {
   if (!template) {
-    return fields.map((field) => formatValue(field, data[field] ?? "")).filter(Boolean).join(" ");
+    return fields
+      .map((field) => formatValue(field, data[field] ?? ""))
+      .filter(Boolean)
+      .join(" ");
   }
-  return template.replace(/\{\{([a-zA-Z0-9_]+)\}\}/g, (_, key: string) =>
-    formatValue(key, data[key] ?? ""),
-  );
+  return template.replace(/\{\{([a-zA-Z0-9_]+)\}\}/g, (_, key: string) => formatValue(key, data[key] ?? ""));
 }
 
 function toE164(value: string, countryCode: string): string {

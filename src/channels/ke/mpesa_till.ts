@@ -31,11 +31,22 @@ export const mpesaTillKeKesPaymentChannel = definePaymentChannelSchema({
       placeholder: "123456",
       normalize: [NormalizationKind.Trim, NormalizationKind.DigitsOnly],
       validation: [
-        { kind: ValidationRuleKind.Pattern, pattern: "^\\d{5,7}$", message: "Use a 5-7 digit till number" },
+        {
+          kind: ValidationRuleKind.Pattern,
+          pattern: "^\\d{5,7}$",
+          message: "Use a 5-7 digit till number",
+        },
       ],
     },
     descriptionField,
   ],
-  detailRows: [{ key: "tillNumber", label: "Till number", fields: ["tillNumber"], copyable: true }],
+  detailRows: [
+    {
+      key: "tillNumber",
+      label: "Till number",
+      fields: ["tillNumber"],
+      copyable: true,
+    },
+  ],
   evidence: mobileReferenceEvidence,
 });

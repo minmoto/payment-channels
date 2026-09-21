@@ -17,7 +17,12 @@ export const tnmMpambaMwMwkPaymentChannel = definePaymentChannelSchema({
     icon: "tnm-mpamba",
     group: PaymentChannelGroup.MobileMoney,
   },
-  network: { id: "tnm_mpamba", label: "TNM Mpamba", country: "MW", currency: "MWK" },
+  network: {
+    id: "tnm_mpamba",
+    label: "TNM Mpamba",
+    country: "MW",
+    currency: "MWK",
+  },
   support: {
     automation: PaymentChannelAutomation.Api,
   },
@@ -36,6 +41,13 @@ export const tnmMpambaMwMwkPaymentChannel = definePaymentChannelSchema({
     },
     descriptionField,
   ],
-  detailRows: [{ key: "phoneNumber", label: "Phone number", fields: ["phoneNumber"], copyable: true }],
+  detailRows: [
+    {
+      key: "phoneNumber",
+      label: "Phone number",
+      fields: ["phoneNumber"],
+      copyable: true,
+    },
+  ],
   evidence: mobileReferenceEvidence,
 });

@@ -26,11 +26,10 @@ try {
   // --ignore-scripts: this repo's own "prepack" script runs "npm run check",
   // which runs this file. Without --ignore-scripts, packing here would
   // recursively re-trigger the check that is already in progress.
-  const tarballName = execFileSync(
-    "npm",
-    ["pack", "--silent", "--ignore-scripts", "--pack-destination", workDir],
-    { cwd: repoRoot, encoding: "utf8" },
-  ).trim();
+  const tarballName = execFileSync("npm", ["pack", "--silent", "--ignore-scripts", "--pack-destination", workDir], {
+    cwd: repoRoot,
+    encoding: "utf8",
+  }).trim();
   const tarballPath = path.join(workDir, tarballName);
 
   const esmResult = runConsumer({
@@ -75,17 +74,28 @@ function runConsumer({ kind, manifest, script, scriptName, tarballPath }) {
   mkdirSync(consumerDir, { recursive: true });
   writeFileSync(
     path.join(consumerDir, "package.json"),
-    JSON.stringify({ name: `${kind}-consumer`, version: "0.0.0", private: true, ...manifest }, null, 2),
+    JSON.stringify(
+      {
+        name: `${kind}-consumer`,
+        version: "0.0.0",
+        private: true,
+        ...manifest,
+      },
+      null,
+      2,
+    ),
   );
 
-  execFileSync(
-    "npm",
-    ["install", "--no-audit", "--no-fund", "--no-save", "--ignore-scripts", tarballPath],
-    { cwd: consumerDir, stdio: "pipe" },
-  );
+  execFileSync("npm", ["install", "--no-audit", "--no-fund", "--no-save", "--ignore-scripts", tarballPath], {
+    cwd: consumerDir,
+    stdio: "pipe",
+  });
 
   writeFileSync(path.join(consumerDir, scriptName), script);
 
-  const output = execFileSync("node", [scriptName], { cwd: consumerDir, encoding: "utf8" });
+  const output = execFileSync("node", [scriptName], {
+    cwd: consumerDir,
+    encoding: "utf8",
+  });
   return JSON.parse(output.trim());
 }

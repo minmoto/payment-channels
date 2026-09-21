@@ -4,31 +4,31 @@
 
 The runtime registry is authoritative. This inventory is provided for human inspection and records the registry order.
 
-| ID | Label | Country | Currency | Group | Automation | Version |
-| --- | --- | --- | --- | --- | --- | ---: |
-| `cash_ao_aoa` | Cash | `AO` | `AOA` | `cash` | `none` | 2 |
-| `cash_bi_bif` | Cash | `BI` | `BIF` | `cash` | `none` | 2 |
-| `cash_bw_bwp` | Cash | `BW` | `BWP` | `cash` | `none` | 2 |
-| `cash_et_etb` | Cash | `ET` | `ETB` | `cash` | `none` | 2 |
-| `mpesa_phone_ke_kes` | M-Pesa phone | `KE` | `KES` | `mobile_money` | `api` | 2 |
-| `mpesa_pochi_ke_kes` | M-Pesa Pochi la Biashara | `KE` | `KES` | `mobile_money` | `manual` | 2 |
-| `mpesa_till_ke_kes` | M-Pesa till | `KE` | `KES` | `mobile_money` | `api` | 2 |
-| `mpesa_paybill_ke_kes` | M-Pesa paybill | `KE` | `KES` | `mobile_money` | `api` | 2 |
-| `pesalink_account_ke_kes` | PesaLink bank account | `KE` | `KES` | `bank` | `manual` | 1 |
-| `airtel_money_ke_kes` | Airtel Money | `KE` | `KES` | `mobile_money` | `api` | 2 |
-| `cash_ke_kes` | Cash | `KE` | `KES` | `cash` | `none` | 2 |
-| `cash_ls_lsl` | Cash | `LS` | `LSL` | `cash` | `none` | 2 |
-| `airtel_money_mw_mwk` | Airtel Money Malawi | `MW` | `MWK` | `mobile_money` | `api` | 2 |
-| `cash_mw_mwk` | Cash | `MW` | `MWK` | `cash` | `none` | 2 |
-| `tnm_mpamba_mw_mwk` | TNM Mpamba | `MW` | `MWK` | `mobile_money` | `api` | 2 |
-| `cash_mz_mzn` | Cash | `MZ` | `MZN` | `cash` | `none` | 2 |
-| `cash_na_nad` | Cash | `NA` | `NAD` | `cash` | `none` | 2 |
-| `cash_rw_rwf` | Cash | `RW` | `RWF` | `cash` | `none` | 2 |
-| `cash_ss_ssp` | Cash | `SS` | `SSP` | `cash` | `none` | 2 |
-| `cash_sz_szl` | Cash | `SZ` | `SZL` | `cash` | `none` | 2 |
-| `cash_tz_tzs` | Cash | `TZ` | `TZS` | `cash` | `none` | 2 |
-| `cash_ug_ugx` | Cash | `UG` | `UGX` | `cash` | `none` | 2 |
-| `payshap_shapid_za_zar` | PayShap ShapID | `ZA` | `ZAR` | `bank` | `manual` | 1 |
-| `payshap_account_za_zar` | PayShap bank account | `ZA` | `ZAR` | `bank` | `manual` | 1 |
-| `cash_za_zar` | Cash | `ZA` | `ZAR` | `cash` | `none` | 2 |
-| `cash_zm_zmw` | Cash | `ZM` | `ZMW` | `cash` | `none` | 2 |
+| ID                        | Label                    | Country | Currency | Group          | Automation | Version |
+| ------------------------- | ------------------------ | ------- | -------- | -------------- | ---------- | ------: |
+| `cash_ao_aoa`             | Cash                     | `AO`    | `AOA`    | `cash`         | `none`     |       2 |
+| `cash_bi_bif`             | Cash                     | `BI`    | `BIF`    | `cash`         | `none`     |       2 |
+| `cash_bw_bwp`             | Cash                     | `BW`    | `BWP`    | `cash`         | `none`     |       2 |
+| `cash_et_etb`             | Cash                     | `ET`    | `ETB`    | `cash`         | `none`     |       2 |
+| `mpesa_phone_ke_kes`      | M-Pesa phone             | `KE`    | `KES`    | `mobile_money` | `api`      |       2 |
+| `mpesa_pochi_ke_kes`      | M-Pesa Pochi la Biashara | `KE`    | `KES`    | `mobile_money` | `manual`   |       2 |
+| `mpesa_till_ke_kes`       | M-Pesa till              | `KE`    | `KES`    | `mobile_money` | `api`      |       2 |
+| `mpesa_paybill_ke_kes`    | M-Pesa paybill           | `KE`    | `KES`    | `mobile_money` | `api`      |       2 |
+| `pesalink_account_ke_kes` | PesaLink bank account    | `KE`    | `KES`    | `bank`         | `manual`   |       1 |
+| `airtel_money_ke_kes`     | Airtel Money             | `KE`    | `KES`    | `mobile_money` | `api`      |       2 |
+| `cash_ke_kes`             | Cash                     | `KE`    | `KES`    | `cash`         | `none`     |       2 |
+| `cash_ls_lsl`             | Cash                     | `LS`    | `LSL`    | `cash`         | `none`     |       2 |
+| `airtel_money_mw_mwk`     | Airtel Money Malawi      | `MW`    | `MWK`    | `mobile_money` | `api`      |       2 |
+| `cash_mw_mwk`             | Cash                     | `MW`    | `MWK`    | `cash`         | `none`     |       2 |
+| `tnm_mpamba_mw_mwk`       | TNM Mpamba               | `MW`    | `MWK`    | `mobile_money` | `api`      |       2 |
+| `cash_mz_mzn`             | Cash                     | `MZ`    | `MZN`    | `cash`         | `none`     |       2 |
+| `cash_na_nad`             | Cash                     | `NA`    | `NAD`    | `cash`         | `none`     |       2 |
+| `cash_rw_rwf`             | Cash                     | `RW`    | `RWF`    | `cash`         | `none`     |       2 |
+| `cash_ss_ssp`             | Cash                     | `SS`    | `SSP`    | `cash`         | `none`     |       2 |
+| `cash_sz_szl`             | Cash                     | `SZ`    | `SZL`    | `cash`         | `none`     |       2 |
+| `cash_tz_tzs`             | Cash                     | `TZ`    | `TZS`    | `cash`         | `none`     |       2 |
+| `cash_ug_ugx`             | Cash                     | `UG`    | `UGX`    | `cash`         | `none`     |       2 |
+| `payshap_shapid_za_zar`   | PayShap ShapID           | `ZA`    | `ZAR`    | `bank`         | `manual`   |       1 |
+| `payshap_account_za_zar`  | PayShap bank account     | `ZA`    | `ZAR`    | `bank`         | `manual`   |       1 |
+| `cash_za_zar`             | Cash                     | `ZA`    | `ZAR`    | `cash`         | `none`     |       2 |
+| `cash_zm_zmw`             | Cash                     | `ZM`    | `ZMW`    | `cash`         | `none`     |       2 |

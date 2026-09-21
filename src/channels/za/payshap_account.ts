@@ -53,9 +53,18 @@ export const payshapAccountZaZarPaymentChannel = definePaymentChannelSchema({
     descriptionField,
   ],
   detailRows: [
-    { key: "recipientName", label: "Recipient name", fields: ["recipientName"] },
+    {
+      key: "recipientName",
+      label: "Recipient name",
+      fields: ["recipientName"],
+    },
     { key: "bankName", label: "Bank", fields: ["bankName"] },
-    { key: "accountNumber", label: "Account number", fields: ["accountNumber"], copyable: true },
+    {
+      key: "accountNumber",
+      label: "Account number",
+      fields: ["accountNumber"],
+      copyable: true,
+    },
   ],
   instructions: {
     payer: ["Confirm the recipient name, bank, and account number directly before sending the payment."],

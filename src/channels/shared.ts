@@ -49,7 +49,12 @@ export function createCashPaymentChannel(input: {
     id: input.id,
     version: 2,
     ...cashChannelDefinition,
-    network: { id: "cash", label: "Cash", country: input.country, currency: input.currency },
+    network: {
+      id: "cash",
+      label: "Cash",
+      country: input.country,
+      currency: input.currency,
+    },
   });
 }
 

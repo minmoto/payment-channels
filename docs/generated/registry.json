@@ -9,30 +9,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "AO",
-      "currency": "AOA"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "AO", "currency": "AOA" }
   },
   {
     "id": "cash_bi_bif",
@@ -44,30 +26,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "BI",
-      "currency": "BIF"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "BI", "currency": "BIF" }
   },
   {
     "id": "cash_bw_bwp",
@@ -79,30 +43,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "BW",
-      "currency": "BWP"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "BW", "currency": "BWP" }
   },
   {
     "id": "cash_et_etb",
@@ -114,30 +60,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "ET",
-      "currency": "ETB"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "ET", "currency": "ETB" }
   },
   {
     "id": "mpesa_phone_ke_kes",
@@ -149,15 +77,8 @@
       "icon": "mpesa",
       "group": "mobile_money"
     },
-    "network": {
-      "id": "mpesa",
-      "label": "M-Pesa",
-      "country": "KE",
-      "currency": "KES"
-    },
-    "support": {
-      "automation": "api"
-    },
+    "network": { "id": "mpesa", "label": "M-Pesa", "country": "KE", "currency": "KES" },
+    "support": { "automation": "api" },
     "fields": [
       {
         "key": "phoneNumber",
@@ -166,10 +87,7 @@
         "required": true,
         "sensitive": true,
         "mask": "phone",
-        "normalize": [
-          "trim",
-          "e164_ke_phone"
-        ],
+        "normalize": ["trim", "e164_ke_phone"],
         "placeholder": "+254712345678",
         "validation": [
           {
@@ -184,34 +102,14 @@
         "label": "Description",
         "type": "text",
         "required": false,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "max_length",
-            "length": 100
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
       }
     ],
-    "detailRows": [
-      {
-        "key": "phoneNumber",
-        "label": "Phone number",
-        "fields": [
-          "phoneNumber"
-        ],
-        "copyable": true
-      }
-    ],
+    "detailRows": [{ "key": "phoneNumber", "label": "Phone number", "fields": ["phoneNumber"], "copyable": true }],
     "instructions": {
-      "payer": [
-        "Send the exact amount to the displayed M-Pesa phone number."
-      ],
-      "payee": [
-        "Confirm the M-Pesa reference is available if the payment is disputed."
-      ]
+      "payer": ["Send the exact amount to the displayed M-Pesa phone number."],
+      "payee": ["Confirm the M-Pesa reference is available if the payment is disputed."]
     },
     "evidence": [
       {
@@ -219,12 +117,7 @@
         "label": "Transaction reference",
         "type": "text",
         "required": true,
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 3
-          }
-        ]
+        "validation": [{ "kind": "min_length", "length": 3 }]
       }
     ]
   },
@@ -238,15 +131,8 @@
       "icon": "mpesa",
       "group": "mobile_money"
     },
-    "network": {
-      "id": "mpesa",
-      "label": "M-Pesa",
-      "country": "KE",
-      "currency": "KES"
-    },
-    "support": {
-      "automation": "manual"
-    },
+    "network": { "id": "mpesa", "label": "M-Pesa", "country": "KE", "currency": "KES" },
+    "support": { "automation": "manual" },
     "fields": [
       {
         "key": "phoneNumber",
@@ -255,10 +141,7 @@
         "required": true,
         "sensitive": true,
         "mask": "phone",
-        "normalize": [
-          "trim",
-          "e164_ke_phone"
-        ],
+        "normalize": ["trim", "e164_ke_phone"],
         "placeholder": "+254712345678",
         "helpText": "Use the phone number registered for Pochi la Biashara.",
         "validation": [
@@ -274,34 +157,16 @@
         "label": "Description",
         "type": "text",
         "required": false,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "max_length",
-            "length": 100
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
       }
     ],
     "detailRows": [
-      {
-        "key": "phoneNumber",
-        "label": "Business phone number",
-        "fields": [
-          "phoneNumber"
-        ],
-        "copyable": true
-      }
+      { "key": "phoneNumber", "label": "Business phone number", "fields": ["phoneNumber"], "copyable": true }
     ],
     "instructions": {
-      "payer": [
-        "Send the exact amount using M-Pesa Pochi la Biashara to the displayed business phone number."
-      ],
-      "payee": [
-        "Confirm the M-Pesa reference is available if the payment is disputed."
-      ]
+      "payer": ["Send the exact amount using M-Pesa Pochi la Biashara to the displayed business phone number."],
+      "payee": ["Confirm the M-Pesa reference is available if the payment is disputed."]
     },
     "evidence": [
       {
@@ -309,12 +174,7 @@
         "label": "Transaction reference",
         "type": "text",
         "required": true,
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 3
-          }
-        ]
+        "validation": [{ "kind": "min_length", "length": 3 }]
       }
     ]
   },
@@ -328,15 +188,8 @@
       "icon": "mpesa",
       "group": "mobile_money"
     },
-    "network": {
-      "id": "mpesa",
-      "label": "M-Pesa",
-      "country": "KE",
-      "currency": "KES"
-    },
-    "support": {
-      "automation": "api"
-    },
+    "network": { "id": "mpesa", "label": "M-Pesa", "country": "KE", "currency": "KES" },
+    "support": { "automation": "api" },
     "fields": [
       {
         "key": "tillNumber",
@@ -344,56 +197,26 @@
         "type": "text",
         "required": true,
         "placeholder": "123456",
-        "normalize": [
-          "trim",
-          "digits_only"
-        ],
-        "validation": [
-          {
-            "kind": "pattern",
-            "pattern": "^\\d{5,7}$",
-            "message": "Use a 5-7 digit till number"
-          }
-        ]
+        "normalize": ["trim", "digits_only"],
+        "validation": [{ "kind": "pattern", "pattern": "^\\d{5,7}$", "message": "Use a 5-7 digit till number" }]
       },
       {
         "key": "description",
         "label": "Description",
         "type": "text",
         "required": false,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "max_length",
-            "length": 100
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
       }
     ],
-    "detailRows": [
-      {
-        "key": "tillNumber",
-        "label": "Till number",
-        "fields": [
-          "tillNumber"
-        ],
-        "copyable": true
-      }
-    ],
+    "detailRows": [{ "key": "tillNumber", "label": "Till number", "fields": ["tillNumber"], "copyable": true }],
     "evidence": [
       {
         "key": "transactionReference",
         "label": "Transaction reference",
         "type": "text",
         "required": true,
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 3
-          }
-        ]
+        "validation": [{ "kind": "min_length", "length": 3 }]
       }
     ]
   },
@@ -407,15 +230,8 @@
       "icon": "mpesa",
       "group": "mobile_money"
     },
-    "network": {
-      "id": "mpesa",
-      "label": "M-Pesa",
-      "country": "KE",
-      "currency": "KES"
-    },
-    "support": {
-      "automation": "api"
-    },
+    "network": { "id": "mpesa", "label": "M-Pesa", "country": "KE", "currency": "KES" },
+    "support": { "automation": "api" },
     "fields": [
       {
         "key": "paybillNumber",
@@ -423,17 +239,8 @@
         "type": "text",
         "required": true,
         "placeholder": "123456",
-        "normalize": [
-          "trim",
-          "digits_only"
-        ],
-        "validation": [
-          {
-            "kind": "pattern",
-            "pattern": "^\\d{5,7}$",
-            "message": "Use a 5-7 digit paybill number"
-          }
-        ]
+        "normalize": ["trim", "digits_only"],
+        "validation": [{ "kind": "pattern", "pattern": "^\\d{5,7}$", "message": "Use a 5-7 digit paybill number" }]
       },
       {
         "key": "accountNumber",
@@ -441,18 +248,10 @@
         "type": "text",
         "required": true,
         "placeholder": "Account reference",
-        "normalize": [
-          "trim"
-        ],
+        "normalize": ["trim"],
         "validation": [
-          {
-            "kind": "min_length",
-            "length": 1
-          },
-          {
-            "kind": "max_length",
-            "length": 20
-          }
+          { "kind": "min_length", "length": 1 },
+          { "kind": "max_length", "length": 20 }
         ]
       },
       {
@@ -460,34 +259,13 @@
         "label": "Description",
         "type": "text",
         "required": false,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "max_length",
-            "length": 100
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
       }
     ],
     "detailRows": [
-      {
-        "key": "paybillNumber",
-        "label": "Paybill number",
-        "fields": [
-          "paybillNumber"
-        ],
-        "copyable": true
-      },
-      {
-        "key": "accountNumber",
-        "label": "Account number",
-        "fields": [
-          "accountNumber"
-        ],
-        "copyable": true
-      }
+      { "key": "paybillNumber", "label": "Paybill number", "fields": ["paybillNumber"], "copyable": true },
+      { "key": "accountNumber", "label": "Account number", "fields": ["accountNumber"], "copyable": true }
     ],
     "evidence": [
       {
@@ -495,12 +273,7 @@
         "label": "Transaction reference",
         "type": "text",
         "required": true,
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 3
-          }
-        ]
+        "validation": [{ "kind": "min_length", "length": 3 }]
       }
     ]
   },
@@ -514,45 +287,24 @@
       "icon": "pesalink",
       "group": "bank"
     },
-    "network": {
-      "id": "pesalink",
-      "label": "PesaLink",
-      "country": "KE",
-      "currency": "KES"
-    },
-    "support": {
-      "automation": "manual"
-    },
+    "network": { "id": "pesalink", "label": "PesaLink", "country": "KE", "currency": "KES" },
+    "support": { "automation": "manual" },
     "fields": [
       {
         "key": "recipientName",
         "label": "Recipient name",
         "type": "text",
         "required": true,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 1
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "min_length", "length": 1 }]
       },
       {
         "key": "bankName",
         "label": "Bank",
         "type": "text",
         "required": true,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 1
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "min_length", "length": 1 }]
       },
       {
         "key": "accountNumber",
@@ -561,63 +313,26 @@
         "required": true,
         "sensitive": true,
         "mask": "last4",
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 1
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "min_length", "length": 1 }]
       },
       {
         "key": "description",
         "label": "Description",
         "type": "text",
         "required": false,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "max_length",
-            "length": 100
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
       }
     ],
     "detailRows": [
-      {
-        "key": "recipientName",
-        "label": "Recipient name",
-        "fields": [
-          "recipientName"
-        ]
-      },
-      {
-        "key": "bankName",
-        "label": "Bank",
-        "fields": [
-          "bankName"
-        ]
-      },
-      {
-        "key": "accountNumber",
-        "label": "Account number",
-        "fields": [
-          "accountNumber"
-        ],
-        "copyable": true
-      }
+      { "key": "recipientName", "label": "Recipient name", "fields": ["recipientName"] },
+      { "key": "bankName", "label": "Bank", "fields": ["bankName"] },
+      { "key": "accountNumber", "label": "Account number", "fields": ["accountNumber"], "copyable": true }
     ],
     "instructions": {
-      "payer": [
-        "Confirm the recipient name, bank, and account number directly before sending the payment."
-      ],
-      "payee": [
-        "Keep the bank confirmation and transaction reference for reconciliation."
-      ]
+      "payer": ["Confirm the recipient name, bank, and account number directly before sending the payment."],
+      "payee": ["Keep the bank confirmation and transaction reference for reconciliation."]
     },
     "evidence": [
       {
@@ -625,12 +340,7 @@
         "label": "Transaction reference",
         "type": "text",
         "required": true,
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 3
-          }
-        ]
+        "validation": [{ "kind": "min_length", "length": 3 }]
       }
     ]
   },
@@ -644,15 +354,8 @@
       "icon": "airtel-money",
       "group": "mobile_money"
     },
-    "network": {
-      "id": "airtel_money",
-      "label": "Airtel Money",
-      "country": "KE",
-      "currency": "KES"
-    },
-    "support": {
-      "automation": "api"
-    },
+    "network": { "id": "airtel_money", "label": "Airtel Money", "country": "KE", "currency": "KES" },
+    "support": { "automation": "api" },
     "fields": [
       {
         "key": "phoneNumber",
@@ -661,10 +364,7 @@
         "required": true,
         "sensitive": true,
         "mask": "phone",
-        "normalize": [
-          "trim",
-          "e164_ke_phone"
-        ],
+        "normalize": ["trim", "e164_ke_phone"],
         "placeholder": "+254712345678",
         "validation": [
           {
@@ -679,39 +379,18 @@
         "label": "Description",
         "type": "text",
         "required": false,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "max_length",
-            "length": 100
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
       }
     ],
-    "detailRows": [
-      {
-        "key": "phoneNumber",
-        "label": "Phone number",
-        "fields": [
-          "phoneNumber"
-        ],
-        "copyable": true
-      }
-    ],
+    "detailRows": [{ "key": "phoneNumber", "label": "Phone number", "fields": ["phoneNumber"], "copyable": true }],
     "evidence": [
       {
         "key": "transactionReference",
         "label": "Transaction reference",
         "type": "text",
         "required": true,
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 3
-          }
-        ]
+        "validation": [{ "kind": "min_length", "length": 3 }]
       }
     ]
   },
@@ -725,30 +404,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "KE",
-      "currency": "KES"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "KE", "currency": "KES" }
   },
   {
     "id": "cash_ls_lsl",
@@ -760,30 +421,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "LS",
-      "currency": "LSL"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "LS", "currency": "LSL" }
   },
   {
     "id": "airtel_money_mw_mwk",
@@ -795,15 +438,8 @@
       "icon": "airtel-money",
       "group": "mobile_money"
     },
-    "network": {
-      "id": "airtel_money",
-      "label": "Airtel Money",
-      "country": "MW",
-      "currency": "MWK"
-    },
-    "support": {
-      "automation": "api"
-    },
+    "network": { "id": "airtel_money", "label": "Airtel Money", "country": "MW", "currency": "MWK" },
+    "support": { "automation": "api" },
     "fields": [
       {
         "key": "phoneNumber",
@@ -812,10 +448,7 @@
         "required": true,
         "sensitive": true,
         "mask": "phone",
-        "normalize": [
-          "trim",
-          "e164_mw_phone"
-        ],
+        "normalize": ["trim", "e164_mw_phone"],
         "placeholder": "+265991234567",
         "validation": [
           {
@@ -830,39 +463,18 @@
         "label": "Description",
         "type": "text",
         "required": false,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "max_length",
-            "length": 100
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
       }
     ],
-    "detailRows": [
-      {
-        "key": "phoneNumber",
-        "label": "Phone number",
-        "fields": [
-          "phoneNumber"
-        ],
-        "copyable": true
-      }
-    ],
+    "detailRows": [{ "key": "phoneNumber", "label": "Phone number", "fields": ["phoneNumber"], "copyable": true }],
     "evidence": [
       {
         "key": "transactionReference",
         "label": "Transaction reference",
         "type": "text",
         "required": true,
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 3
-          }
-        ]
+        "validation": [{ "kind": "min_length", "length": 3 }]
       }
     ]
   },
@@ -876,30 +488,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "MW",
-      "currency": "MWK"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "MW", "currency": "MWK" }
   },
   {
     "id": "tnm_mpamba_mw_mwk",
@@ -911,15 +505,8 @@
       "icon": "tnm-mpamba",
       "group": "mobile_money"
     },
-    "network": {
-      "id": "tnm_mpamba",
-      "label": "TNM Mpamba",
-      "country": "MW",
-      "currency": "MWK"
-    },
-    "support": {
-      "automation": "api"
-    },
+    "network": { "id": "tnm_mpamba", "label": "TNM Mpamba", "country": "MW", "currency": "MWK" },
+    "support": { "automation": "api" },
     "fields": [
       {
         "key": "phoneNumber",
@@ -928,10 +515,7 @@
         "required": true,
         "sensitive": true,
         "mask": "phone",
-        "normalize": [
-          "trim",
-          "e164_mw_phone"
-        ],
+        "normalize": ["trim", "e164_mw_phone"],
         "placeholder": "+265881234567",
         "validation": [
           {
@@ -946,39 +530,18 @@
         "label": "Description",
         "type": "text",
         "required": false,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "max_length",
-            "length": 100
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
       }
     ],
-    "detailRows": [
-      {
-        "key": "phoneNumber",
-        "label": "Phone number",
-        "fields": [
-          "phoneNumber"
-        ],
-        "copyable": true
-      }
-    ],
+    "detailRows": [{ "key": "phoneNumber", "label": "Phone number", "fields": ["phoneNumber"], "copyable": true }],
     "evidence": [
       {
         "key": "transactionReference",
         "label": "Transaction reference",
         "type": "text",
         "required": true,
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 3
-          }
-        ]
+        "validation": [{ "kind": "min_length", "length": 3 }]
       }
     ]
   },
@@ -992,30 +555,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "MZ",
-      "currency": "MZN"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "MZ", "currency": "MZN" }
   },
   {
     "id": "cash_na_nad",
@@ -1027,30 +572,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "NA",
-      "currency": "NAD"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "NA", "currency": "NAD" }
   },
   {
     "id": "cash_rw_rwf",
@@ -1062,30 +589,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "RW",
-      "currency": "RWF"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "RW", "currency": "RWF" }
   },
   {
     "id": "cash_ss_ssp",
@@ -1097,30 +606,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "SS",
-      "currency": "SSP"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "SS", "currency": "SSP" }
   },
   {
     "id": "cash_sz_szl",
@@ -1132,30 +623,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "SZ",
-      "currency": "SZL"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "SZ", "currency": "SZL" }
   },
   {
     "id": "cash_tz_tzs",
@@ -1167,30 +640,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "TZ",
-      "currency": "TZS"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "TZ", "currency": "TZS" }
   },
   {
     "id": "cash_ug_ugx",
@@ -1202,30 +657,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "UG",
-      "currency": "UGX"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "UG", "currency": "UGX" }
   },
   {
     "id": "payshap_shapid_za_zar",
@@ -1237,15 +674,8 @@
       "icon": "payshap",
       "group": "bank"
     },
-    "network": {
-      "id": "payshap",
-      "label": "PayShap",
-      "country": "ZA",
-      "currency": "ZAR"
-    },
-    "support": {
-      "automation": "manual"
-    },
+    "network": { "id": "payshap", "label": "PayShap", "country": "ZA", "currency": "ZAR" },
+    "support": { "automation": "manual" },
     "fields": [
       {
         "key": "shapId",
@@ -1256,9 +686,7 @@
         "helpText": "Use the recipient's registered cellphone number, optionally followed by @bank.",
         "sensitive": true,
         "mask": "shap_id",
-        "normalize": [
-          "trim"
-        ],
+        "normalize": ["trim"],
         "validation": [
           {
             "kind": "pattern",
@@ -1272,34 +700,14 @@
         "label": "Description",
         "type": "text",
         "required": false,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "max_length",
-            "length": 100
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
       }
     ],
-    "detailRows": [
-      {
-        "key": "shapId",
-        "label": "ShapID",
-        "fields": [
-          "shapId"
-        ],
-        "copyable": true
-      }
-    ],
+    "detailRows": [{ "key": "shapId", "label": "ShapID", "fields": ["shapId"], "copyable": true }],
     "instructions": {
-      "payer": [
-        "Confirm the recipient name returned by the bank before sending the payment."
-      ],
-      "payee": [
-        "Keep the bank confirmation and transaction reference for reconciliation."
-      ]
+      "payer": ["Confirm the recipient name returned by the bank before sending the payment."],
+      "payee": ["Keep the bank confirmation and transaction reference for reconciliation."]
     },
     "evidence": [
       {
@@ -1307,12 +715,7 @@
         "label": "Transaction reference",
         "type": "text",
         "required": true,
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 3
-          }
-        ]
+        "validation": [{ "kind": "min_length", "length": 3 }]
       }
     ]
   },
@@ -1326,15 +729,8 @@
       "icon": "payshap",
       "group": "bank"
     },
-    "network": {
-      "id": "payshap",
-      "label": "PayShap",
-      "country": "ZA",
-      "currency": "ZAR"
-    },
-    "support": {
-      "automation": "manual"
-    },
+    "network": { "id": "payshap", "label": "PayShap", "country": "ZA", "currency": "ZAR" },
+    "support": { "automation": "manual" },
     "fields": [
       {
         "key": "recipientName",
@@ -1342,9 +738,7 @@
         "type": "text",
         "required": true,
         "placeholder": "Recipient name",
-        "normalize": [
-          "trim"
-        ]
+        "normalize": ["trim"]
       },
       {
         "key": "bankName",
@@ -1352,9 +746,7 @@
         "type": "text",
         "required": true,
         "placeholder": "Recipient bank",
-        "normalize": [
-          "trim"
-        ]
+        "normalize": ["trim"]
       },
       {
         "key": "accountNumber",
@@ -1364,57 +756,25 @@
         "placeholder": "Recipient account number",
         "sensitive": true,
         "mask": "last4",
-        "normalize": [
-          "trim"
-        ]
+        "normalize": ["trim"]
       },
       {
         "key": "description",
         "label": "Description",
         "type": "text",
         "required": false,
-        "normalize": [
-          "trim"
-        ],
-        "validation": [
-          {
-            "kind": "max_length",
-            "length": 100
-          }
-        ]
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
       }
     ],
     "detailRows": [
-      {
-        "key": "recipientName",
-        "label": "Recipient name",
-        "fields": [
-          "recipientName"
-        ]
-      },
-      {
-        "key": "bankName",
-        "label": "Bank",
-        "fields": [
-          "bankName"
-        ]
-      },
-      {
-        "key": "accountNumber",
-        "label": "Account number",
-        "fields": [
-          "accountNumber"
-        ],
-        "copyable": true
-      }
+      { "key": "recipientName", "label": "Recipient name", "fields": ["recipientName"] },
+      { "key": "bankName", "label": "Bank", "fields": ["bankName"] },
+      { "key": "accountNumber", "label": "Account number", "fields": ["accountNumber"], "copyable": true }
     ],
     "instructions": {
-      "payer": [
-        "Confirm the recipient name, bank, and account number directly before sending the payment."
-      ],
-      "payee": [
-        "Keep the bank confirmation and transaction reference for reconciliation."
-      ]
+      "payer": ["Confirm the recipient name, bank, and account number directly before sending the payment."],
+      "payee": ["Keep the bank confirmation and transaction reference for reconciliation."]
     },
     "evidence": [
       {
@@ -1422,12 +782,7 @@
         "label": "Transaction reference",
         "type": "text",
         "required": true,
-        "validation": [
-          {
-            "kind": "min_length",
-            "length": 3
-          }
-        ]
+        "validation": [{ "kind": "min_length", "length": 3 }]
       }
     ]
   },
@@ -1441,30 +796,12 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "ZA",
-      "currency": "ZAR"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "ZA", "currency": "ZAR" }
   },
   {
     "id": "cash_zm_zmw",
@@ -1476,29 +813,11 @@
       "icon": "cash",
       "group": "cash"
     },
-    "support": {
-      "automation": "none"
-    },
+    "support": { "automation": "none" },
     "fields": [],
     "detailRows": [],
-    "instructions": {
-      "payer": [
-        "Exchange cash in person and keep local receipt evidence when required."
-      ]
-    },
-    "evidence": [
-      {
-        "key": "receiptNote",
-        "label": "Receipt note",
-        "type": "text",
-        "required": false
-      }
-    ],
-    "network": {
-      "id": "cash",
-      "label": "Cash",
-      "country": "ZM",
-      "currency": "ZMW"
-    }
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "ZM", "currency": "ZMW" }
   }
 ]

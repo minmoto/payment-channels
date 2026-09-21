@@ -4,17 +4,17 @@ This document describes the public contract exported from `@minmoto/payment-chan
 
 ## `PaymentChannelSchema`
 
-| Property | Meaning |
-| --- | --- |
-| `id` | Stable lowercase snake-case channel ID. Built-ins use `<network>_<variant?>_<country>_<currency>`. Changing a published ID is breaking. |
-| `version` | Positive integer revision of this schema. It is not a package version. |
-| `display` | Human label, short label, description, icon token, and `PaymentChannelGroup`. |
-| `network` | Stable lowercase network ID and label plus two-letter uppercase country and three-letter uppercase currency codes. |
-| `support.automation` | `none`, `manual`, or `api`; never proof that the current application can execute a payment. |
-| `fields` | Ordered values collected from the user. |
-| `detailRows` | Ordered presentation and copy rows derived from validated data. |
-| `instructions` | Optional payer and payee operational guidance. |
-| `evidence` | Optional reconciliation or receipt fields. These are metadata definitions; the validator currently validates `fields`, not evidence submissions. |
+| Property             | Meaning                                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `id`                 | Stable lowercase snake-case channel ID. Built-ins use `<network>_<variant?>_<country>_<currency>`. Changing a published ID is breaking.          |
+| `version`            | Positive integer revision of this schema. It is not a package version.                                                                           |
+| `display`            | Human label, short label, description, icon token, and `PaymentChannelGroup`.                                                                    |
+| `network`            | Stable lowercase network ID and label plus two-letter uppercase country and three-letter uppercase currency codes.                               |
+| `support.automation` | `none`, `manual`, or `api`; never proof that the current application can execute a payment.                                                      |
+| `fields`             | Ordered values collected from the user.                                                                                                          |
+| `detailRows`         | Ordered presentation and copy rows derived from validated data.                                                                                  |
+| `instructions`       | Optional payer and payee operational guidance.                                                                                                   |
+| `evidence`           | Optional reconciliation or receipt fields. These are metadata definitions; the validator currently validates `fields`, not evidence submissions. |
 
 ## Enums
 

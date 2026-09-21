@@ -37,7 +37,12 @@ const exampleSchema = definePaymentChannelSchema({
     icon: "wallet",
     group: PaymentChannelGroup.MobileMoney,
   },
-  network: { id: "example_wallet", label: "Example wallet", country: "XZ", currency: "XTS" },
+  network: {
+    id: "example_wallet",
+    label: "Example wallet",
+    country: "XZ",
+    currency: "XTS",
+  },
   support: { automation: PaymentChannelAutomation.Manual },
   fields: [
     {
@@ -57,7 +62,14 @@ const exampleSchema = definePaymentChannelSchema({
       ],
     },
   ],
-  detailRows: [{ key: "accountCode", label: "Account code", fields: ["accountCode"], copyable: true }],
+  detailRows: [
+    {
+      key: "accountCode",
+      label: "Account code",
+      fields: ["accountCode"],
+      copyable: true,
+    },
+  ],
 });
 addPaymentChannelSchema(registry, exampleSchema);
 
@@ -70,15 +82,32 @@ const controls = exampleSchema.fields.map(({ key, label, type, required, options
 }));
 assert.equal(controls.length, 1);
 
-const invalid = validatePaymentChannelData(exampleSchema, { accountCode: "wrong" });
+const invalid = validatePaymentChannelData(exampleSchema, {
+  accountCode: "wrong",
+});
 assert.deepEqual(invalid.issues, [
-  { field: "accountCode", message: "Use two letters, a hyphen, and four digits" },
+  {
+    field: "accountCode",
+    message: "Use two letters, a hyphen, and four digits",
+  },
 ]);
 
-const valid = validatePaymentChannelData(exampleSchema, { accountCode: " ab-1234 " });
-assert.deepEqual(valid, { valid: true, data: { accountCode: "AB-1234" }, issues: [] });
+const valid = validatePaymentChannelData(exampleSchema, {
+  accountCode: " ab-1234 ",
+});
+assert.deepEqual(valid, {
+  valid: true,
+  data: { accountCode: "AB-1234" },
+  issues: [],
+});
 assert.deepEqual(renderDetailRows(exampleSchema, valid.data), [
-  { key: "accountCode", label: "Account code", value: "***1234", copyable: true, copyValue: "AB-1234" },
+  {
+    key: "accountCode",
+    label: "Account code",
+    value: "***1234",
+    copyable: true,
+    copyValue: "AB-1234",
+  },
 ]);
 
 console.log("Generic consumer example passed.");

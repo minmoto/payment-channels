@@ -17,10 +17,7 @@ Use this procedure when an agent integrates `@minmoto/payment-channels`. The pac
 ## Discovery and allow-listing
 
 ```ts
-import {
-  createPaymentChannelRegistry,
-  listPaymentChannelSchemas,
-} from "@minmoto/payment-channels";
+import { createPaymentChannelRegistry, listPaymentChannelSchemas } from "@minmoto/payment-channels";
 
 const registry = createPaymentChannelRegistry();
 const approvedIds = new Set(applicationConfig.approvedPaymentChannelIds);
