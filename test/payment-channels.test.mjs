@@ -415,34 +415,67 @@ test("every represented country has a built-in cash channel", () => {
       .map((channel) => channel.id),
     [
       "cash_ao_aoa",
+      "cash_bf_xof",
       "cash_bi_bif",
+      "cash_bj_xof",
       "cash_bw_bwp",
+      "cash_cd_cdf",
+      "cash_cf_xaf",
+      "cash_cg_xaf",
+      "cash_ci_xof",
+      "cash_cm_xaf",
+      "cash_cv_cve",
+      "cash_dj_djf",
       "cash_dz_dzd",
       "cash_eg_egp",
       "cash_eh_mad",
+      "cash_er_ern",
       "cash_et_etb",
+      "cash_ga_xaf",
       "cash_gb_gbp",
+      "cash_gh_ghs",
+      "cash_gm_gmd",
+      "cash_gn_gnf",
+      "cash_gq_xaf",
+      "cash_gw_xof",
       "cash_in_inr",
       "cash_ke_kes",
+      "cash_km_kmf",
+      "cash_lr_lrd",
       "cash_ls_lsl",
       "cash_ly_lyd",
       "cash_ma_mad",
+      "cash_mg_mga",
+      "cash_ml_xof",
+      "cash_mr_mru",
       "cash_mu_mur",
       "cash_mw_mwk",
       "cash_mz_mzn",
       "cash_na_nad",
+      "cash_ne_xof",
       "cash_ng_ngn",
       "cash_pk_pkr",
+      "cash_re_eur",
       "cash_rw_rwf",
+      "cash_sc_scr",
       "cash_sd_sdg",
+      "cash_sh_shp",
+      "cash_sl_sle",
+      "cash_sn_xof",
+      "cash_so_sos",
       "cash_ss_ssp",
+      "cash_st_stn",
       "cash_sz_szl",
+      "cash_td_xaf",
+      "cash_tg_xof",
       "cash_tn_tnd",
       "cash_tz_tzs",
       "cash_ug_ugx",
       "cash_us_usd",
+      "cash_yt_eur",
       "cash_za_zar",
       "cash_zm_zmw",
+      "cash_zw_zwg",
     ],
   );
 });
@@ -451,12 +484,21 @@ test("registry exposes built-in cash channels for East African markets", () => {
   const registry = createPaymentChannelRegistry();
   const markets = [
     { country: "BI", currency: "BIF", id: "cash_bi_bif" },
+    { country: "DJ", currency: "DJF", id: "cash_dj_djf" },
+    { country: "ER", currency: "ERN", id: "cash_er_ern" },
     { country: "ET", currency: "ETB", id: "cash_et_etb" },
     { country: "KE", currency: "KES", id: "cash_ke_kes" },
+    { country: "KM", currency: "KMF", id: "cash_km_kmf" },
+    { country: "MG", currency: "MGA", id: "cash_mg_mga" },
+    { country: "RE", currency: "EUR", id: "cash_re_eur" },
     { country: "RW", currency: "RWF", id: "cash_rw_rwf" },
+    { country: "SC", currency: "SCR", id: "cash_sc_scr" },
+    { country: "SO", currency: "SOS", id: "cash_so_sos" },
     { country: "SS", currency: "SSP", id: "cash_ss_ssp" },
     { country: "TZ", currency: "TZS", id: "cash_tz_tzs" },
     { country: "UG", currency: "UGX", id: "cash_ug_ugx" },
+    { country: "YT", currency: "EUR", id: "cash_yt_eur" },
+    { country: "ZW", currency: "ZWG", id: "cash_zw_zwg" },
   ];
 
   for (const { country, currency, id } of markets) {
@@ -507,6 +549,66 @@ test("registry exposes built-in cash channels for South African markets", () => 
     { country: "NA", currency: "NAD", id: "cash_na_nad" },
     { country: "SZ", currency: "SZL", id: "cash_sz_szl" },
     { country: "ZM", currency: "ZMW", id: "cash_zm_zmw" },
+  ];
+
+  for (const { country, currency, id } of markets) {
+    const channels = listPaymentChannelSchemas(registry, {
+      country,
+      currency,
+      group: PaymentChannelGroup.Cash,
+    });
+    assert.deepEqual(
+      channels.map((channel) => channel.id),
+      [id],
+    );
+  }
+});
+
+test("registry exposes built-in cash channels for Central African markets", () => {
+  const registry = createPaymentChannelRegistry();
+  const markets = [
+    { country: "CD", currency: "CDF", id: "cash_cd_cdf" },
+    { country: "CF", currency: "XAF", id: "cash_cf_xaf" },
+    { country: "CG", currency: "XAF", id: "cash_cg_xaf" },
+    { country: "CM", currency: "XAF", id: "cash_cm_xaf" },
+    { country: "GA", currency: "XAF", id: "cash_ga_xaf" },
+    { country: "GQ", currency: "XAF", id: "cash_gq_xaf" },
+    { country: "ST", currency: "STN", id: "cash_st_stn" },
+    { country: "TD", currency: "XAF", id: "cash_td_xaf" },
+  ];
+
+  for (const { country, currency, id } of markets) {
+    const channels = listPaymentChannelSchemas(registry, {
+      country,
+      currency,
+      group: PaymentChannelGroup.Cash,
+    });
+    assert.deepEqual(
+      channels.map((channel) => channel.id),
+      [id],
+    );
+  }
+});
+
+test("registry exposes built-in cash channels for West African markets", () => {
+  const registry = createPaymentChannelRegistry();
+  const markets = [
+    { country: "BF", currency: "XOF", id: "cash_bf_xof" },
+    { country: "BJ", currency: "XOF", id: "cash_bj_xof" },
+    { country: "CI", currency: "XOF", id: "cash_ci_xof" },
+    { country: "CV", currency: "CVE", id: "cash_cv_cve" },
+    { country: "GH", currency: "GHS", id: "cash_gh_ghs" },
+    { country: "GM", currency: "GMD", id: "cash_gm_gmd" },
+    { country: "GN", currency: "GNF", id: "cash_gn_gnf" },
+    { country: "GW", currency: "XOF", id: "cash_gw_xof" },
+    { country: "LR", currency: "LRD", id: "cash_lr_lrd" },
+    { country: "ML", currency: "XOF", id: "cash_ml_xof" },
+    { country: "MR", currency: "MRU", id: "cash_mr_mru" },
+    { country: "NE", currency: "XOF", id: "cash_ne_xof" },
+    { country: "SH", currency: "SHP", id: "cash_sh_shp" },
+    { country: "SL", currency: "SLE", id: "cash_sl_sle" },
+    { country: "SN", currency: "XOF", id: "cash_sn_xof" },
+    { country: "TG", currency: "XOF", id: "cash_tg_xof" },
   ];
 
   for (const { country, currency, id } of markets) {
