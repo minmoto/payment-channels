@@ -102,6 +102,23 @@
     "network": { "id": "cash", "label": "Cash", "country": "BB", "currency": "BBD" }
   },
   {
+    "id": "cash_be_eur",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": { "automation": "none" },
+    "fields": [],
+    "detailRows": [],
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "BE", "currency": "EUR" }
+  },
+  {
     "id": "cash_as_usd",
     "version": 2,
     "display": {
@@ -117,6 +134,23 @@
     "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
     "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
     "network": { "id": "cash", "label": "Cash", "country": "AS", "currency": "USD" }
+  },
+  {
+    "id": "cash_at_eur",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": { "automation": "none" },
+    "fields": [],
+    "detailRows": [],
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "AT", "currency": "EUR" }
   },
   {
     "id": "cash_bf_xof",
@@ -391,6 +425,23 @@
     "network": { "id": "cash", "label": "Cash", "country": "CG", "currency": "XAF" }
   },
   {
+    "id": "cash_ch_chf",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": { "automation": "none" },
+    "fields": [],
+    "detailRows": [],
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "CH", "currency": "CHF" }
+  },
+  {
     "id": "cash_ci_xof",
     "version": 2,
     "display": {
@@ -542,6 +593,23 @@
     "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
     "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
     "network": { "id": "cash", "label": "Cash", "country": "CW", "currency": "ANG" }
+  },
+  {
+    "id": "cash_de_eur",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": { "automation": "none" },
+    "fields": [],
+    "detailRows": [],
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "DE", "currency": "EUR" }
   },
   {
     "id": "cash_dj_djf",
@@ -783,6 +851,23 @@
     "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
     "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
     "network": { "id": "cash", "label": "Cash", "country": "FM", "currency": "USD" }
+  },
+  {
+    "id": "cash_fr_eur",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": { "automation": "none" },
+    "fields": [],
+    "detailRows": [],
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "FR", "currency": "EUR" }
   },
   {
     "id": "cash_fk_fkp",
@@ -1520,6 +1605,23 @@
     "network": { "id": "cash", "label": "Cash", "country": "LC", "currency": "XCD" }
   },
   {
+    "id": "cash_li_chf",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": { "automation": "none" },
+    "fields": [],
+    "detailRows": [],
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "LI", "currency": "CHF" }
+  },
+  {
     "id": "cash_ky_kyd",
     "version": 2,
     "display": {
@@ -1605,6 +1707,23 @@
     "network": { "id": "cash", "label": "Cash", "country": "LS", "currency": "ZAR" }
   },
   {
+    "id": "cash_lu_eur",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": { "automation": "none" },
+    "fields": [],
+    "detailRows": [],
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "LU", "currency": "EUR" }
+  },
+  {
     "id": "cash_ly_lyd",
     "version": 2,
     "display": {
@@ -1637,6 +1756,23 @@
     "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
     "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
     "network": { "id": "cash", "label": "Cash", "country": "MA", "currency": "MAD" }
+  },
+  {
+    "id": "cash_mc_eur",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": { "automation": "none" },
+    "fields": [],
+    "detailRows": [],
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "MC", "currency": "EUR" }
   },
   {
     "id": "cash_mf_eur",
@@ -2144,6 +2280,23 @@
     "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
     "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
     "network": { "id": "cash", "label": "Cash", "country": "NI", "currency": "NIO" }
+  },
+  {
+    "id": "cash_nl_eur",
+    "version": 2,
+    "display": {
+      "label": "Cash",
+      "shortLabel": "Cash",
+      "description": "In-person cash settlement. Cash has no structured payment fields and is not automatable.",
+      "icon": "cash",
+      "group": "cash"
+    },
+    "support": { "automation": "none" },
+    "fields": [],
+    "detailRows": [],
+    "instructions": { "payer": ["Exchange cash in person and keep local receipt evidence when required."] },
+    "evidence": [{ "key": "receiptNote", "label": "Receipt note", "type": "text", "required": false }],
+    "network": { "id": "cash", "label": "Cash", "country": "NL", "currency": "EUR" }
   },
   {
     "id": "cash_nz_nzd",
