@@ -1,5 +1,40 @@
 # Changelog
 
+## [0.5.0](https://github.com/minmoto/payment-channels/compare/payment-channels-v0.4.0...payment-channels-v0.5.0) (2026-09-24)
+
+
+### Features
+
+* **channels:** add cash channels for Central American markets ([6a46c5f](https://github.com/minmoto/payment-channels/commit/6a46c5f8aef5ed01b348786e2be21ffa9b10a6c3))
+* **channels:** add cash channels for Eastern Caribbean and Eurozone Caribbean markets ([93bdb51](https://github.com/minmoto/payment-channels/commit/93bdb5195ca7e1dc624eec0c2e7ad627d04878d4))
+* **channels:** add cash channels for Greater Antilles and Western Caribbean markets ([34559ee](https://github.com/minmoto/payment-channels/commit/34559eea2a76a2e28ebfe3f673a0bb400e793d40))
+* **channels:** add cash channels for Micronesia and Polynesia ([ca4ed12](https://github.com/minmoto/payment-channels/commit/ca4ed127fe46f874159c361f086f77c50593dbeb))
+* **channels:** add cash channels for Northern American markets ([#34](https://github.com/minmoto/payment-channels/issues/34)) ([512f5be](https://github.com/minmoto/payment-channels/commit/512f5be42d6401045eed846096319e4670f0ee08))
+* **channels:** add cash channels for remaining African markets ([1e060b9](https://github.com/minmoto/payment-channels/commit/1e060b91241d007be03aeb1dba472ef1eed842bc))
+* **channels:** add cash channels for South American markets ([4b23b4b](https://github.com/minmoto/payment-channels/commit/4b23b4b0c5422bef1135e38c46e3fb32c9eb22c8))
+* **channels:** add CMA parallel cash channels for Lesotho, Namibia, and Eswatini ([#33](https://github.com/minmoto/payment-channels/issues/33)) ([7c72f06](https://github.com/minmoto/payment-channels/commit/7c72f066a7afd92119297e2143b31fbe80c9d39e))
+* **channels:** add Ethiopian Telebirr phone channel schema ([64f9eda](https://github.com/minmoto/payment-channels/commit/64f9eda48ce92d981046f152220e39b92a29cba2))
+* **channels:** add Oceania cash channels for Australia, New Zealand, and Melanesia ([0215b7d](https://github.com/minmoto/payment-channels/commit/0215b7df4cec61ebce6ec1a203d8170d93e5cb43))
+* **channels:** add secondary USD cash channels for LR, SO, and ZW ([c6c8c3f](https://github.com/minmoto/payment-channels/commit/c6c8c3fbb9ae06a61134af8f0458b27686a27e15))
+* **channels:** add test to verify Western Sahara cash_eh_mad is present in builtinPaymentChannels ([74e1d42](https://github.com/minmoto/payment-channels/commit/74e1d4203ead1fd5a3625593efcb920e9bb6264d))
+* **channels:** add Western Sahara Payment channel ([fe23ba1](https://github.com/minmoto/payment-channels/commit/fe23ba11ad20a418dd10cc648a07b824a02eef78))
+* **channels:** import and export Western Sahara built-in payment channel constant ([900247c](https://github.com/minmoto/payment-channels/commit/900247c3881ad20074eefa6db0b41152ecb6810f))
+* **core:** add Ethiopian phone normalization support ([3be83f0](https://github.com/minmoto/payment-channels/commit/3be83f0d740ff2c18abf199c5e34728f3210ec53))
+* **docs:** update generated registry documentation for Western Sahara cash channel ([61ca42d](https://github.com/minmoto/payment-channels/commit/61ca42da9b0d18c1bcce5c32b6d9baf5df43c2ac))
+* **test:** verify Western Sahara cash channel is exposed for North African markets ([dc44b49](https://github.com/minmoto/payment-channels/commit/dc44b49980c9a424ddab97bddbe080ee6fdc2263))
+
+
+### Documentation
+
+* add Ethiopia to built-in seed registry inventory ([b8fecec](https://github.com/minmoto/payment-channels/commit/b8fecec8bd3bdd6062e02c3fdfa400221336e73b))
+* document multi-currency convention and refresh registry ([493eed2](https://github.com/minmoto/payment-channels/commit/493eed2ca0c674d058b7e21b8c835f5aad69d453))
+* refresh registry documentation for Central American cash channels ([3459d55](https://github.com/minmoto/payment-channels/commit/3459d55cbc64c32b56dfed12aead6b4d85f88ab0))
+* refresh registry documentation for Eastern Caribbean and Eurozone Caribbean cash channels ([ecc3df4](https://github.com/minmoto/payment-channels/commit/ecc3df4cb2984ca7d988af7ab8f8a24c818855c3))
+* refresh registry documentation for Greater Antilles and Western Caribbean cash channels ([bf2c612](https://github.com/minmoto/payment-channels/commit/bf2c61286d3764520527d2f90f065bb36595d468))
+* refresh registry documentation for Micronesia and Polynesia cash channels ([88c26d9](https://github.com/minmoto/payment-channels/commit/88c26d9e9661bebf93813e06ba20ae4091bf1793))
+* refresh registry documentation for Oceania cash channels ([1bd7f41](https://github.com/minmoto/payment-channels/commit/1bd7f41bce04084baf4fa6532bd4cd1d53baf051))
+* refresh registry documentation for South American cash channels ([1e254fb](https://github.com/minmoto/payment-channels/commit/1e254fbab4d3a13ff71e2be03de9d06bbf29180d))
+
 ## [0.4.0](https://github.com/minmoto/payment-channels/compare/payment-channels-v0.3.0...payment-channels-v0.4.0) (2026-09-23)
 
 
