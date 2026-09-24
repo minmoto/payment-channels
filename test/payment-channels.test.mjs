@@ -480,6 +480,7 @@ test("every represented country has a built-in cash channel", () => {
     [
       "cash_ao_aoa",
       "cash_au_aud",
+      "cash_as_usd",
       "cash_bf_xof",
       "cash_bi_bif",
       "cash_bj_xof",
@@ -490,6 +491,7 @@ test("every represented country has a built-in cash channel", () => {
       "cash_cf_xaf",
       "cash_cg_xaf",
       "cash_ci_xof",
+      "cash_ck_nzd",
       "cash_cm_xaf",
       "cash_cv_cve",
       "cash_dj_djf",
@@ -499,6 +501,7 @@ test("every represented country has a built-in cash channel", () => {
       "cash_er_ern",
       "cash_et_etb",
       "cash_fj_fjd",
+      "cash_fm_usd",
       "cash_ga_xaf",
       "cash_gb_gbp",
       "cash_gh_ghs",
@@ -506,9 +509,11 @@ test("every represented country has a built-in cash channel", () => {
       "cash_gm_gmd",
       "cash_gn_gnf",
       "cash_gq_xaf",
+      "cash_gu_usd",
       "cash_gw_xof",
       "cash_in_inr",
       "cash_ke_kes",
+      "cash_ki_aud",
       "cash_km_kmf",
       "cash_lr_lrd",
       "cash_lr_usd",
@@ -517,7 +522,9 @@ test("every represented country has a built-in cash channel", () => {
       "cash_ly_lyd",
       "cash_ma_mad",
       "cash_mg_mga",
+      "cash_mh_usd",
       "cash_ml_xof",
+      "cash_mp_usd",
       "cash_mr_mru",
       "cash_mu_mur",
       "cash_mw_mwk",
@@ -532,6 +539,11 @@ test("every represented country has a built-in cash channel", () => {
       "cash_pk_pkr",
       "cash_pm_eur",
       "cash_pg_pgk",
+      "cash_nr_aud",
+      "cash_nu_nzd",
+      "cash_pf_xpf",
+      "cash_pn_nzd",
+      "cash_pw_usd",
       "cash_re_eur",
       "cash_rw_rwf",
       "cash_sb_sbd",
@@ -548,11 +560,16 @@ test("every represented country has a built-in cash channel", () => {
       "cash_sz_zar",
       "cash_td_xaf",
       "cash_tg_xof",
+      "cash_tk_nzd",
       "cash_tn_tnd",
+      "cash_to_top",
+      "cash_tv_aud",
       "cash_tz_tzs",
       "cash_ug_ugx",
       "cash_vu_vuv",
       "cash_us_usd",
+      "cash_wf_xpf",
+      "cash_ws_wst",
       "cash_yt_eur",
       "cash_za_zar",
       "cash_zm_zmw",
@@ -810,6 +827,41 @@ test("registry exposes built-in cash channels for Northern American markets", ()
     { country: "GL", currency: "DKK", id: "cash_gl_dkk" },
     { country: "PM", currency: "EUR", id: "cash_pm_eur" },
     { country: "US", currency: "USD", id: "cash_us_usd" },
+  ];
+
+  for (const { country, currency, id } of markets) {
+    const channels = listPaymentChannelSchemas(registry, {
+      country,
+      currency,
+      group: PaymentChannelGroup.Cash,
+    });
+    assert.deepEqual(
+      channels.map((channel) => channel.id),
+      [id],
+    );
+  }
+});
+
+test("registry exposes built-in cash channels for Micronesia and Polynesia markets", () => {
+  const registry = createPaymentChannelRegistry();
+  const markets = [
+    { country: "AS", currency: "USD", id: "cash_as_usd" },
+    { country: "CK", currency: "NZD", id: "cash_ck_nzd" },
+    { country: "FM", currency: "USD", id: "cash_fm_usd" },
+    { country: "GU", currency: "USD", id: "cash_gu_usd" },
+    { country: "KI", currency: "AUD", id: "cash_ki_aud" },
+    { country: "MH", currency: "USD", id: "cash_mh_usd" },
+    { country: "MP", currency: "USD", id: "cash_mp_usd" },
+    { country: "NR", currency: "AUD", id: "cash_nr_aud" },
+    { country: "NU", currency: "NZD", id: "cash_nu_nzd" },
+    { country: "PF", currency: "XPF", id: "cash_pf_xpf" },
+    { country: "PN", currency: "NZD", id: "cash_pn_nzd" },
+    { country: "PW", currency: "USD", id: "cash_pw_usd" },
+    { country: "TK", currency: "NZD", id: "cash_tk_nzd" },
+    { country: "TO", currency: "TOP", id: "cash_to_top" },
+    { country: "TV", currency: "AUD", id: "cash_tv_aud" },
+    { country: "WF", currency: "XPF", id: "cash_wf_xpf" },
+    { country: "WS", currency: "WST", id: "cash_ws_wst" },
   ];
 
   for (const { country, currency, id } of markets) {
