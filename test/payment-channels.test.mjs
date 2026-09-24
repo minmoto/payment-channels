@@ -485,6 +485,10 @@ test("every represented country has a built-in cash channel", () => {
       "cash_bi_bif",
       "cash_bj_xof",
       "cash_bm_bmd",
+
+      "cash_ar_ars",
+      "cash_bo_bob",
+      "cash_br_brl",
       "cash_bw_bwp",
       "cash_ca_cad",
       "cash_cd_cdf",
@@ -492,18 +496,25 @@ test("every represented country has a built-in cash channel", () => {
       "cash_cg_xaf",
       "cash_ci_xof",
       "cash_ck_nzd",
+
+      "cash_cl_clp",
       "cash_cm_xaf",
+      "cash_co_cop",
       "cash_cv_cve",
       "cash_dj_djf",
       "cash_dz_dzd",
+      "cash_ec_usd",
       "cash_eg_egp",
       "cash_eh_mad",
       "cash_er_ern",
       "cash_et_etb",
       "cash_fj_fjd",
       "cash_fm_usd",
+
+      "cash_fk_fkp",
       "cash_ga_xaf",
       "cash_gb_gbp",
+      "cash_gf_eur",
       "cash_gh_ghs",
       "cash_gl_dkk",
       "cash_gm_gmd",
@@ -511,6 +522,7 @@ test("every represented country has a built-in cash channel", () => {
       "cash_gq_xaf",
       "cash_gu_usd",
       "cash_gw_xof",
+      "cash_gy_gyd",
       "cash_in_inr",
       "cash_ke_kes",
       "cash_ki_aud",
@@ -544,6 +556,9 @@ test("every represented country has a built-in cash channel", () => {
       "cash_pf_xpf",
       "cash_pn_nzd",
       "cash_pw_usd",
+
+      "cash_pe_pen",
+      "cash_py_pyg",
       "cash_re_eur",
       "cash_rw_rwf",
       "cash_sb_sbd",
@@ -554,6 +569,8 @@ test("every represented country has a built-in cash channel", () => {
       "cash_sn_xof",
       "cash_so_sos",
       "cash_so_usd",
+
+      "cash_sr_srd",
       "cash_ss_ssp",
       "cash_st_stn",
       "cash_sz_szl",
@@ -570,6 +587,9 @@ test("every represented country has a built-in cash channel", () => {
       "cash_us_usd",
       "cash_wf_xpf",
       "cash_ws_wst",
+
+      "cash_uy_uyu",
+      "cash_ve_ves",
       "cash_yt_eur",
       "cash_za_zar",
       "cash_zm_zmw",
@@ -862,6 +882,38 @@ test("registry exposes built-in cash channels for Micronesia and Polynesia marke
     { country: "TV", currency: "AUD", id: "cash_tv_aud" },
     { country: "WF", currency: "XPF", id: "cash_wf_xpf" },
     { country: "WS", currency: "WST", id: "cash_ws_wst" },
+  ];
+
+  for (const { country, currency, id } of markets) {
+    const channels = listPaymentChannelSchemas(registry, {
+      country,
+      currency,
+      group: PaymentChannelGroup.Cash,
+    });
+    assert.deepEqual(
+      channels.map((channel) => channel.id),
+      [id],
+    );
+  }
+});
+
+test("registry exposes built-in cash channels for South American markets", () => {
+  const registry = createPaymentChannelRegistry();
+  const markets = [
+    { country: "AR", currency: "ARS", id: "cash_ar_ars" },
+    { country: "BO", currency: "BOB", id: "cash_bo_bob" },
+    { country: "BR", currency: "BRL", id: "cash_br_brl" },
+    { country: "CL", currency: "CLP", id: "cash_cl_clp" },
+    { country: "CO", currency: "COP", id: "cash_co_cop" },
+    { country: "EC", currency: "USD", id: "cash_ec_usd" },
+    { country: "FK", currency: "FKP", id: "cash_fk_fkp" },
+    { country: "GF", currency: "EUR", id: "cash_gf_eur" },
+    { country: "GY", currency: "GYD", id: "cash_gy_gyd" },
+    { country: "PE", currency: "PEN", id: "cash_pe_pen" },
+    { country: "PY", currency: "PYG", id: "cash_py_pyg" },
+    { country: "SR", currency: "SRD", id: "cash_sr_srd" },
+    { country: "UY", currency: "UYU", id: "cash_uy_uyu" },
+    { country: "VE", currency: "VES", id: "cash_ve_ves" },
   ];
 
   for (const { country, currency, id } of markets) {
