@@ -44,7 +44,6 @@ export {
   cashArArsPaymentChannel,
   cashAsUsdPaymentChannel,
   cashAuAudPaymentChannel,
-
   cashAwAwgPaymentChannel,
   cashBbBbdPaymentChannel,
   cashBfXofPaymentChannel,
@@ -71,7 +70,6 @@ export {
   cashCwAngPaymentChannel,
   cashDjDjfPaymentChannel,
   cashDmXcdPaymentChannel,
-
   cashDoDopPaymentChannel,
   cashDzDzdPaymentChannel,
   cashEcUsdPaymentChannel,
@@ -103,7 +101,6 @@ export {
   cashKmKmfPaymentChannel,
   cashKnXcdPaymentChannel,
   cashLcXcdPaymentChannel,
-
   cashKyKydPaymentChannel,
   cashLrLrdPaymentChannel,
   cashLrUsdPaymentChannel,
@@ -137,7 +134,6 @@ export {
   cashPkPkrPaymentChannel,
   cashPmEurPaymentChannel,
   cashPnNzdPaymentChannel,
-
   cashPrUsdPaymentChannel,
   cashPwUsdPaymentChannel,
   cashPyPygPaymentChannel,
@@ -171,7 +167,6 @@ export {
   cashUyUyuPaymentChannel,
   cashVcXcdPaymentChannel,
   cashVeVesPaymentChannel,
-
   cashVgUsdPaymentChannel,
   cashViUsdPaymentChannel,
   cashVuVuvPaymentChannel,
