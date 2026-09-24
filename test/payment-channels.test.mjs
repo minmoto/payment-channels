@@ -478,14 +478,16 @@ test("every represented country has a built-in cash channel", () => {
       .filter((channel) => channel.display.group === PaymentChannelGroup.Cash)
       .map((channel) => channel.id),
     [
+      "cash_ag_xcd",
+      "cash_ai_xcd",
       "cash_ao_aoa",
       "cash_au_aud",
       "cash_as_usd",
       "cash_bf_xof",
       "cash_bi_bif",
       "cash_bj_xof",
+      "cash_bl_eur",
       "cash_bm_bmd",
-
       "cash_ar_ars",
       "cash_bo_bob",
       "cash_br_brl",
@@ -496,12 +498,12 @@ test("every represented country has a built-in cash channel", () => {
       "cash_cg_xaf",
       "cash_ci_xof",
       "cash_ck_nzd",
-
       "cash_cl_clp",
       "cash_cm_xaf",
       "cash_co_cop",
       "cash_cv_cve",
       "cash_dj_djf",
+      "cash_dm_xcd",
       "cash_dz_dzd",
       "cash_ec_usd",
       "cash_eg_egp",
@@ -510,15 +512,16 @@ test("every represented country has a built-in cash channel", () => {
       "cash_et_etb",
       "cash_fj_fjd",
       "cash_fm_usd",
-
       "cash_fk_fkp",
       "cash_ga_xaf",
       "cash_gb_gbp",
+      "cash_gd_xcd",
       "cash_gf_eur",
       "cash_gh_ghs",
       "cash_gl_dkk",
       "cash_gm_gmd",
       "cash_gn_gnf",
+      "cash_gp_eur",
       "cash_gq_xaf",
       "cash_gu_usd",
       "cash_gw_xof",
@@ -527,17 +530,22 @@ test("every represented country has a built-in cash channel", () => {
       "cash_ke_kes",
       "cash_ki_aud",
       "cash_km_kmf",
+      "cash_kn_xcd",
+      "cash_lc_xcd",
       "cash_lr_lrd",
       "cash_lr_usd",
       "cash_ls_lsl",
       "cash_ls_zar",
       "cash_ly_lyd",
       "cash_ma_mad",
+      "cash_mf_eur",
       "cash_mg_mga",
       "cash_mh_usd",
       "cash_ml_xof",
       "cash_mp_usd",
+      "cash_mq_eur",
       "cash_mr_mru",
+      "cash_ms_xcd",
       "cash_mu_mur",
       "cash_mw_mwk",
       "cash_mz_mzn",
@@ -556,7 +564,6 @@ test("every represented country has a built-in cash channel", () => {
       "cash_pf_xpf",
       "cash_pn_nzd",
       "cash_pw_usd",
-
       "cash_pe_pen",
       "cash_py_pyg",
       "cash_re_eur",
@@ -569,7 +576,6 @@ test("every represented country has a built-in cash channel", () => {
       "cash_sn_xof",
       "cash_so_sos",
       "cash_so_usd",
-
       "cash_sr_srd",
       "cash_ss_ssp",
       "cash_st_stn",
@@ -587,8 +593,8 @@ test("every represented country has a built-in cash channel", () => {
       "cash_us_usd",
       "cash_wf_xpf",
       "cash_ws_wst",
-
       "cash_uy_uyu",
+      "cash_vc_xcd",
       "cash_ve_ves",
       "cash_yt_eur",
       "cash_za_zar",
@@ -914,6 +920,36 @@ test("registry exposes built-in cash channels for South American markets", () =>
     { country: "SR", currency: "SRD", id: "cash_sr_srd" },
     { country: "UY", currency: "UYU", id: "cash_uy_uyu" },
     { country: "VE", currency: "VES", id: "cash_ve_ves" },
+  ];
+
+  for (const { country, currency, id } of markets) {
+    const channels = listPaymentChannelSchemas(registry, {
+      country,
+      currency,
+      group: PaymentChannelGroup.Cash,
+    });
+    assert.deepEqual(
+      channels.map((channel) => channel.id),
+      [id],
+    );
+  }
+});
+
+test("registry exposes built-in cash channels for Eastern Caribbean and Eurozone Caribbean markets", () => {
+  const registry = createPaymentChannelRegistry();
+  const markets = [
+    { country: "AG", currency: "XCD", id: "cash_ag_xcd" },
+    { country: "AI", currency: "XCD", id: "cash_ai_xcd" },
+    { country: "BL", currency: "EUR", id: "cash_bl_eur" },
+    { country: "DM", currency: "XCD", id: "cash_dm_xcd" },
+    { country: "GD", currency: "XCD", id: "cash_gd_xcd" },
+    { country: "GP", currency: "EUR", id: "cash_gp_eur" },
+    { country: "KN", currency: "XCD", id: "cash_kn_xcd" },
+    { country: "LC", currency: "XCD", id: "cash_lc_xcd" },
+    { country: "MF", currency: "EUR", id: "cash_mf_eur" },
+    { country: "MQ", currency: "EUR", id: "cash_mq_eur" },
+    { country: "MS", currency: "XCD", id: "cash_ms_xcd" },
+    { country: "VC", currency: "XCD", id: "cash_vc_xcd" },
   ];
 
   for (const { country, currency, id } of markets) {
