@@ -496,6 +496,7 @@ test("every represented country has a built-in cash channel", () => {
       "cash_br_brl",
       "cash_bs_bsd",
       "cash_bw_bwp",
+      "cash_bz_bzd",
       "cash_ca_cad",
       "cash_cd_cdf",
       "cash_cf_xaf",
@@ -505,6 +506,7 @@ test("every represented country has a built-in cash channel", () => {
       "cash_cl_clp",
       "cash_cm_xaf",
       "cash_co_cop",
+      "cash_cr_crc",
       "cash_cu_cup",
       "cash_cv_cve",
       "cash_cw_ang",
@@ -530,9 +532,11 @@ test("every represented country has a built-in cash channel", () => {
       "cash_gn_gnf",
       "cash_gp_eur",
       "cash_gq_xaf",
+      "cash_gt_gtq",
       "cash_gu_usd",
       "cash_gw_xof",
       "cash_gy_gyd",
+      "cash_hn_hnl",
       "cash_ht_htg",
       "cash_in_inr",
       "cash_jm_jmd",
@@ -558,6 +562,7 @@ test("every represented country has a built-in cash channel", () => {
       "cash_ms_xcd",
       "cash_mu_mur",
       "cash_mw_mwk",
+      "cash_mx_mxn",
       "cash_mz_mzn",
       "cash_na_nad",
       "cash_na_zar",
@@ -565,7 +570,10 @@ test("every represented country has a built-in cash channel", () => {
       "cash_nf_aud",
       "cash_ne_xof",
       "cash_ng_ngn",
+      "cash_ni_nio",
       "cash_nz_nzd",
+      "cash_pa_pab",
+      "cash_pa_usd",
       "cash_pk_pkr",
       "cash_pm_eur",
       "cash_pg_pgk",
@@ -590,6 +598,7 @@ test("every represented country has a built-in cash channel", () => {
       "cash_sr_srd",
       "cash_ss_ssp",
       "cash_st_stn",
+      "cash_sv_usd",
       "cash_sx_ang",
       "cash_sz_szl",
       "cash_sz_zar",
@@ -1009,6 +1018,40 @@ test("registry exposes built-in cash channels for Greater Antilles and Western C
       [id],
     );
   }
+});
+
+test("registry exposes built-in cash channels for Central American markets", () => {
+  const registry = createPaymentChannelRegistry();
+  const markets = [
+    { country: "BZ", currency: "BZD", id: "cash_bz_bzd" },
+    { country: "CR", currency: "CRC", id: "cash_cr_crc" },
+    { country: "GT", currency: "GTQ", id: "cash_gt_gtq" },
+    { country: "HN", currency: "HNL", id: "cash_hn_hnl" },
+    { country: "MX", currency: "MXN", id: "cash_mx_mxn" },
+    { country: "NI", currency: "NIO", id: "cash_ni_nio" },
+    { country: "SV", currency: "USD", id: "cash_sv_usd" },
+  ];
+
+  for (const { country, currency, id } of markets) {
+    const channels = listPaymentChannelSchemas(registry, {
+      country,
+      currency,
+      group: PaymentChannelGroup.Cash,
+    });
+    assert.deepEqual(
+      channels.map((channel) => channel.id),
+      [id],
+    );
+  }
+
+  const panamaChannels = listPaymentChannelSchemas(registry, {
+    country: "PA",
+    group: PaymentChannelGroup.Cash,
+  });
+  assert.deepEqual(
+    panamaChannels.map((channel) => channel.id),
+    ["cash_pa_pab", "cash_pa_usd"],
+  );
 });
 
 test("channel source files are grouped by country and match stable channel IDs", async () => {
