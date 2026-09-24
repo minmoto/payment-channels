@@ -479,6 +479,7 @@ test("every represented country has a built-in cash channel", () => {
       .map((channel) => channel.id),
     [
       "cash_ao_aoa",
+      "cash_au_aud",
       "cash_bf_xof",
       "cash_bi_bif",
       "cash_bj_xof",
@@ -497,6 +498,7 @@ test("every represented country has a built-in cash channel", () => {
       "cash_eh_mad",
       "cash_er_ern",
       "cash_et_etb",
+      "cash_fj_fjd",
       "cash_ga_xaf",
       "cash_gb_gbp",
       "cash_gh_ghs",
@@ -521,13 +523,18 @@ test("every represented country has a built-in cash channel", () => {
       "cash_mw_mwk",
       "cash_mz_mzn",
       "cash_na_nad",
+      "cash_nc_xpf",
+      "cash_nf_aud",
       "cash_na_zar",
       "cash_ne_xof",
       "cash_ng_ngn",
+      "cash_nz_nzd",
       "cash_pk_pkr",
+      "cash_pg_pgk",
       "cash_pm_eur",
       "cash_re_eur",
       "cash_rw_rwf",
+      "cash_sb_sbd",
       "cash_sc_scr",
       "cash_sd_sdg",
       "cash_sh_shp",
@@ -544,6 +551,7 @@ test("every represented country has a built-in cash channel", () => {
       "cash_tn_tnd",
       "cash_tz_tzs",
       "cash_ug_ugx",
+      "cash_vu_vuv",
       "cash_us_usd",
       "cash_yt_eur",
       "cash_za_zar",
@@ -709,6 +717,32 @@ test("registry exposes built-in cash channels for West African markets", () => {
     { country: "SL", currency: "SLE", id: "cash_sl_sle" },
     { country: "SN", currency: "XOF", id: "cash_sn_xof" },
     { country: "TG", currency: "XOF", id: "cash_tg_xof" },
+  ];
+
+  for (const { country, currency, id } of markets) {
+    const channels = listPaymentChannelSchemas(registry, {
+      country,
+      currency,
+      group: PaymentChannelGroup.Cash,
+    });
+    assert.deepEqual(
+      channels.map((channel) => channel.id),
+      [id],
+    );
+  }
+});
+
+test("registry exposes built-in cash channels for Oceania markets", () => {
+  const registry = createPaymentChannelRegistry();
+  const markets = [
+    { country: "AU", currency: "AUD", id: "cash_au_aud" },
+    { country: "FJ", currency: "FJD", id: "cash_fj_fjd" },
+    { country: "NC", currency: "XPF", id: "cash_nc_xpf" },
+    { country: "NF", currency: "AUD", id: "cash_nf_aud" },
+    { country: "NZ", currency: "NZD", id: "cash_nz_nzd" },
+    { country: "PG", currency: "PGK", id: "cash_pg_pgk" },
+    { country: "SB", currency: "SBD", id: "cash_sb_sbd" },
+    { country: "VU", currency: "VUV", id: "cash_vu_vuv" },
   ];
 
   for (const { country, currency, id } of markets) {
