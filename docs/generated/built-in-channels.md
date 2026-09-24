@@ -6,12 +6,15 @@ The runtime registry is authoritative. This inventory is provided for human insp
 
 | ID                           | Label                    | Country | Currency | Group          | Automation | Version |
 | ---------------------------- | ------------------------ | ------- | -------- | -------------- | ---------- | ------: |
+| `cash_ag_xcd`                | Cash                     | `AG`    | `XCD`    | `cash`         | `none`     |       2 |
+| `cash_ai_xcd`                | Cash                     | `AI`    | `XCD`    | `cash`         | `none`     |       2 |
 | `cash_ao_aoa`                | Cash                     | `AO`    | `AOA`    | `cash`         | `none`     |       2 |
 | `cash_au_aud`                | Cash                     | `AU`    | `AUD`    | `cash`         | `none`     |       2 |
 | `cash_as_usd`                | Cash                     | `AS`    | `USD`    | `cash`         | `none`     |       2 |
 | `cash_bf_xof`                | Cash                     | `BF`    | `XOF`    | `cash`         | `none`     |       2 |
 | `cash_bi_bif`                | Cash                     | `BI`    | `BIF`    | `cash`         | `none`     |       2 |
 | `cash_bj_xof`                | Cash                     | `BJ`    | `XOF`    | `cash`         | `none`     |       2 |
+| `cash_bl_eur`                | Cash                     | `BL`    | `EUR`    | `cash`         | `none`     |       2 |
 | `cash_bm_bmd`                | Cash                     | `BM`    | `BMD`    | `cash`         | `none`     |       2 |
 | `cash_ar_ars`                | Cash                     | `AR`    | `ARS`    | `cash`         | `none`     |       2 |
 | `cash_bo_bob`                | Cash                     | `BO`    | `BOB`    | `cash`         | `none`     |       2 |
@@ -28,6 +31,7 @@ The runtime registry is authoritative. This inventory is provided for human insp
 | `cash_co_cop`                | Cash                     | `CO`    | `COP`    | `cash`         | `none`     |       2 |
 | `cash_cv_cve`                | Cash                     | `CV`    | `CVE`    | `cash`         | `none`     |       2 |
 | `cash_dj_djf`                | Cash                     | `DJ`    | `DJF`    | `cash`         | `none`     |       2 |
+| `cash_dm_xcd`                | Cash                     | `DM`    | `XCD`    | `cash`         | `none`     |       2 |
 | `cash_dz_dzd`                | Cash                     | `DZ`    | `DZD`    | `cash`         | `none`     |       2 |
 | `cash_ec_usd`                | Cash                     | `EC`    | `USD`    | `cash`         | `none`     |       2 |
 | `cash_eg_egp`                | Cash                     | `EG`    | `EGP`    | `cash`         | `none`     |       2 |
@@ -40,11 +44,13 @@ The runtime registry is authoritative. This inventory is provided for human insp
 | `cash_fk_fkp`                | Cash                     | `FK`    | `FKP`    | `cash`         | `none`     |       2 |
 | `cash_ga_xaf`                | Cash                     | `GA`    | `XAF`    | `cash`         | `none`     |       2 |
 | `cash_gb_gbp`                | Cash                     | `GB`    | `GBP`    | `cash`         | `none`     |       2 |
+| `cash_gd_xcd`                | Cash                     | `GD`    | `XCD`    | `cash`         | `none`     |       2 |
 | `cash_gf_eur`                | Cash                     | `GF`    | `EUR`    | `cash`         | `none`     |       2 |
 | `cash_gh_ghs`                | Cash                     | `GH`    | `GHS`    | `cash`         | `none`     |       2 |
 | `cash_gl_dkk`                | Cash                     | `GL`    | `DKK`    | `cash`         | `none`     |       2 |
 | `cash_gm_gmd`                | Cash                     | `GM`    | `GMD`    | `cash`         | `none`     |       2 |
 | `cash_gn_gnf`                | Cash                     | `GN`    | `GNF`    | `cash`         | `none`     |       2 |
+| `cash_gp_eur`                | Cash                     | `GP`    | `EUR`    | `cash`         | `none`     |       2 |
 | `cash_gq_xaf`                | Cash                     | `GQ`    | `XAF`    | `cash`         | `none`     |       2 |
 | `cash_gu_usd`                | Cash                     | `GU`    | `USD`    | `cash`         | `none`     |       2 |
 | `cash_gw_xof`                | Cash                     | `GW`    | `XOF`    | `cash`         | `none`     |       2 |
@@ -59,17 +65,22 @@ The runtime registry is authoritative. This inventory is provided for human insp
 | `cash_ke_kes`                | Cash                     | `KE`    | `KES`    | `cash`         | `none`     |       2 |
 | `cash_ki_aud`                | Cash                     | `KI`    | `AUD`    | `cash`         | `none`     |       2 |
 | `cash_km_kmf`                | Cash                     | `KM`    | `KMF`    | `cash`         | `none`     |       2 |
+| `cash_kn_xcd`                | Cash                     | `KN`    | `XCD`    | `cash`         | `none`     |       2 |
+| `cash_lc_xcd`                | Cash                     | `LC`    | `XCD`    | `cash`         | `none`     |       2 |
 | `cash_lr_lrd`                | Cash                     | `LR`    | `LRD`    | `cash`         | `none`     |       2 |
 | `cash_lr_usd`                | Cash                     | `LR`    | `USD`    | `cash`         | `none`     |       2 |
 | `cash_ls_lsl`                | Cash                     | `LS`    | `LSL`    | `cash`         | `none`     |       2 |
 | `cash_ls_zar`                | Cash                     | `LS`    | `ZAR`    | `cash`         | `none`     |       2 |
 | `cash_ly_lyd`                | Cash                     | `LY`    | `LYD`    | `cash`         | `none`     |       2 |
 | `cash_ma_mad`                | Cash                     | `MA`    | `MAD`    | `cash`         | `none`     |       2 |
+| `cash_mf_eur`                | Cash                     | `MF`    | `EUR`    | `cash`         | `none`     |       2 |
 | `cash_mg_mga`                | Cash                     | `MG`    | `MGA`    | `cash`         | `none`     |       2 |
 | `cash_mh_usd`                | Cash                     | `MH`    | `USD`    | `cash`         | `none`     |       2 |
 | `cash_ml_xof`                | Cash                     | `ML`    | `XOF`    | `cash`         | `none`     |       2 |
 | `cash_mp_usd`                | Cash                     | `MP`    | `USD`    | `cash`         | `none`     |       2 |
+| `cash_mq_eur`                | Cash                     | `MQ`    | `EUR`    | `cash`         | `none`     |       2 |
 | `cash_mr_mru`                | Cash                     | `MR`    | `MRU`    | `cash`         | `none`     |       2 |
+| `cash_ms_xcd`                | Cash                     | `MS`    | `XCD`    | `cash`         | `none`     |       2 |
 | `cash_mu_mur`                | Cash                     | `MU`    | `MUR`    | `cash`         | `none`     |       2 |
 | `airtel_money_mw_mwk`        | Airtel Money Malawi      | `MW`    | `MWK`    | `mobile_money` | `api`      |       2 |
 | `airtel_money_till_mw_mwk`   | Airtel Money till        | `MW`    | `MWK`    | `mobile_money` | `manual`   |       2 |
@@ -122,6 +133,7 @@ The runtime registry is authoritative. This inventory is provided for human insp
 | `cash_wf_xpf`                | Cash                     | `WF`    | `XPF`    | `cash`         | `none`     |       2 |
 | `cash_ws_wst`                | Cash                     | `WS`    | `WST`    | `cash`         | `none`     |       2 |
 | `cash_uy_uyu`                | Cash                     | `UY`    | `UYU`    | `cash`         | `none`     |       2 |
+| `cash_vc_xcd`                | Cash                     | `VC`    | `XCD`    | `cash`         | `none`     |       2 |
 | `cash_ve_ves`                | Cash                     | `VE`    | `VES`    | `cash`         | `none`     |       2 |
 | `cash_yt_eur`                | Cash                     | `YT`    | `EUR`    | `cash`         | `none`     |       2 |
 | `payshap_shapid_za_zar`      | PayShap ShapID           | `ZA`    | `ZAR`    | `bank`         | `manual`   |       1 |
