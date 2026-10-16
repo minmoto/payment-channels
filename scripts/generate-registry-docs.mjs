@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { format } from "prettier";
 
 import prettierConfig from "../.prettierrc.mjs";
+import { contributionCoverageOutput } from "./contribution-coverage.mjs";
 import { builtinPaymentChannels } from "../dist/esm/index.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -35,6 +36,7 @@ ${rows.join("\n")}
 const outputs = [
   [path.join(generatedDirectory, "registry.json"), json],
   [path.join(generatedDirectory, "built-in-channels.md"), markdown],
+  await contributionCoverageOutput(root, builtinPaymentChannels),
 ];
 
 if (check) {
@@ -58,5 +60,5 @@ if (check) {
 } else {
   await mkdir(generatedDirectory, { recursive: true });
   for (const [filename, contents] of outputs) await writeFile(filename, contents);
-  console.log("Generated docs/generated/registry.json and docs/generated/built-in-channels.md.");
+  console.log("Generated registry documentation and contributing/coverage.md.");
 }

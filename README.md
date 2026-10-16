@@ -6,6 +6,10 @@ Each entry connects a payment method to a known money network, country, and fiat
 
 This package is a declarative contract. It does not move money, call payment providers, verify ownership, confirm settlement, or replace compliance and fraud controls.
 
+## Contribute local payment knowledge
+
+[Describe a channel, review local accuracy, or implement a schema](./CONTRIBUTING.md). **No coding required for research or review.** Start with one market and a specific question; maintainers can help with the TypeScript. See the [coverage and evidence view](./contributing/coverage.md) and [contributor recognition](./CONTRIBUTORS.md).
+
 ## Install
 
 ```sh
@@ -195,7 +199,7 @@ The registry is open for contribution, but a contributor-provided schema is not 
 
 ## Contributing and releasing
 
-Contributor and LLM-agent instructions are in [`AGENTS.md`](./AGENTS.md). In a checkout of this repository:
+Contribution paths and evidence guidance are in [`CONTRIBUTING.md`](./CONTRIBUTING.md); contributor and LLM-agent engineering instructions are in [`AGENTS.md`](./AGENTS.md). In a checkout of this repository:
 
 ```sh
 npm install

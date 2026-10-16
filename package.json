@@ -33,7 +33,10 @@
     "examples",
     "CHANGELOG.md",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CONTRIBUTING.md",
+    "CONTRIBUTORS.md",
+    "contributing"
   ],
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -65,7 +68,8 @@
     "test": "npm run build && npm run docs:check && npm run examples:check && node --test",
     "verify:pack": "node scripts/verify-pack.mjs",
     "check": "npm run format:check && npm run typecheck && npm test",
-    "prepack": "npm run check"
+    "prepack": "npm run check",
+    "channel:scaffold:cash": "node scripts/scaffold-cash-channel.mjs"
   },
   "devDependencies": {
     "lint-staged": "^15.5.2",

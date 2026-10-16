@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "records": [
+    {
+      "channelId": "cash_ls_zar",
+      "country": "LS",
+      "currency": "ZAR",
+      "network": "cash",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://centralbank.org.ls/about-the-kingdom-of-lesotho/",
+          "supports": "Source proposed for Lesotho cash circulation and ZAR legal-tender status."
+        }
+      ],
+      "sourceCheckedOn": null,
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/issues/25",
+      "notes": "Implemented in PR #33; issue #25 still requires explicit local review."
+    },
+    {
+      "channelId": "cash_na_zar",
+      "country": "NA",
+      "currency": "ZAR",
+      "network": "cash",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://www.bon.com.na/Informations/FAQ/Exchange-Control.aspx",
+          "supports": "Bank of Namibia identifies NAD and ZAR as legal tender; ordinary cash use remains part of the scoped review."
+        }
+      ],
+      "sourceCheckedOn": null,
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/issues/25",
+      "notes": "Implemented in PR #33; record current source and local review separately."
+    },
+    {
+      "channelId": "cash_sz_zar",
+      "country": "SZ",
+      "currency": "ZAR",
+      "network": "cash",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://www.centralbank.org.sz/currency/",
+          "supports": "Source proposed for Eswatini cash circulation and its relationship to ZAR."
+        }
+      ],
+      "sourceCheckedOn": null,
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/issues/25",
+      "notes": "Implemented in PR #33; issue #25 still requires explicit local review."
+    },
+    {
+      "channelId": "cash_sh_gbp",
+      "country": "SH",
+      "currency": "GBP",
+      "network": "cash",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://tristandc.com/visitsadmin.php",
+          "supports": "Official tourism guidance identifies UK pound sterling as the local currency on Tristan da Cunha."
+        }
+      ],
+      "sourceCheckedOn": null,
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/issues/54",
+      "notes": "Candidate for review under SH; document island scope and shared ISO code before adding."
+    },
+    {
+      "channelId": "cash_cw_xcg",
+      "country": "CW",
+      "currency": "XCG",
+      "network": "cash",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://www.centralbank.cw/functions/banknotes-coins/caribbean-guilder/frequently-asked-questions",
+          "supports": "CBCS documents the Caribbean guilder and the currency transition."
+        }
+      ],
+      "sourceCheckedOn": null,
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/issues/53",
+      "notes": "Candidate addition; existing ANG ID needs a separate compatibility decision, not a silent rename."
+    },
+    {
+      "channelId": "cash_sx_xcg",
+      "country": "SX",
+      "currency": "XCG",
+      "network": "cash",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://www.centralbank.cw/functions/banknotes-coins/caribbean-guilder/frequently-asked-questions",
+          "supports": "CBCS documents the Caribbean guilder and the currency transition."
+        }
+      ],
+      "sourceCheckedOn": null,
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/issues/53",
+      "notes": "Candidate addition; existing ANG ID needs a separate compatibility decision, not a silent rename."
+    },
+    {
+      "channelId": "cash_ps_usd",
+      "country": "PS",
+      "currency": "USD",
+      "network": "cash",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://www.pma.ps/ar/الإعلام/بيانات-صحفية/أسئلة-واجابات-حول-أزمة-تكدس-الشيكل",
+          "supports": "PMA describes legally circulating currencies; ordinary physical use and limitations need scoped review."
+        }
+      ],
+      "sourceCheckedOn": null,
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/issues/55",
+      "notes": "Research candidate only. Do not infer ordinary physical circulation or uniform acceptance from legal status."
+    },
+    {
+      "channelId": "cash_ps_jod",
+      "country": "PS",
+      "currency": "JOD",
+      "network": "cash",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://www.pma.ps/ar/الإعلام/بيانات-صحفية/أسئلة-واجابات-حول-أزمة-تكدس-الشيكل",
+          "supports": "PMA describes legally circulating currencies; ordinary physical use and limitations need scoped review."
+        }
+      ],
+      "sourceCheckedOn": null,
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/issues/55",
+      "notes": "Research candidate only. Do not infer ordinary physical circulation or uniform acceptance from legal status."
+    },
+    {
+      "channelId": "cash_ps_eur",
+      "country": "PS",
+      "currency": "EUR",
+      "network": "cash",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://www.pma.ps/ar/الإعلام/بيانات-صحفية/أسئلة-واجابات-حول-أزمة-تكدس-الشيكل",
+          "supports": "PMA describes legally circulating currencies; ordinary physical use and limitations need scoped review."
+        }
+      ],
+      "sourceCheckedOn": null,
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/issues/55",
+      "notes": "Research candidate only. Do not infer ordinary physical circulation or uniform acceptance from legal status."
+    }
+  ]
+}

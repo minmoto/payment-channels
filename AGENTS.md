@@ -23,6 +23,8 @@ This file governs contributors modifying the repository. The public consumer con
 - `scripts/verify-pack.mjs` packs the tarball and installs it into throwaway ESM and CommonJS consumer projects to check both module systems resolve the published package.
 - `dist/` is generated output and must not be committed.
 
+Contributor research, market review, evidence records, and scaffolding are described in `CONTRIBUTING.md` and `contributing/review-guide.md`. Keep them separate from consumer documentation. `contributing/coverage.md` is generated and checked with the registry docs; do not hand-edit it or infer review status from implementation.
+
 ## Development commands
 
 Use Node.js 18 or newer.
