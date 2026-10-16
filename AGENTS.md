@@ -11,9 +11,12 @@ This file governs contributors modifying the repository. The public consumer con
 ## Repository map
 
 - `src/core.ts` contains schema types, registry helpers, validators, and render helpers.
-- `src/channels/` contains one built-in channel per market-qualified source file.
+- `src/channels/<country>/` contains one built-in channel per source file, named `<network>_<variant?>.ts` (for example `src/channels/ke/mpesa_phone.ts`). Add a `_<currency>` suffix when a country has the same channel in more than one currency (for example `src/channels/zw/cash_usd.ts` and `cash_zwg.ts`).
+- `src/channels/shared.ts` contains shared fields, evidence, and factories such as `createCashPaymentChannel`.
+- `src/channels/index.ts` exports every channel and lists it in `builtinPaymentChannels`.
 - `src/index.ts` is the public source module.
 - `test/payment-channels.test.mjs` is the runtime contract test suite. Tests import compiled ESM output from `dist/esm`.
+- `test/contribution-tooling.test.mjs` tests evidence validation and the generated coverage view.
 - `test/payment-channels.cjs.test.cjs` is a CommonJS smoke test. It `require()`s compiled output from `dist/cjs` and checks it matches the ESM result for a shared fixture.
 - `README.md` is the consumer-facing API and release documentation.
 - `CHANGELOG.md` is generated per release from Conventional Commit messages.
@@ -22,6 +25,8 @@ This file governs contributors modifying the repository. The public consumer con
 - `tsconfig.json` is also the ESM build config (`dist/esm`); `tsconfig.cjs.json` extends it to build `dist/cjs`. `scripts/finalize-build.mjs` writes `dist/cjs/package.json` so Node treats that output as CommonJS.
 - `scripts/verify-pack.mjs` packs the tarball and installs it into throwaway ESM and CommonJS consumer projects to check both module systems resolve the published package.
 - `dist/` is generated output and must not be committed.
+
+Contributor research, market review, and evidence records (`contributing/evidence.json`) are described in `CONTRIBUTING.md` and `contributing/review-guide.md`. Keep them separate from consumer documentation. `contributing/coverage.md` is generated and checked with the registry docs; do not hand-edit it or infer review status from implementation.
 
 ## Development commands
 
@@ -39,14 +44,15 @@ npm run verify:pack
 
 ## Adding or changing a channel
 
-1. Use `<network>_<variant?>_<country>_<currency>` for the stable lowercase channel ID and matching source filename, for example `mpesa_phone_ke_kes` in `mpesa_phone_ke_kes.ts`. Once published, changing an ID is a breaking change.
-2. Keep the network, country, and currency relationship explicit. Use ISO-style uppercase country and currency codes and a lowercase stable network ID.
-3. Define every user-entered value as a field with a label, type, required flag, normalization rules, and serializable validation rules.
-4. Add ordered detail rows for values that a consumer must display or copy after collection.
-5. Add payer/payee instructions and evidence fields when the channel needs operational or reconciliation guidance.
-6. Set `support.automation` to `api` only when a separate integration can actually perform the payout. A schema is not proof of provider capability.
-7. Add or update tests for filtering, normalization, validation failures, and rendered details.
-8. Update the README when the public API, built-in registry, supported runtime, or release process changes.
+1. Use `<network>_<variant?>_<country>_<currency>` for the stable lowercase channel ID, for example `mpesa_phone_ke_kes` in `src/channels/ke/mpesa_phone.ts`, exported as `mpesaPhoneKeKesPaymentChannel`. Once published, changing an ID or export name is a breaking change. Export the channel from `src/channels/index.ts` and `src/index.ts` and add it to `builtinPaymentChannels`.
+2. For cash, use `createCashPaymentChannel` and add the ID to the cash inventory test; cash channels have no fields or detail rows.
+3. Keep the network, country, and currency relationship explicit. Use ISO-style uppercase country and currency codes and a lowercase stable network ID.
+4. Define every user-entered value as a field with a label, type, required flag, normalization rules, and serializable validation rules.
+5. Add ordered detail rows for values that a consumer must display or copy after collection.
+6. Add payer/payee instructions and evidence fields when the channel needs operational or reconciliation guidance.
+7. Set `support.automation` to `api` only when a separate integration can actually perform the payout. A schema is not proof of provider capability.
+8. Add or update tests for filtering, normalization, validation failures, and rendered details.
+9. Update the README when the public API, built-in registry, supported runtime, or release process changes.
 
 Do not put provider secrets, API calls, environment-specific URLs, executable callbacks, or non-serializable functions in a schema. Validation rules must remain portable across web, mobile, and server consumers.
 

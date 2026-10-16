@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Contribution paths and evidence guide
+    url: https://github.com/minmoto/payment-channels/blob/main/CONTRIBUTING.md
+    about: Describe a channel, review local accuracy, or implement an accepted definition. Coding is optional.

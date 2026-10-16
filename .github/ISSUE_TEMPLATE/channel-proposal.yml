@@ -1,0 +1,57 @@
+name: Describe a payment channel
+description: Share local payment knowledge and sources. No coding required.
+title: "research: describe <network> in <country>/<currency>"
+labels: [research, needs-evidence]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Start with one channel or a small batch. Plain language and local-language sources are welcome. Write "unknown" where evidence is missing. Use fictional examples; never include real payment details, credentials, or secrets. Maintainers can help with implementation.
+  - type: input
+    id: market
+    attributes:
+      label: Country, currency, and payment network
+      description: Include ISO-style codes, local network name, and channel variant if known.
+      placeholder: Country (XX), currency (XXX), network, phone/account/merchant variant
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and intended use
+      description: What should this channel describe? Link an umbrella issue or existing proposal and identify any exclusions.
+    validations:
+      required: true
+  - type: textarea
+    id: fields
+    attributes:
+      label: Recipient details and fictional examples
+      description: Describe labels, required/optional fields, formats, normalization, and validation with sources. For cash, say no collection fields. Unknown is acceptable.
+    validations:
+      required: true
+  - type: textarea
+    id: instructions
+    attributes:
+      label: Payer/payee instructions and reconciliation evidence
+      description: Describe ordinary practice and relevant variants, or write unknown. A schema does not imply provider automation or recipient ownership verification.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources, supported claims, and verification date
+      description: Link specific network, provider, central-bank, or government documents; explain each claim supported and the date checked (YYYY-MM-DD). Local-language sources are welcome. Say which sources are still needed.
+    validations:
+      required: true
+  - type: textarea
+    id: uncertainty
+    attributes:
+      label: Uncertainty and review needed
+      description: Distinguish documented facts from assumptions. For cash, distinguish physical circulation from a peg or exchangeability. What would resolve the open questions?
+    validations:
+      required: true
+  - type: textarea
+    id: experience
+    attributes:
+      label: Relevant experience and preferred credit (optional)
+      description: Describe your experience and affiliations relevant to the claims. Formal credentials are not required. Share only what you want public, and state how you would like to be credited.

@@ -1,0 +1,56 @@
+name: Review local payment accuracy
+description: Review specific channel claims against current sources and market experience.
+title: "review: validate <channel or market>"
+labels: [market-review]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Reviews can cover a few fields or currency pairs. Coding is optional. A local review is separate from technical approval. Do not post customer details or private evidence. Unknown or conflicting findings are useful.
+  - type: textarea
+    id: scope
+    attributes:
+      label: Exact review scope
+      description: Link the issue/PR and list channel IDs, country/currency/network, fields, and claims reviewed. State what you did not check.
+    validations:
+      required: true
+  - type: textarea
+    id: experience
+    attributes:
+      label: Relevant market experience
+      description: Describe the practical or research experience behind this review and relevant provider affiliations. Formal credentials are not required; share only public information.
+    validations:
+      required: true
+  - type: textarea
+    id: findings
+    attributes:
+      label: Findings and corrections
+      description: Distinguish confirmed claims, incorrect assumptions, uncertain behavior, provider-specific rules, and local variants.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources and dates checked
+      description: Link specific authoritative sources and the claims they support. Include verification dates and relevant translated excerpts for local-language sources when possible.
+    validations:
+      required: true
+  - type: input
+    id: reviewed_on
+    attributes:
+      label: Review date
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations and remaining questions
+      description: Identify variants, regions, or workflows not covered, and anything requiring another reviewer. Write none if applicable.
+    validations:
+      required: true
+  - type: input
+    id: credit
+    attributes:
+      label: Preferred credit (optional)
+      description: Public handle/name or no additional credit. This does not assign ongoing market-maintainer responsibility.

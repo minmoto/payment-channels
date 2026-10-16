@@ -1,0 +1,41 @@
+name: Report outdated or incorrect channel information
+description: Report a currency change, incorrect field, normalization rule, or instruction.
+title: "fix: correct <channel or market>"
+labels: [research, needs-evidence]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        No coding required. Use invented examples and public sources; do not include real accounts, phone numbers, receipts, credentials, or secrets.
+  - type: input
+    id: channel
+    attributes:
+      label: Channel ID, market, and package version
+      description: Include country, currency, and network if the ID is unknown.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Current behavior and proposed correction
+      description: Explain what is wrong, its effect on users, and the expected behavior. Include fictional examples when helpful.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Supporting sources and dates
+      description: Link authoritative documents, the claims supported, date checked, and effective date of the change. Identify sources still needed.
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility and uncertainty
+      description: Could the correction affect existing IDs, accepted inputs, or integrations? Describe any open questions or say unknown.
+    validations:
+      required: true
+  - type: input
+    id: credit
+    attributes:
+      label: Relevant experience and preferred credit (optional)

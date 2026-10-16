@@ -33,7 +33,10 @@
     "examples",
     "CHANGELOG.md",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CONTRIBUTING.md",
+    "CONTRIBUTORS.md",
+    "contributing"
   ],
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
