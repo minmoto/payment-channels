@@ -48,6 +48,6 @@ This is deliberate: Tanzania supports mobile-number portability, so a subscriber
 
 ## Source
 
-- Tanzania Communications Regulatory Authority (TCRA), [National Numbering and Signaling Point Codes Plans, July 2025](https://tcra.go.tz/download/sw-1751634705-National_Numbering_and_Signaling_Point_Code_Plans_edition_of_2025.pdf). The plan assigns `061` to Viettel Tanzania, `065`, `067`, `071`, and `077` to Honora Tanzania, `068`, `069`, and `078` to Airtel Tanzania, and `074`, `075`, `076`, and `079` to Vodacom Tanzania. It marks `062` not operational.
-- TCRA, [Frequently asked questions on numbering](https://www.tcra.go.tz/faq/frequent-asked-questions-on-numbering), including its description of mobile-number portability.
-- Yas Tanzania, [Tigo is now Yas](https://yas.co.tz/tigo-is-now-yas-your-guide-to-the-new-brand-2/), which identifies Tigo Pesa as rebranded to Mixx by Yas.
+- Tanzania Communications Regulatory Authority (TCRA), *National Numbering and Signaling Point Codes Plans, July 2025*. The plan assigns `061` to Viettel Tanzania, `065`, `067`, `071`, and `077` to Honora Tanzania, `068`, `069`, and `078` to Airtel Tanzania, and `074`, `075`, `076`, and `079` to Vodacom Tanzania. It marks `062` not operational.
+- TCRA, *Frequently asked questions on numbering*, including its description of mobile-number portability.
+- Yas Tanzania, *Tigo is now Yas*, which identifies Tigo Pesa as rebranded to Mixx by Yas.
