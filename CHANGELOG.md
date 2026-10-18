@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.0](https://github.com/minmoto/payment-channels/compare/payment-channels-v0.5.0...payment-channels-v0.6.0) (2026-10-18)
+
+
+### Features
+
+* **contributing:** add expert contribution workflow ([2004014](https://github.com/minmoto/payment-channels/commit/20040140cdc7be07f3494dff5e07f558b0afa120))
+* **tz:** add mobile money phone channels ([6d5bd91](https://github.com/minmoto/payment-channels/commit/6d5bd91e4ea22a27f9685074afde37d99aa4a971))
+
+
+### Documentation
+
+* **contributing:** record Tanzania prefix evidence in evidence.json ([ca105de](https://github.com/minmoto/payment-channels/commit/ca105de5da58d51e674143d1fe59c1fd311dfc7a))
+* **tz:** remove prefix source hyperlinks ([3e9de4c](https://github.com/minmoto/payment-channels/commit/3e9de4ce27664e9ed6e606fbeea9bf432662d201))
+
 ## [0.5.0](https://github.com/minmoto/payment-channels/compare/payment-channels-v0.4.0...payment-channels-v0.5.0) (2026-10-16)
 
 
