@@ -162,6 +162,98 @@
       "marketReview": null,
       "trackingIssue": "https://github.com/minmoto/payment-channels/issues/55",
       "notes": "Research candidate only. Do not infer ordinary physical circulation or uniform acceptance from legal status."
+    },
+    {
+      "channelId": "airtel_money_phone_tz_tzs",
+      "country": "TZ",
+      "currency": "TZS",
+      "network": "airtel_money",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://tcra.go.tz/download/sw-1751634705-National_Numbering_and_Signaling_Point_Code_Plans_edition_of_2025.pdf",
+          "supports": "TCRA National Numbering and Signaling Point Codes Plans (July 2025) assigns mobile prefixes 068, 069, and 078 to Airtel Tanzania."
+        },
+        {
+          "url": "https://www.tcra.go.tz/faq/frequent-asked-questions-on-numbering",
+          "supports": "TCRA describes mobile-number portability, so a prefix does not prove which operator or wallet currently serves a number."
+        }
+      ],
+      "sourceCheckedOn": "2026-10-18",
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/pull/58",
+      "notes": "Implemented in PR #58. Domestic ranges shown: 0680–0689, 0690–0699, 0780–0789. Prefixes appear in field help text as guidance only; validation accepts any structurally valid Tanzanian mobile number (+255 followed by 6 or 7 and eight digits) because of mobile-number portability."
+    },
+    {
+      "channelId": "halopesa_phone_tz_tzs",
+      "country": "TZ",
+      "currency": "TZS",
+      "network": "halopesa",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://tcra.go.tz/download/sw-1751634705-National_Numbering_and_Signaling_Point_Code_Plans_edition_of_2025.pdf",
+          "supports": "TCRA National Numbering and Signaling Point Codes Plans (July 2025) assigns mobile prefix 061 to Viettel Tanzania (Halotel) and marks 062 not operational."
+        },
+        {
+          "url": "https://www.tcra.go.tz/faq/frequent-asked-questions-on-numbering",
+          "supports": "TCRA describes mobile-number portability, so a prefix does not prove which operator or wallet currently serves a number."
+        }
+      ],
+      "sourceCheckedOn": "2026-10-18",
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/pull/58",
+      "notes": "Implemented in PR #58. Domestic range shown: 0610–0619; 0620–0629 is not advertised because TCRA marks 062 not operational, as confirmed by the contributor. Prefixes appear in field help text as guidance only; validation accepts any structurally valid Tanzanian mobile number (+255 followed by 6 or 7 and eight digits) because of mobile-number portability."
+    },
+    {
+      "channelId": "mixx_phone_tz_tzs",
+      "country": "TZ",
+      "currency": "TZS",
+      "network": "mixx_by_yas",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://tcra.go.tz/download/sw-1751634705-National_Numbering_and_Signaling_Point_Code_Plans_edition_of_2025.pdf",
+          "supports": "TCRA National Numbering and Signaling Point Codes Plans (July 2025) assigns mobile prefixes 065, 067, 071, and 077 to Honora Tanzania (Yas)."
+        },
+        {
+          "url": "https://yas.co.tz/tigo-is-now-yas-your-guide-to-the-new-brand-2/",
+          "supports": "Yas Tanzania identifies Tigo Pesa as rebranded to Mixx by Yas."
+        },
+        {
+          "url": "https://www.tcra.go.tz/faq/frequent-asked-questions-on-numbering",
+          "supports": "TCRA describes mobile-number portability, so a prefix does not prove which operator or wallet currently serves a number."
+        }
+      ],
+      "sourceCheckedOn": "2026-10-18",
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/pull/58",
+      "notes": "Implemented in PR #58. Domestic ranges shown: 0650–0659, 0670–0679, 0710–0719, 0770–0779. Prefixes appear in field help text as guidance only; validation accepts any structurally valid Tanzanian mobile number (+255 followed by 6 or 7 and eight digits) because of mobile-number portability."
+    },
+    {
+      "channelId": "mpesa_phone_tz_tzs",
+      "country": "TZ",
+      "currency": "TZS",
+      "network": "mpesa",
+      "decision": "pending",
+      "decisionReference": null,
+      "sources": [
+        {
+          "url": "https://tcra.go.tz/download/sw-1751634705-National_Numbering_and_Signaling_Point_Code_Plans_edition_of_2025.pdf",
+          "supports": "TCRA National Numbering and Signaling Point Codes Plans (July 2025) assigns mobile prefixes 074, 075, 076, and 079 to Vodacom Tanzania."
+        },
+        {
+          "url": "https://www.tcra.go.tz/faq/frequent-asked-questions-on-numbering",
+          "supports": "TCRA describes mobile-number portability, so a prefix does not prove which operator or wallet currently serves a number."
+        }
+      ],
+      "sourceCheckedOn": "2026-10-18",
+      "marketReview": null,
+      "trackingIssue": "https://github.com/minmoto/payment-channels/pull/58",
+      "notes": "Implemented in PR #58. Domestic ranges shown: 0740–0749, 0750–0759, 0760–0769, 0790–0799. Prefixes appear in field help text as guidance only; validation accepts any structurally valid Tanzanian mobile number (+255 followed by 6 or 7 and eight digits) because of mobile-number portability."
     }
   ]
 }

@@ -24,7 +24,7 @@ export const mpesaPhoneTzTzsPaymentChannel = definePaymentChannelSchema({
       ...phoneNumberField,
       placeholder: "+255 7XX XXX XXX",
       helpText:
-        "Vodacom-assigned ranges include 0740–0749, 0750–0759, 0760–0769, and 0790–0799 in domestic format. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "Vodacom-assigned ranges include 0740–0749, 0750–0759, 0760–0769, and 0790–0799 in domestic format. Prefixes are guidance only; number portability means they do not prove the current wallet provider.",
       normalize: [NormalizationKind.Trim, NormalizationKind.E164TanzaniaPhone],
       validation: [
         {

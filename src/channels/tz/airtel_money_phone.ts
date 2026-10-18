@@ -24,7 +24,7 @@ export const airtelMoneyPhoneTzTzsPaymentChannel = definePaymentChannelSchema({
       ...phoneNumberField,
       placeholder: "+255 6XX XXX XXX or +255 7XX XXX XXX",
       helpText:
-        "Airtel-assigned ranges include 0680–0689, 0690–0699, and 0780–0789 in domestic format. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "Airtel-assigned ranges include 0680–0689, 0690–0699, and 0780–0789 in domestic format. Prefixes are guidance only; number portability means they do not prove the current wallet provider.",
       normalize: [NormalizationKind.Trim, NormalizationKind.E164TanzaniaPhone],
       validation: [
         {

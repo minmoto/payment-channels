@@ -4479,7 +4479,7 @@
         "mask": "phone",
         "normalize": ["trim", "e164_tz_phone"],
         "placeholder": "+255 6XX XXX XXX or +255 7XX XXX XXX",
-        "helpText": "Airtel-assigned ranges include 0680–0689, 0690–0699, and 0780–0789 in domestic format. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "helpText": "Airtel-assigned ranges include 0680–0689, 0690–0699, and 0780–0789 in domestic format. Prefixes are guidance only; number portability means they do not prove the current wallet provider.",
         "validation": [
           {
             "kind": "pattern",
@@ -4534,7 +4534,7 @@
         "mask": "phone",
         "normalize": ["trim", "e164_tz_phone"],
         "placeholder": "+255 61X XXX XXX",
-        "helpText": "The operational Halotel-assigned range is 0610–0619 in domestic format. TCRA lists 062 as not operational. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "helpText": "The operational Halotel-assigned range is 0610–0619 in domestic format. TCRA lists 062 as not operational. Prefixes are guidance only; number portability means they do not prove the current wallet provider.",
         "validation": [
           {
             "kind": "pattern",
@@ -4589,7 +4589,7 @@
         "mask": "phone",
         "normalize": ["trim", "e164_tz_phone"],
         "placeholder": "+255 6XX XXX XXX or +255 7XX XXX XXX",
-        "helpText": "Yas-assigned ranges include 0650–0659, 0670–0679, 0710–0719, and 0770–0779 in domestic format. Tigo Pesa is the former service name. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "helpText": "Yas-assigned ranges include 0650–0659, 0670–0679, 0710–0719, and 0770–0779 in domestic format. Tigo Pesa is the former service name. Prefixes are guidance only; number portability means they do not prove the current wallet provider.",
         "validation": [
           {
             "kind": "pattern",
@@ -4644,7 +4644,7 @@
         "mask": "phone",
         "normalize": ["trim", "e164_tz_phone"],
         "placeholder": "+255 7XX XXX XXX",
-        "helpText": "Vodacom-assigned ranges include 0740–0749, 0750–0759, 0760–0769, and 0790–0799 in domestic format. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "helpText": "Vodacom-assigned ranges include 0740–0749, 0750–0759, 0760–0769, and 0790–0799 in domestic format. Prefixes are guidance only; number portability means they do not prove the current wallet provider.",
         "validation": [
           {
             "kind": "pattern",

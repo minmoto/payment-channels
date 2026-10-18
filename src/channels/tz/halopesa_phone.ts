@@ -24,7 +24,7 @@ export const halopesaPhoneTzTzsPaymentChannel = definePaymentChannelSchema({
       ...phoneNumberField,
       placeholder: "+255 61X XXX XXX",
       helpText:
-        "The operational Halotel-assigned range is 0610–0619 in domestic format. TCRA lists 062 as not operational. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "The operational Halotel-assigned range is 0610–0619 in domestic format. TCRA lists 062 as not operational. Prefixes are guidance only; number portability means they do not prove the current wallet provider.",
       normalize: [NormalizationKind.Trim, NormalizationKind.E164TanzaniaPhone],
       validation: [
         {

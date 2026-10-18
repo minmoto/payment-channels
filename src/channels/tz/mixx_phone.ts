@@ -24,7 +24,7 @@ export const mixxPhoneTzTzsPaymentChannel = definePaymentChannelSchema({
       ...phoneNumberField,
       placeholder: "+255 6XX XXX XXX or +255 7XX XXX XXX",
       helpText:
-        "Yas-assigned ranges include 0650–0659, 0670–0679, 0710–0719, and 0770–0779 in domestic format. Tigo Pesa is the former service name. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "Yas-assigned ranges include 0650–0659, 0670–0679, 0710–0719, and 0770–0779 in domestic format. Tigo Pesa is the former service name. Prefixes are guidance only; number portability means they do not prove the current wallet provider.",
       normalize: [NormalizationKind.Trim, NormalizationKind.E164TanzaniaPhone],
       validation: [
         {
