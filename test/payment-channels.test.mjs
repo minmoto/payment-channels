@@ -134,6 +134,81 @@ test("Telebirr rejects invalid Ethiopian phone numbers", () => {
   }
 });
 
+const tanzaniaPhoneChannels = [
+  { id: "airtel_money_phone_tz_tzs", example: "+255 7XX XXX XXX" },
+  { id: "halopesa_phone_tz_tzs", example: "+255 61X XXX XXX" },
+  { id: "mixx_phone_tz_tzs", example: "+255 7XX XXX XXX" },
+  { id: "mpesa_phone_tz_tzs", example: "+255 7XX XXX XXX" },
+];
+
+test("registry exposes built-in TZS mobile money channels", () => {
+  const registry = createPaymentChannelRegistry();
+  const channels = listPaymentChannelSchemas(registry, {
+    currency: "TZS",
+    country: "TZ",
+    group: PaymentChannelGroup.MobileMoney,
+  });
+  assert.deepEqual(
+    channels.map((channel) => channel.id),
+    tanzaniaPhoneChannels.map((channel) => channel.id),
+  );
+});
+
+test("Tanzanian phone channels are manual and normalize Tanzanian phone formats", () => {
+  const validCases = [
+    { input: "0754123456", expected: "+255754123456" },
+    { input: "0612345678", expected: "+255612345678" },
+    { input: "754123456", expected: "+255754123456" },
+    { input: "255754123456", expected: "+255754123456" },
+    { input: "00255754123456", expected: "+255754123456" },
+    { input: " +255 754 123 456 ", expected: "+255754123456" },
+  ];
+
+  for (const { id } of tanzaniaPhoneChannels) {
+    const schema = builtinPaymentChannels.find((channel) => channel.id === id);
+    assert.ok(schema, id);
+    assert.equal(schema.support.automation, PaymentChannelAutomation.Manual, id);
+
+    for (const { input, expected } of validCases) {
+      const validation = validatePaymentChannelData(schema, { phoneNumber: input });
+      assert.equal(validation.valid, true, `${id}: ${input}`);
+      assert.equal(validation.data.phoneNumber, expected, `${id}: ${input}`);
+    }
+  }
+});
+
+test("Tanzanian phone channels reject invalid Tanzanian phone numbers", () => {
+  for (const { id, example } of tanzaniaPhoneChannels) {
+    const schema = builtinPaymentChannels.find((channel) => channel.id === id);
+    assert.ok(schema, id);
+
+    for (const invalidNumber of ["+254712345678", "+255812345678", "07541234567", "12345"]) {
+      const validation = validatePaymentChannelData(schema, { phoneNumber: invalidNumber });
+      assert.equal(validation.valid, false, `${id}: ${invalidNumber}`);
+      assert.deepEqual(validation.issues, [
+        {
+          field: "phoneNumber",
+          message: `Use a Tanzanian mobile number in international format, e.g. ${example}`,
+        },
+      ]);
+    }
+  }
+});
+
+test("Tanzanian phone details are normalized and rendered", () => {
+  const schema = builtinPaymentChannels.find((channel) => channel.id === "mpesa_phone_tz_tzs");
+  assert.ok(schema);
+  const validation = validatePaymentChannelData(schema, {
+    phoneNumber: " 0754123456 ",
+    description: " settlement ",
+  });
+  assert.equal(validation.valid, true);
+  assert.deepEqual(validation.data, { phoneNumber: "+255754123456", description: "settlement" });
+  assert.deepEqual(renderDetailRows(schema, validation.data), [
+    { key: "phoneNumber", label: "Phone number", value: "+255***456", copyable: true, copyValue: "+255754123456" },
+  ]);
+});
+
 test("registry exposes the built-in ZAR PayShap bank channel", () => {
   const registry = createPaymentChannelRegistry();
   const channels = listPaymentChannelSchemas(registry, {
