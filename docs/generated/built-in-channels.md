@@ -246,6 +246,10 @@ The runtime registry is authoritative. This inventory is provided for human insp
 | `cash_tv_aud`                | Cash                     | `TV`    | `AUD`    | `cash`         | `none`     |       2 |
 | `cash_tw_twd`                | Cash                     | `TW`    | `TWD`    | `cash`         | `none`     |       2 |
 | `cash_tz_tzs`                | Cash                     | `TZ`    | `TZS`    | `cash`         | `none`     |       2 |
+| `airtel_money_phone_tz_tzs`  | Airtel Money phone       | `TZ`    | `TZS`    | `mobile_money` | `manual`   |       1 |
+| `halopesa_phone_tz_tzs`      | HaloPesa phone           | `TZ`    | `TZS`    | `mobile_money` | `manual`   |       1 |
+| `mixx_phone_tz_tzs`          | Mixx by Yas phone        | `TZ`    | `TZS`    | `mobile_money` | `manual`   |       1 |
+| `mpesa_phone_tz_tzs`         | M-Pesa phone             | `TZ`    | `TZS`    | `mobile_money` | `manual`   |       1 |
 | `cash_ua_uah`                | Cash                     | `UA`    | `UAH`    | `cash`         | `none`     |       2 |
 | `cash_ug_ugx`                | Cash                     | `UG`    | `UGX`    | `cash`         | `none`     |       2 |
 | `cash_vu_vuv`                | Cash                     | `VU`    | `VUV`    | `cash`         | `none`     |       2 |

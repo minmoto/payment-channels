@@ -4,6 +4,7 @@ This is the predictable entry point for humans and agents integrating `@minmoto/
 
 - [Agent contract](./agent-contract.md): the required discovery, selection, collection, validation, rendering, and security procedure.
 - [Schema reference](./schema-reference.md): public types, enums, helpers, and exact runtime semantics.
+- [Tanzania mobile-money prefixes](./tanzania-mobile-money-prefixes.md): source and limitations for the Tanzania phone-number guidance used by the built-in channels.
 - [Built-in channels](./generated/built-in-channels.md): generated human-readable registry inventory.
 - [Registry JSON](./generated/registry.json): generated machine-readable registry snapshot.
 - [Generic consumer example](../examples/generic-consumer.mjs): executable market-neutral integration example.

@@ -4458,6 +4458,226 @@
     "network": { "id": "cash", "label": "Cash", "country": "TZ", "currency": "TZS" }
   },
   {
+    "id": "airtel_money_phone_tz_tzs",
+    "version": 1,
+    "display": {
+      "label": "Airtel Money phone",
+      "shortLabel": "Airtel Money",
+      "description": "Airtel Money transfer to a Tanzanian phone number.",
+      "icon": "airtel-money",
+      "group": "mobile_money"
+    },
+    "network": { "id": "airtel_money", "label": "Airtel Money", "country": "TZ", "currency": "TZS" },
+    "support": { "automation": "manual" },
+    "fields": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "type": "phone",
+        "required": true,
+        "sensitive": true,
+        "mask": "phone",
+        "normalize": ["trim", "e164_tz_phone"],
+        "placeholder": "+255 6XX XXX XXX or +255 7XX XXX XXX",
+        "helpText": "Airtel-assigned ranges include 0680–0689, 0690–0699, and 0780–0789 in domestic format. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^\\+255[67][0-9]{8}$",
+            "message": "Use a Tanzanian mobile number in international format, e.g. +255 7XX XXX XXX"
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
+      }
+    ],
+    "detailRows": [{ "key": "phoneNumber", "label": "Phone number", "fields": ["phoneNumber"], "copyable": true }],
+    "instructions": {
+      "payer": ["Send the exact amount to the displayed Airtel Money phone number."],
+      "payee": ["Confirm the Airtel Money transaction reference before marking the payment complete."]
+    },
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [{ "kind": "min_length", "length": 3 }]
+      }
+    ]
+  },
+  {
+    "id": "halopesa_phone_tz_tzs",
+    "version": 1,
+    "display": {
+      "label": "HaloPesa phone",
+      "shortLabel": "HaloPesa",
+      "description": "HaloPesa mobile-money transfer to a Tanzanian phone number.",
+      "icon": "halopesa",
+      "group": "mobile_money"
+    },
+    "network": { "id": "halopesa", "label": "HaloPesa", "country": "TZ", "currency": "TZS" },
+    "support": { "automation": "manual" },
+    "fields": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "type": "phone",
+        "required": true,
+        "sensitive": true,
+        "mask": "phone",
+        "normalize": ["trim", "e164_tz_phone"],
+        "placeholder": "+255 61X XXX XXX",
+        "helpText": "The operational Halotel-assigned range is 0610–0619 in domestic format. TCRA lists 062 as not operational. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^\\+255[67][0-9]{8}$",
+            "message": "Use a Tanzanian mobile number in international format, e.g. +255 61X XXX XXX"
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
+      }
+    ],
+    "detailRows": [{ "key": "phoneNumber", "label": "Phone number", "fields": ["phoneNumber"], "copyable": true }],
+    "instructions": {
+      "payer": ["Send the exact amount to the displayed HaloPesa phone number."],
+      "payee": ["Confirm the HaloPesa transaction reference before marking the payment complete."]
+    },
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [{ "kind": "min_length", "length": 3 }]
+      }
+    ]
+  },
+  {
+    "id": "mixx_phone_tz_tzs",
+    "version": 1,
+    "display": {
+      "label": "Mixx by Yas phone",
+      "shortLabel": "Mixx by Yas",
+      "description": "Mixx by Yas mobile-money transfer to a Tanzanian phone number; formerly Tigo Pesa.",
+      "icon": "mixx-by-yas",
+      "group": "mobile_money"
+    },
+    "network": { "id": "mixx_by_yas", "label": "Mixx by Yas", "country": "TZ", "currency": "TZS" },
+    "support": { "automation": "manual" },
+    "fields": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "type": "phone",
+        "required": true,
+        "sensitive": true,
+        "mask": "phone",
+        "normalize": ["trim", "e164_tz_phone"],
+        "placeholder": "+255 6XX XXX XXX or +255 7XX XXX XXX",
+        "helpText": "Yas-assigned ranges include 0650–0659, 0670–0679, 0710–0719, and 0770–0779 in domestic format. Tigo Pesa is the former service name. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^\\+255[67][0-9]{8}$",
+            "message": "Use a Tanzanian mobile number in international format, e.g. +255 7XX XXX XXX"
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
+      }
+    ],
+    "detailRows": [{ "key": "phoneNumber", "label": "Phone number", "fields": ["phoneNumber"], "copyable": true }],
+    "instructions": {
+      "payer": ["Send the exact amount to the displayed Mixx by Yas phone number."],
+      "payee": ["Confirm the Mixx by Yas transaction reference before marking the payment complete."]
+    },
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [{ "kind": "min_length", "length": 3 }]
+      }
+    ]
+  },
+  {
+    "id": "mpesa_phone_tz_tzs",
+    "version": 1,
+    "display": {
+      "label": "M-Pesa phone",
+      "shortLabel": "M-Pesa",
+      "description": "M-Pesa mobile-money transfer to a Tanzanian phone number.",
+      "icon": "mpesa",
+      "group": "mobile_money"
+    },
+    "network": { "id": "mpesa", "label": "M-Pesa", "country": "TZ", "currency": "TZS" },
+    "support": { "automation": "manual" },
+    "fields": [
+      {
+        "key": "phoneNumber",
+        "label": "Phone number",
+        "type": "phone",
+        "required": true,
+        "sensitive": true,
+        "mask": "phone",
+        "normalize": ["trim", "e164_tz_phone"],
+        "placeholder": "+255 7XX XXX XXX",
+        "helpText": "Vodacom-assigned ranges include 0740–0749, 0750–0759, 0760–0769, and 0790–0799 in domestic format. Prefixes are guidance only; number portability means they do not prove the current wallet provider. See the Tanzania prefix reference in the package docs.",
+        "validation": [
+          {
+            "kind": "pattern",
+            "pattern": "^\\+255[67][0-9]{8}$",
+            "message": "Use a Tanzanian mobile number in international format, e.g. +255 7XX XXX XXX"
+          }
+        ]
+      },
+      {
+        "key": "description",
+        "label": "Description",
+        "type": "text",
+        "required": false,
+        "normalize": ["trim"],
+        "validation": [{ "kind": "max_length", "length": 100 }]
+      }
+    ],
+    "detailRows": [{ "key": "phoneNumber", "label": "Phone number", "fields": ["phoneNumber"], "copyable": true }],
+    "instructions": {
+      "payer": ["Send the exact amount to the displayed M-Pesa phone number."],
+      "payee": ["Confirm the M-Pesa transaction reference before marking the payment complete."]
+    },
+    "evidence": [
+      {
+        "key": "transactionReference",
+        "label": "Transaction reference",
+        "type": "text",
+        "required": true,
+        "validation": [{ "kind": "min_length", "length": 3 }]
+      }
+    ]
+  },
+  {
     "id": "cash_ua_uah",
     "version": 2,
     "display": {

@@ -242,6 +242,10 @@ export { cashTtTtdPaymentChannel } from "./tt/cash.js";
 export { cashTvAudPaymentChannel } from "./tv/cash.js";
 export { cashTwTwdPaymentChannel } from "./tw/cash.js";
 export { cashTzTzsPaymentChannel } from "./tz/cash.js";
+export { airtelMoneyPhoneTzTzsPaymentChannel } from "./tz/airtel_money_phone.js";
+export { halopesaPhoneTzTzsPaymentChannel } from "./tz/halopesa_phone.js";
+export { mixxPhoneTzTzsPaymentChannel } from "./tz/mixx_phone.js";
+export { mpesaPhoneTzTzsPaymentChannel } from "./tz/mpesa_phone.js";
 export { cashUaUahPaymentChannel } from "./ua/cash.js";
 export { cashUgUgxPaymentChannel } from "./ug/cash.js";
 export { cashUsUsdPaymentChannel } from "./us/cash.js";
@@ -505,6 +509,10 @@ import { cashTtTtdPaymentChannel } from "./tt/cash.js";
 import { cashTvAudPaymentChannel } from "./tv/cash.js";
 import { cashTwTwdPaymentChannel } from "./tw/cash.js";
 import { cashTzTzsPaymentChannel } from "./tz/cash.js";
+import { airtelMoneyPhoneTzTzsPaymentChannel } from "./tz/airtel_money_phone.js";
+import { halopesaPhoneTzTzsPaymentChannel } from "./tz/halopesa_phone.js";
+import { mixxPhoneTzTzsPaymentChannel } from "./tz/mixx_phone.js";
+import { mpesaPhoneTzTzsPaymentChannel } from "./tz/mpesa_phone.js";
 import { cashUaUahPaymentChannel } from "./ua/cash.js";
 import { cashUgUgxPaymentChannel } from "./ug/cash.js";
 import { cashUsUsdPaymentChannel } from "./us/cash.js";
@@ -769,6 +777,10 @@ export const builtinPaymentChannels: readonly PaymentChannelSchema[] = [
   cashTvAudPaymentChannel,
   cashTwTwdPaymentChannel,
   cashTzTzsPaymentChannel,
+  airtelMoneyPhoneTzTzsPaymentChannel,
+  halopesaPhoneTzTzsPaymentChannel,
+  mixxPhoneTzTzsPaymentChannel,
+  mpesaPhoneTzTzsPaymentChannel,
   cashUaUahPaymentChannel,
   cashUgUgxPaymentChannel,
   cashVuVuvPaymentChannel,

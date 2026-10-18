@@ -34,6 +34,7 @@ export enum NormalizationKind {
   E164KenyaPhone = "e164_ke_phone",
   E164MalawiPhone = "e164_mw_phone",
   E164EthiopiaPhone = "e164_et_phone",
+  E164TanzaniaPhone = "e164_tz_phone",
 }
 
 export enum MaskingKind {
@@ -241,6 +242,7 @@ export function normalizeFieldValue(field: PaymentChannelField, value: unknown):
     if (strategy === NormalizationKind.E164KenyaPhone) next = toE164(next, "254");
     if (strategy === NormalizationKind.E164MalawiPhone) next = toE164(next, "265");
     if (strategy === NormalizationKind.E164EthiopiaPhone) next = toE164(next, "251");
+    if (strategy === NormalizationKind.E164TanzaniaPhone) next = toE164(next, "255");
   }
   return next;
 }
